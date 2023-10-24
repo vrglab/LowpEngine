@@ -272,6 +272,74 @@ project "Launcher"
 		defines {"RELEASE"}
 
 
+project "Editor"
+	location "Editor"
+	kind "StaticLib"
+	language "C++"
+	toolset "v143"
+	buildoptions
+	{
+		"/Zc:__cplusplus"
+	}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+	if os.target() == "windows" then
+		pchheader "pch.h"
+		cppdialect "C++latest"
+	elseif os.target() == "linux" then
+		pchheader "%{prj.name}/pch.h"
+	end
+
+	pchsource "%{prj.name}/pch.cpp"
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.h",
+		"%{prj.name}/**/**.cpp"
+	}
+
+	libdirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
+	}
+
+	includedirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"%{prj.name}",
+		".",
+		"Packages/c++/includes"
+	}
+	
+	links
+	{
+		"EngineCommons"
+	}
+
+	vpaths {
+		["Headers/*"] = { "**.h", "**.hpp" },
+		["Sources/*"] = {"**.c", "**.cpp"}
+	}
+
+
+	filter "system:windows"
+		cppdialect "C++20"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+		defines {"DEBUG"}
+
+	filter "configurations:Release"
+		optimize "On"
+		defines {"RELEASE"}
+
 -- C++ Subsystems that are used in the engine
 group "C++/Subsystem"
 project "SoundEngine"
@@ -440,12 +508,14 @@ project "RenderingEngine"
 			"dxgi",
 			"D3DCompiler",
 			"OpenGL32",
+			"vulkan-1"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
 		links 
 		{
-			"OpenGL"
+			"OpenGL",
+			"vulkan"
 		}
 	end
 
@@ -473,7 +543,9 @@ project "RenderingEngine"
 	
 	links
 	{
-		"EngineCommons"
+		"EngineCommons",
+		"glew32",
+		"GlU32"
 	}
 
 	vpaths {
@@ -618,7 +690,7 @@ project "SceneEngine"
 		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
 		"Packages/c++/includes",
 		"%{prj.name}",
-		"EngineCommons"
+		"."
 	}
 	
 	links
@@ -646,3 +718,75 @@ project "SceneEngine"
 		optimize "On"
 		defines {"RELEASE"}
 
+project "AssetsEngine"
+	location "AssetsEngine"
+	kind "StaticLib"
+	language "C++"
+	toolset "v143"
+	buildoptions
+	{
+		"/Zc:__cplusplus"
+	}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+	if os.target() == "windows" then
+		pchheader "pch.h"
+		cppdialect "C++latest"
+		libdirs
+		{
+			"Packages/c++/libs/windows"
+		}
+	elseif os.target() == "linux" then
+		pchheader "%{prj.name}/pch.h"
+	end
+
+	pchsource "%{prj.name}/pch.cpp"
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.h",
+		"%{prj.name}/**/**.cpp"
+	}
+
+	libdirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
+	}
+
+	includedirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"Packages/c++/includes",
+		"%{prj.name}",
+		"."
+	}
+	
+	links
+	{
+		"EngineCommons",
+		"yaml-cpp"
+	}
+
+	vpaths {
+		["Headers/*"] = { "**.h", "**.hpp" },
+		["Sources/*"] = {"**.c", "**.cpp"}
+	}
+
+
+	filter "system:windows"
+		cppdialect "C++20"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+		defines { "DEBUG"}
+
+	filter "configurations:Release"
+		optimize "On"
+		defines {"RELEASE"}

@@ -16,3 +16,13 @@ Programs\vcpkg\vcpkg install box2d
 Programs\vcpkg\vcpkg install mnn
 Programs\vcpkg\vcpkg install tinyexr
 Programs\vcpkg\vcpkg install yaml-cpp
+Programs\vcpkg\vcpkg install imgui
+Programs\vcpkg\vcpkg install imgui[vulkan-binding]
+Programs\vcpkg\vcpkg install imgui[sdl2-binding]
+Programs\vcpkg\vcpkg install imgui[opengl2-binding]
+Programs\vcpkg\vcpkg install imgui[opengl3-binding]
+Programs\vcpkg\vcpkg install imgui[dx12-binding]
+Programs\vcpkg\vcpkg install imgui[metal-binding]
+Programs\vcpkg\vcpkg install imgui[sdl2-renderer-binding]
+Programs\vcpkg\vcpkg install imguizmo
+Programs\vcpkg\vcpkg install implot
