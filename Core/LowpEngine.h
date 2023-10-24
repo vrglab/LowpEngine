@@ -10,7 +10,7 @@
 #ifndef _lpEngine_
 #define _lpEngine_
 
-#include "Debuging/Debug.h"
+#include "Debugging/Debug.h"
 
 
 #endif
