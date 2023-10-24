@@ -6,18 +6,6 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
+#include "Macros.h"
 
-#include <vector>
-
-#include <sstream>
-#include <iostream>
-#include <memory>
-#include <utility>
-#include <algorithm>
-#include <functional>
-#include <fstream>
-
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
+LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize);

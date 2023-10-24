@@ -93,7 +93,8 @@ project "Core"
 		"PhysicsEngine",
 		"RenderingEngine",
 		"EngineCommons",
-		"ScriptingEngine"
+		"ScriptingEngine",
+		"SDL2"
 	}
 
 	vpaths {
@@ -155,28 +156,13 @@ project "EngineCommons"
 	{
 		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
 		"Packages/c++/includes",
-		"%{prj.name}"
+		"%{prj.name}",
+		"."
 	}
-	
+
 	links
 	{
-		"assimp-vc143-mt",
-		"CompilerSpirV",
-		"draco",
-		"GlU32",
-		"kubazip",
-		"miniz",
-		"minizip",
-		"poly2tri",
-		"polyclipping",
-		"pugixml",
-		"SDL2",
-		"ShaderAST",
-		"ShaderWriter",
-		"tinyexr",
-		"volk",
-		"zlib",
-		"glew32"
+		"zlib"
 	}
 
 	vpaths {
@@ -270,7 +256,6 @@ project "Launcher"
 	filter "configurations:Release"
 		optimize "On"
 		defines {"RELEASE"}
-
 
 project "Editor"
 	location "Editor"

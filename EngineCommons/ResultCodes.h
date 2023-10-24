@@ -7,17 +7,8 @@
 /* ======================================================================================== */
 #pragma once
 
-#include <vector>
-
-#include <sstream>
-#include <iostream>
-#include <memory>
-#include <utility>
-#include <algorithm>
-#include <functional>
-#include <fstream>
-
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
+enum LowpResultCodes {
+	Success = 0,
+	UnknowError = 1,
+	SystemFailure = 2
+};

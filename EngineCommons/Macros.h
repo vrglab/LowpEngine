@@ -5,19 +5,13 @@
 /*                                                                                          */
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
-#pragma once
 
-#include <vector>
+//LP_EXPORT
+#ifdef _WIN32
+#define LP_Export __declspec(dllexport)
+#else
+#define LP_Export __attribute__((visibility("default")))
+#endif
 
-#include <sstream>
-#include <iostream>
-#include <memory>
-#include <utility>
-#include <algorithm>
-#include <functional>
-#include <fstream>
-
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
+//LP_EXTERN
+#define LP_Extern extern "C"

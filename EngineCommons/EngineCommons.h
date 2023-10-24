@@ -7,17 +7,10 @@
 /* ======================================================================================== */
 #pragma once
 
-#include <vector>
 
-#include <sstream>
-#include <iostream>
-#include <memory>
-#include <utility>
-#include <algorithm>
-#include <functional>
-#include <fstream>
-
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
+#ifndef _LpEngine_Commons
+#define _LpEngine_Commons
+#include "Macros.h"
+#include "ResultCodes.h"
+#include "IoCommons.h"
+#endif // !_LpEngine_Commons
