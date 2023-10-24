@@ -507,8 +507,7 @@ project "RenderingEngine"
 			"d3d12",
 			"dxgi",
 			"D3DCompiler",
-			"OpenGL32",
-			"vulkan-1"
+			"OpenGL32"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -780,6 +779,61 @@ project "AssetsEngine"
 
 	filter "system:windows"
 		cppdialect "C++20"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+		defines { "DEBUG"}
+
+	filter "configurations:Release"
+		optimize "On"
+		defines {"RELEASE"}
+
+group("C#")
+project "LowpEngine"
+	location "LowpEngine"
+	kind "SharedLib"
+	language "C#"
+
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/**.cs",
+		"%{prj.name}/**/**.cs",
+	}
+
+	filter "system:windows"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+		defines { "DEBUG"}
+
+	filter "configurations:Release"
+		optimize "On"
+		defines {"RELEASE"}
+
+project "TestGame"
+	location "TestGame"
+	kind "SharedLib"
+	language "C#"
+
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/**.cs",
+		"%{prj.name}/**/**.cs",
+	}
+
+	filter "system:windows"
 		staticruntime "On"
 		systemversion "latest"
 
