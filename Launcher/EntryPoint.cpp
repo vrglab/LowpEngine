@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <iostream>
+#include <Core/LowpEngine.h>
 
 #undef main
 
@@ -8,7 +9,7 @@
 #include <Windows.h>
 
 int WINAPI main(int argc, char* argv[]) {
-    
+    LP_CORE_INFO("Test");
     return 0;
 }
 

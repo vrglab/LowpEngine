@@ -26,3 +26,4 @@ Programs\vcpkg\vcpkg install imgui[metal-binding]
 Programs\vcpkg\vcpkg install imgui[sdl2-renderer-binding]
 Programs\vcpkg\vcpkg install imguizmo
 Programs\vcpkg\vcpkg install implot
+Programs\vcpkg\vcpkg install spdlog

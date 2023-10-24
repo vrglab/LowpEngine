@@ -94,7 +94,9 @@ project "Core"
 		"RenderingEngine",
 		"EngineCommons",
 		"ScriptingEngine",
-		"SDL2"
+		"SDL2",
+		"spdlog",
+		"fmt"
 	}
 
 	vpaths {
