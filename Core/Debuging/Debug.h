@@ -22,13 +22,13 @@ private:
 	inline static std::shared_ptr<spdlog::logger> s_ClientLogger = spdlog::stdout_color_mt("APP");
 };
 
-#define LP_CORE_TRACE(...)  ::Debug::CoreLogger()->trace(__VA_ARGS__)
-#define LP_CORE_INFO(...)   ::Debug::CoreLogger()->info(__VA_ARGS__)
-#define LP_CORE_WARN(...)   ::Debug::CoreLogger()->warn(__VA_ARGS__)
-#define LP_CORE_ERROR(...)  ::Debug::CoreLogger()->error(__VA_ARGS__)
+#define LP_CORE_TRACE(...)  Debug::CoreLogger()->trace(__VA_ARGS__)
+#define LP_CORE_INFO(...)   Debug::CoreLogger()->info(__VA_ARGS__)
+#define LP_CORE_WARN(...)   Debug::CoreLogger()->warn(__VA_ARGS__)
+#define LP_CORE_ERROR(...)  Debug::CoreLogger()->error(__VA_ARGS__)
 
 // Client log macros
-#define LP_TRACE(...)   ::Debug::ClientLogger()->trace(__VA_ARGS__)
-#define LP_INFO(...)    ::Debug::ClientLogger()->info(__VA_ARGS__)
-#define LP_WARN(...)    ::Debug::ClientLogger()->warn(__VA_ARGS__)
-#define LP_ERROR(...)   ::Debug::ClientLogger()->error(__VA_ARGS__)
+#define LP_TRACE(...)   Debug::ClientLogger()->trace(__VA_ARGS__)
+#define LP_INFO(...)    Debug::ClientLogger()->info(__VA_ARGS__)
+#define LP_WARN(...)    Debug::ClientLogger()->warn(__VA_ARGS__)
+#define LP_ERROR(...)   Debug::ClientLogger()->error(__VA_ARGS__)
