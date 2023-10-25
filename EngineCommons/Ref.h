@@ -7,17 +7,18 @@
 /* ======================================================================================== */
 #pragma once
 
-#ifndef _lpEngine_
-#define _lpEngine_
+template<typename T>
+using Scope = std::unique_ptr<T>;
+template<typename T, typename ... Args>
+constexpr Scope<T> CreateScope(Args&& ... args)
+{
+	return std::make_unique<T>(std::forward<Args>(args)...);
+}
 
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-#endif
+template<typename T>
+using Ref = std::shared_ptr<T>;
+template<typename T, typename ... Args>
+constexpr Ref<T> CreateRef(Args&& ... args)
+{
+	return std::make_shared<T>(std::forward<Args>(args)...);
+}

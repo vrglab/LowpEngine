@@ -6,18 +6,12 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
+#include <EngineCommons/EngineCommons.h>
 
-#ifndef _lpEngine_
-#define _lpEngine_
-
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-#endif
+LP_Export enum RendererTypes
+{
+	OpenGL = 0,
+	Vulkan = 1,
+	DirectX12 = 2,
+	Metal = 3
+};

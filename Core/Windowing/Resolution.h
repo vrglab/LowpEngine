@@ -6,18 +6,11 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
+#include <EngineCommons/EngineCommons.h>
 
-#ifndef _lpEngine_
-#define _lpEngine_
+class Resolution
+{
+public:
+	int width, height;
+};
 
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-#endif

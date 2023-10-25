@@ -11,6 +11,7 @@
 #ifndef _LpEngine_Commons
 #define _LpEngine_Commons
 #include "Macros.h"
+#include "Ref.h"
 #include "ResultCodes.h"
 #include "IoCommons.h"
 #endif // !_LpEngine_Commons

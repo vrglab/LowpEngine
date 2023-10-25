@@ -3,21 +3,27 @@
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
+/* The Debug class's implementation is based on the Log class from Hazel by Cherno          */
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-
-#ifndef _lpEngine_
-#define _lpEngine_
-
-#include "Debugging/Debug.h"
-
-//Renderer Types
+#include <EngineCommons/EngineCommons.h>
 #include <RenderingEngine/RendererTypes.h>
+#include <SDL2/SDL.h>
+#include "Debugging/Debug.h"
+#include "WindowCreateInfo.h"
 
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-#endif
+LP_Export class Window
+{
+private:
+	SDL_Window* sdl_window;
+	Ref<WindowCreateInfo> create_info;
+	bool quit = false;
+public:
+	int Init(Ref<WindowCreateInfo> createInfo);
+	void ShowWindow();
+	void ProcessEvents();
+	bool ShouldClose();
+	void CloseWindow();
+	int CleanUp();
+};

@@ -7,5 +7,6 @@
 /* ======================================================================================== */
 #pragma once
 #include "Macros.h"
+#include <string>
 
 LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize);
