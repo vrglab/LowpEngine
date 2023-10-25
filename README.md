@@ -1,8 +1,6 @@
 # LowpEngine
 C++/C# based Game Engine, fully free and open source.
-
-# Important
-I should mention certain project's such as the ConsoleAppEngine and GlobalUtilities projects are standalone projects than can be used in other things without the direct need of the Entire Engine. 
+ 
 ## list of Projects
 
 1. Core (C++): This is the core engine.
