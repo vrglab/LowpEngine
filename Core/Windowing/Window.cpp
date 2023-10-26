@@ -3,11 +3,10 @@
 
 int Window::Init(Ref<WindowCreateInfo> createInfo)
 {
-	WindowCreateInfo* loaded_create_info = createInfo.get();
 	create_info = createInfo;
 
-	if (loaded_create_info->renderer_type == RendererTypes::OpenGL) {
-		loaded_create_info->tags |= SDL_WINDOW_OPENGL;
+	if (create_info->renderer_type == RendererTypes::OpenGL) {
+		create_info->tags |= SDL_WINDOW_OPENGL;
 	}
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -15,7 +14,7 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		return LowpResultCodes::SystemFailure;
 	}
 
-	sdl_window = SDL_CreateWindow(loaded_create_info->window_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, loaded_create_info->resolution.get()->width, loaded_create_info->resolution.get()->height, loaded_create_info->tags | SDL_WINDOW_HIDDEN);
+	sdl_window = SDL_CreateWindow(create_info->window_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, create_info->resolution->width, create_info->resolution->height, create_info->tags | SDL_WINDOW_HIDDEN);
 	if (sdl_window == nullptr) {
 
 		LP_CORE_ERROR(SDL_GetError());

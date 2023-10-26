@@ -10,12 +10,12 @@
 
 int WINAPI main(int argc, char* argv[]) {
     Ref<WindowCreateInfo> create_info = CreateRef<WindowCreateInfo>();
-    create_info.get()->renderer_type = RendererTypes::OpenGL;
-    create_info.get()->window_title = "Lowp Windows";
+    create_info->renderer_type = RendererTypes::OpenGL;
+    create_info->window_title = "Lowp Windows";
 
-    create_info.get()->resolution = CreateRef<Resolution>();
-    create_info.get()->resolution.get()->height = 400;
-    create_info.get()->resolution.get()->width = 600;
+    create_info->resolution = CreateRef<Resolution>();
+    create_info->resolution->height = 400;
+    create_info->resolution->width = 600;
 
     Window* window = new Window();
     window->Init(create_info);
