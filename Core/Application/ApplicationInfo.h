@@ -6,22 +6,15 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-
-#ifndef _lpEngine_
-#define _lpEngine_
-
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
+#include <EngineCommons/EngineCommons.h>
 #include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
 
-//Application
-#include "Application/ApplicationInfo.h"
-#include "Application/Application.h"
+class ApplicationInfo
+{
+public:
+	std::string name;
+	Ref<Resolution> resolution;
+	int flags, renderer_type, auio_system_type;
+	Ref<WindowCreateInfo> GetWindowCreateInfo();
+};
 
-#endif

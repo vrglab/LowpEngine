@@ -6,22 +6,19 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-
-#ifndef _lpEngine_
-#define _lpEngine_
-
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
+#include <EngineCommons/EngineCommons.h>
 #include "Windowing/Window.h"
+#include "ApplicationInfo.h"
 
-//Application
-#include "Application/ApplicationInfo.h"
-#include "Application/Application.h"
+LP_Export class Application
+{
+private:
+	Ref<Window> created_window;
+	Ref<ApplicationInfo> app_info;
 
-#endif
+public:
+	int Init(Ref<ApplicationInfo> info);
+	void Run();
+	void CleanUp();
+};
+

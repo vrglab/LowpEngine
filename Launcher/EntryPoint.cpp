@@ -9,22 +9,18 @@
 #include <Windows.h>
 
 int WINAPI main(int argc, char* argv[]) {
-    Ref<WindowCreateInfo> create_info = CreateRef<WindowCreateInfo>();
+    Ref<ApplicationInfo> create_info = CreateRef<ApplicationInfo>();
     create_info->renderer_type = RendererTypes::OpenGL;
-    create_info->window_title = "Lowp Windows";
+    create_info->name = "Lowp Windows";
 
     create_info->resolution = CreateRef<Resolution>();
     create_info->resolution->height = 400;
     create_info->resolution->width = 600;
 
-    Window* window = new Window();
-    window->Init(create_info);
-    window->ShowWindow();
-    while (!window->ShouldClose()) 
-    {
-        window->ProcessEvents();
-    }
-    window->CleanUp();
+    Application* app = new Application();
+    app->Init(create_info);
+    app->Run();
+    app->CleanUp();
     return 0;
 }
 
