@@ -13,5 +13,11 @@
 #define LP_Export __attribute__((visibility("default")))
 #endif
 
+#ifdef _WIN32
+#define LP_Import __declspec(dllimport)
+#else
+#define LP_Import __attribute__((visibility("default")))
+#endif
+
 //LP_EXTERN
 #define LP_Extern extern "C"
