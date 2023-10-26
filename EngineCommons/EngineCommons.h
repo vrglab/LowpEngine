@@ -14,4 +14,5 @@
 #include "Ref.h"
 #include "ResultCodes.h"
 #include "IoCommons.h"
+#include "Assert.h"
 #endif // !_LpEngine_Commons

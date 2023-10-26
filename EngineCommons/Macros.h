@@ -21,3 +21,18 @@
 
 //LP_EXTERN
 #define LP_Extern extern "C"
+
+//Debugs
+#ifdef DEBUG
+#ifdef _WIN32
+#define LP_BREAK() __debugbreak()
+#elif defined(LP_PLATFORM_LINUX)
+#include <signal.h>
+#define LP_BREAK() raise(SIGTRAP)
+#else
+#error "Platform doesn't support debugbreak yet!"
+#endif
+#define LP_ENABLE_ASSERTS
+#else
+#define LP_BREAK()
+#endif
