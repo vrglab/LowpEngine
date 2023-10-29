@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Application.h"
-#include <EventEngine/EventQue.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -21,7 +20,6 @@ void Application::Run()
     while (!created_window->ShouldClose()) 
     {
         created_window->ProcessEvents();
-        EventQue::GetInstance().DispatchEvents();
     }
 }
 
