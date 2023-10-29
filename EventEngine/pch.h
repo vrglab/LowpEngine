@@ -7,24 +7,16 @@
 /* ======================================================================================== */
 #pragma once
 
-#ifndef _lpEngine_
-#define _lpEngine_
+#include <vector>
 
-#include "Debugging/Debug.h"
+#include <sstream>
+#include <iostream>
+#include <memory>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Events
-#include <EventEngine/EventEngine.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-//Application
-#include "Application/ApplicationInfo.h"
-#include "Application/Application.h"
-
-#endif
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>

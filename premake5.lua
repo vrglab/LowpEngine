@@ -94,6 +94,7 @@ project "Core"
 		"RenderingEngine",
 		"EngineCommons",
 		"ScriptingEngine",
+		"EventEngine",
 		"SDL2",
 		"spdlog",
 		"fmt"
@@ -328,7 +329,7 @@ project "Editor"
 		defines {"RELEASE"}
 
 -- C++ Subsystems that are used in the engine
-group "C++/Subsystem"
+group "C++/SubEngines"
 project "SoundEngine"
 	location "SoundEngine"
 	kind "StaticLib"
@@ -756,6 +757,78 @@ project "AssetsEngine"
 	{
 		"EngineCommons",
 		"yaml-cpp"
+	}
+
+	vpaths {
+		["Headers/*"] = { "**.h", "**.hpp" },
+		["Sources/*"] = {"**.c", "**.cpp"}
+	}
+
+
+	filter "system:windows"
+		cppdialect "C++20"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+		defines { "DEBUG"}
+
+	filter "configurations:Release"
+		optimize "On"
+		defines {"RELEASE"}
+
+project "EventEngine"
+	location "EventEngine"
+	kind "StaticLib"
+	language "C++"
+	toolset "v143"
+	buildoptions
+	{
+		"/Zc:__cplusplus"
+	}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+	if os.target() == "windows" then
+		pchheader "pch.h"
+		cppdialect "C++latest"
+		libdirs
+		{
+			"Packages/c++/libs/windows"
+		}
+	elseif os.target() == "linux" then
+		pchheader "%{prj.name}/pch.h"
+	end
+
+	pchsource "%{prj.name}/pch.cpp"
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.h",
+		"%{prj.name}/**/**.cpp"
+	}
+
+	libdirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
+	}
+
+	includedirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"Packages/c++/includes",
+		"%{prj.name}",
+		"."
+	}
+	
+	links
+	{
+		"EngineCommons"
 	}
 
 	vpaths {

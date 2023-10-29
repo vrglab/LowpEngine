@@ -6,25 +6,22 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
+#include <map>
+#include <EngineCommons/EngineCommons.h>
+#include "Event.h"
 
-#ifndef _lpEngine_
-#define _lpEngine_
 
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Events
-#include <EventEngine/EventEngine.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-//Application
-#include "Application/ApplicationInfo.h"
-#include "Application/Application.h"
-
-#endif
+LP_Export class EventQue
+{
+private:
+	std::vector<Ref<Event>> m_EventQueue;
+	std::map<int, std::vector<std::function<void(Ref<Event>)>>> eventListeners_;
+public:
+	void Enqueue(Ref<Event> event);
+	void AddListener(int eventType, const std::function<void(Ref<Event>)>& listener);
+	void DispatchEvents();
+	static EventQue& GetInstance() {
+		static EventQue instance; 
+		return instance;
+	}
+};

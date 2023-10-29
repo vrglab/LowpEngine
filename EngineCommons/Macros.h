@@ -36,3 +36,5 @@
 #else
 #define LP_BREAK()
 #endif
+
+#define BIT(x) (1 << x)

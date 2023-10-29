@@ -7,24 +7,5 @@
 /* ======================================================================================== */
 #pragma once
 
-#ifndef _lpEngine_
-#define _lpEngine_
-
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RendererTypes.h>
-
-//Events
-#include <EventEngine/EventEngine.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-//Application
-#include "Application/ApplicationInfo.h"
-#include "Application/Application.h"
-
-#endif
+#include "Event.h"
+#include "EventQue.h"
