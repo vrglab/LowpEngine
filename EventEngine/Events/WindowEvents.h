@@ -7,26 +7,17 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <RenderingEngine/RendererTypes.h>
-#include <EventEngine/EventHandler.h>
-#include <EventEngine/Events/WindowEvents.h>
-#include <EventEngine/EventBus.h>
-#include <SDL2/SDL.h>
-#include "Debugging/Debug.h"
-#include "WindowCreateInfo.h"
+#include "EventEngine/Event.h"
 
-LP_Export class Window
+LP_Export enum WindowEventType
 {
-private:
-	SDL_Window* sdl_window;
-	Ref<WindowCreateInfo> create_info;
-	bool quit = false;
-	Ref<EventHandler<E_WindowResize>> window_resize_event;
+	resize = 0
+};
+
+
+LP_Export class E_WindowResize: public Event
+{
 public:
-	int Init(Ref<WindowCreateInfo> createInfo);
-	void ShowWindow();
-	void ProcessEvents();
-	bool ShouldClose();
-	void CloseWindow();
-	int CleanUp();
+	EVENT_CLASS_TYPE(WindowEventType::resize)
+	EVENT_CLASS_CATEGORY(BIT(0))
 };
