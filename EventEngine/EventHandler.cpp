@@ -4,13 +4,13 @@
 template<typename T>
 void EventHandler<T>::Dispatch()
 {
-    for (const event_function* listener : listeners) {
+    for (const std::function<bool(T&)>* listener : listeners) {
         listener(static_cast<T&>(m_Event));
     }
 }
 
 template<typename T>
-void EventHandler<T>::AddListener(const event_function& e)
+void EventHandler<T>::AddListener(const std::function<bool(T&)>& e)
 {
 	if(m_Event.GetEventType() == T::GetStaticType())
 	{

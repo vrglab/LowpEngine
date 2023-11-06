@@ -18,20 +18,17 @@ public:
     virtual void Dispatch() = 0;
 };
 
-typedef bool event_function(Event& event);
-
 template<typename T>
 class EventHandler : public EventHandlerBase
 {
+private:
+    Event& m_Event;
+    std::vector<std::function<bool(T&)>*> listeners;
 public:
     EventHandler(Event& event)
         : m_Event(event)
     {
     }
     void Dispatch() override;
-    void AddListener(const event_function& e);
-
-private:
-    Event& m_Event;
-    std::vector<event_function*> listeners;
+    void AddListener(const std::function<bool(T&)>& e);
 };
