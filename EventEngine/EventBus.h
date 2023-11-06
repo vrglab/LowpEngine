@@ -12,13 +12,12 @@
 LP_Export class EventBus
 {
 public:
-	template<typename T>
-	void QueHandler(Ref<EventHandler<T>> event_handler);
+	void QueHandler(void* event_handler);
 	void ResolveQue();
 	static EventBus& GetInstance() {
 		static EventBus instance; // This instance is created once and only once
 		return instance;
 	}
 private:
-	std::vector<Ref<EventHandlerBase>> qued_handlers;
+	std::vector<void*> qued_handlers;
 };

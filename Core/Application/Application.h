@@ -17,6 +17,7 @@ private:
 	Ref<ApplicationInfo> app_info;
 
 public:
+	inline Ref<Window> GetWindow() { return created_window; }
 	int Init(Ref<ApplicationInfo> info);
 	void Run();
 	void CleanUp();

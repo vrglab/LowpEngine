@@ -38,7 +38,7 @@ void Window::ProcessEvents()
 		}
 		if(event.type == SDL_WINDOWEVENT_RESIZED)
 		{
-			EventBus::GetInstance().QueHandler<E_WindowResize>(window_resize_event);
+			EventBus::GetInstance().QueHandler((void*)window_resize_event);
 		}
 	}
 }

@@ -20,6 +20,7 @@ void Application::Run()
     while (!created_window->ShouldClose()) 
     {
         created_window->ProcessEvents();
+        EventBus::GetInstance().ResolveQue();
     }
 }
 
