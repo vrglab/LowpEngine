@@ -7,9 +7,8 @@
 #ifdef _WIN32
 #include <Windows.h>
 
-bool OnWindowResized(E_WindowResize& e) {
+void OnWindowResized(E_WindowResize e) {
     LP_CORE_INFO("Window resize event was called");
-    return true;
 }
 
 int WINAPI main(int argc, char* argv[]) {
@@ -22,8 +21,8 @@ int WINAPI main(int argc, char* argv[]) {
     create_info->resolution->width = 600;
 
     Application* app = new Application();
-    app->GetWindow()->window_resize_event->AddListener(OnWindowResized);
     app->Init(create_info);
+    app->GetWindow()->window_resize_event->AddListener(OnWindowResized);
     app->Run();
     app->CleanUp();
     return 0;

@@ -18,6 +18,10 @@ LP_Export enum WindowEventType
 LP_Export class E_WindowResize: public Event
 {
 public:
-	EVENT_CLASS_TYPE(WindowEventType::resize)
+	~E_WindowResize() override
+	{
+
+	}
+	EVENT_CLASS_TYPE(resize)
 	EVENT_CLASS_CATEGORY(BIT(0))
 };
