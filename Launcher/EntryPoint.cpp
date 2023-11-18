@@ -5,8 +5,11 @@
 #undef main
 
 #ifdef _WIN32
-// Windows-specific headers and entry point
 #include <Windows.h>
+
+void OnWindowResized() {
+    LP_CORE_INFO("Window resize event was called");
+}
 
 int WINAPI main(int argc, char* argv[]) {
     Ref<ApplicationInfo> create_info = CreateRef<ApplicationInfo>();
@@ -19,6 +22,7 @@ int WINAPI main(int argc, char* argv[]) {
 
     Application* app = new Application();
     app->Init(create_info);
+    app->GetWindow()->window_resize_event->AddListener(OnWindowResized);
     app->Run();
     app->CleanUp();
     return 0;

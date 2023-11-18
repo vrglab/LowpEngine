@@ -11,6 +11,8 @@ int Application::Init(Ref<ApplicationInfo> info)
         return LowpResultCodes::UnknowError;
     }
     created_window->ShowWindow();
+    created_window->window_resize_event = CreateRef<EventHandler>();
+    event_buss = CreateRef<EventBus>();
 
     return LowpResultCodes::Success;
 }
@@ -20,6 +22,7 @@ void Application::Run()
     while (!created_window->ShouldClose()) 
     {
         created_window->ProcessEvents();
+		GetEvenBuss()->ResolveQue();
     }
 }
 
