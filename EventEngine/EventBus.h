@@ -12,12 +12,8 @@
 LP_Export class EventBus
 {
 public:
-	void QueHandler(void* event_handler);
+	void QueHandler(Ref<EventHandler> event_handler);
 	void ResolveQue();
-	static EventBus& GetInstance() {
-		static EventBus instance; // This instance is created once and only once
-		return instance;
-	}
 private:
-	std::vector<void*> qued_handlers;
+	std::vector<Ref<EventHandler>> qued_handlers;
 };

@@ -9,7 +9,6 @@
 #include <EngineCommons/EngineCommons.h>
 #include <RenderingEngine/RendererTypes.h>
 #include <EventEngine/EventHandler.h>
-#include <EventEngine/Events/WindowEvents.h>
 #include <EventEngine/EventBus.h>
 #include <SDL2/SDL.h>
 #include "Debugging/Debug.h"
@@ -22,7 +21,7 @@ private:
 	Ref<WindowCreateInfo> create_info;
 	bool quit = false;
 public:
-	EventHandler<E_WindowResize>* window_resize_event;
+	Ref <EventHandler> window_resize_event;
 	int Init(Ref<WindowCreateInfo> createInfo);
 	void ShowWindow();
 	void ProcessEvents();

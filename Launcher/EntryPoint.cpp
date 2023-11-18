@@ -7,7 +7,7 @@
 #ifdef _WIN32
 #include <Windows.h>
 
-void OnWindowResized(E_WindowResize e) {
+void OnWindowResized() {
     LP_CORE_INFO("Window resize event was called");
 }
 

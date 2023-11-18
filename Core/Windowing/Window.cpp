@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Window.h"
+#include "Application/Application.h"
 
 int Window::Init(Ref<WindowCreateInfo> createInfo)
 {
@@ -14,7 +15,7 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		return LowpResultCodes::SystemFailure;
 	}
 
-	sdl_window = SDL_CreateWindow(create_info->window_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, create_info->resolution->width, create_info->resolution->height, create_info->tags | SDL_WINDOW_HIDDEN);
+	sdl_window = SDL_CreateWindow(create_info->window_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, create_info->resolution->width, create_info->resolution->height, create_info->tags | SDL_WINDOW_HIDDEN | SDL_WINDOW_RESIZABLE);
 	if (sdl_window == nullptr) {
 
 		LP_CORE_ERROR(SDL_GetError());
@@ -38,7 +39,7 @@ void Window::ProcessEvents()
 		}
 		if(event.type == SDL_WINDOWEVENT_RESIZED)
 		{
-			EventBus::GetInstance().QueHandler((void*)window_resize_event);
+			Application::GetEvenBuss()->QueHandler(window_resize_event);
 		}
 	}
 }

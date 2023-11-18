@@ -1,22 +1,18 @@
 ﻿#include "pch.h"
 #include "EventHandler.h"
 
-template<typename T>
-EventHandler<T>::EventHandler(Event& event)
-    : m_Event(event) {
-    listeners = std::vector<std::function<void(T&)>>();
+
+EventHandler::EventHandler() {
+    listeners = std::vector<std::function<void()>>();
 }
 
-template<typename T>
-void EventHandler<T>::Dispatch() {
+
+void EventHandler::Dispatch() {
     for (const auto& listener : listeners) {
-        listener(static_cast<T&>(m_Event));
+        listener();
     }
 }
 
-template<typename T>
-void EventHandler<T>::AddListener(const std::function<void(T&)>& e) {
-    if (m_Event.GetEventType() == T::GetStaticType()) {
-        listeners.push_back(e);
-    }
+void EventHandler::AddListener(const std::function<void()>& e) {
+    listeners.push_back(e);
 }
