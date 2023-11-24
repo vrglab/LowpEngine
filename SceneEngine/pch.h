@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Core C/C++ header file.														*/
+/* LowpEngine - Scene Engine C/C++ header file.												*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
