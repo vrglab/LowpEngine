@@ -6,25 +6,6 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
+#include <EngineCommons/EngineCommons.h>
 
-#ifndef _lpEngine_
-#define _lpEngine_
-
-#include "Debugging/Debug.h"
-
-//Renderer Types
-#include <RenderingEngine/RenderingEngine.h>
-
-//Events
-#include <EventEngine/EventEngine.h>
-
-//Windowing
-#include "Windowing/Resolution.h"
-#include "Windowing/WindowCreateInfo.h"
-#include "Windowing/Window.h"
-
-//Application
-#include "Application/ApplicationInfo.h"
-#include "Application/Application.h"
-
-#endif
+#include "RendererTypes.h"
