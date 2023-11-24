@@ -12,7 +12,7 @@
 
 #include "Debugging/Debug.h"
 
-//Renderer Types
+//Rendrering engine
 #include <RenderingEngine/RenderingEngine.h>
 
 //Events

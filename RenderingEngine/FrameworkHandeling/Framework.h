@@ -6,8 +6,7 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-#include <EngineCommons/EngineCommons.h>
-#include <GL/glew.h>
+class Framework
+{
+};
 
-#include "RendererTypes.h"
-#include "FrameworkHandeling/Framework.h"
