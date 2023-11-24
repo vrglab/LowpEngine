@@ -7,6 +7,8 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include <vk_video/vulkan_video_codecs_common.h>
+
 
 LP_Export enum RendererTypes
 {
@@ -15,3 +17,5 @@ LP_Export enum RendererTypes
 	DirectX12 = 2,
 	Metal = 3
 };
+
+LP_Export int getSystemSupportedRenderer();
