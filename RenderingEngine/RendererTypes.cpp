@@ -3,8 +3,8 @@
 
 LP_Export int getSystemSupportedRenderer()
 {
-#ifdef _WIN32 || __linux__
-#ifdef __d3d12_h__ && _WIN32
+#if defined(_WIN32) || defined(__linux_)
+#if defined(__d3d12_h__) && defined(_WIN32)
 		return RendererTypes::DirectX12;
 #elif defined(vulkan)
 		return RendererTypes::Vulkan;
