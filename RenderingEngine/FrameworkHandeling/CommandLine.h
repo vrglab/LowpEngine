@@ -7,10 +7,8 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include "CommandLine.h"
 
-LP_Export class Framework
+LP_Export class CommandLine
 {
-private:
-	Ref<CommandLine> command_line;
+
 };
