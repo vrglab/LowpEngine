@@ -28,6 +28,7 @@ int Application::Init(Ref<ApplicationInfo> info)
 
     created_window->window_resize_event = CreateRef<EventHandler>();
     event_buss = CreateRef<EventBus>();
+    ((Framework*)created_rendering_framework)->Init();
 
     return LowpResultCodes::Success;
 }
