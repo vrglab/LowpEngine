@@ -1,10 +1,14 @@
 #include "pch.h"
 #include "OpenGLFramework.h"
+
 #include <Core/Debugging/Debug.h>
+#include <GL/glew.h>
 
 void OpenGLFramework::Init()
 {
-	LP_CORE_INFO("OpenGL init called");
+	if (glewInit() != GLEW_OK) {
+		LP_CORE_ERROR("OpenGL Glew failed");
+	}
 }
 
 void OpenGLFramework::Tick()

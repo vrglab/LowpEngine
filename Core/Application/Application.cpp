@@ -6,12 +6,6 @@ int Application::Init(Ref<ApplicationInfo> info)
 {
     LP_CORE_INFO("Starting engine");
     created_window = CreateRef<Window>();
-    if (created_window->Init(info->GetWindowCreateInfo()) != LowpResultCodes::Success) 
-    {
-        LP_CORE_ERROR("Window initiation failed");
-        return LowpResultCodes::UnknowError;
-    }
-    created_window->ShowWindow();
 
     switch (info->renderer_type)
     {
@@ -25,10 +19,18 @@ int Application::Init(Ref<ApplicationInfo> info)
     case RendererTypes::Metal:
         break;
     }
+    ((Framework*)created_rendering_framework)->Init();
+
+    if (created_window->Init(info->GetWindowCreateInfo()) != LowpResultCodes::Success) 
+    {
+        LP_CORE_ERROR("Window initiation failed");
+        return LowpResultCodes::UnknowError;
+    }
+    created_window->ShowWindow();
+
 
     created_window->window_resize_event = CreateRef<EventHandler>();
-    event_buss = CreateRef<EventBus>();
-    ((Framework*)created_rendering_framework)->Init();
+    event_buss = CreateRef<EventBus>(); 
 
     return LowpResultCodes::Success;
 }
