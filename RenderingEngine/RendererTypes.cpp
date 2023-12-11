@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "RendererTypes.h"
+#include "FrameworkHandeling/Framework.h"
+#include "FrameworkHandeling/Frameworks/OpenGLFramework.h"
 
 LP_Export int getSystemSupportedRenderer()
 {

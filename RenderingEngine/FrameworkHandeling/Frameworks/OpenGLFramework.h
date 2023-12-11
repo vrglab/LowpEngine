@@ -7,8 +7,12 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include "RenderingEngine/FrameworkHandeling/Framework.h"
 
-LP_Export class CommandLine
+class OpenGLFramework : Framework
 {
-
+public:
+	void Init() override;
+	void Tick() override;
+	void Cleanup() override;
 };

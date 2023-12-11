@@ -7,10 +7,11 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include "CommandLine.h"
 
 LP_Export class Framework
 {
-private:
-	Ref<CommandLine> command_line;
+public:
+	virtual void Init() = 0;
+	virtual void Tick() = 0;
+	virtual void Cleanup() = 0;
 };
