@@ -50,5 +50,6 @@ void Application::Run()
 void Application::CleanUp()
 {
     LP_CORE_INFO("Closing engine");
+    ((Framework*)created_rendering_framework)->Cleanup();
     created_window->CleanUp();
 }
