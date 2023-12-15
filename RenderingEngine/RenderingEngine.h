@@ -13,3 +13,4 @@
 #include "FrameworkHandeling/Framework.h"
 
 #include "FrameworkHandeling/Frameworks/OpenGLFramework.h"
+#include "FrameworkHandeling/Frameworks/Directx12Framework.h"
