@@ -7,7 +7,8 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include "Windowing/WindowCreateInfo.h"
+#include <Core/Windowing/WindowCreateInfo.h>
+#include <Core/Windowing/Resolution.h>
 
 class ApplicationInfo
 {

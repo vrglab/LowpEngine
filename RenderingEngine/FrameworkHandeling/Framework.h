@@ -8,12 +8,15 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 #include <SDL2/SDL.h>
+#include <Core/Application/ApplicationInfo.h>
 
 LP_Export class Framework
 {
+protected:
+	SDL_Window* window_access;
 public:
-	virtual void Init() = 0;
+	virtual void Init(Ref<ApplicationInfo>, SDL_Window*) = 0;
 	virtual void Tick() = 0;
-	virtual void SwapWindow(SDL_Window*) = 0;
+	virtual void SwapWindow() = 0;
 	virtual void Cleanup() = 0;
 };

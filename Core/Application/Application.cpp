@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Application.h"
 #include <RenderingEngine/FrameworkHandeling/Frameworks/OpenGLFramework.h>
+#include <RenderingEngine/FrameworkHandeling/Frameworks/Directx12Framework.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -16,6 +17,7 @@ int Application::Init(Ref<ApplicationInfo> info)
     switch (info->renderer_type)
     {
     case RendererTypes::DirectX12:
+        created_rendering_framework = new Directx12Framework();
         break;
     case RendererTypes::Vulkan:
         break;
@@ -25,7 +27,7 @@ int Application::Init(Ref<ApplicationInfo> info)
     case RendererTypes::Metal:
         break;
     }
-    ((Framework*)created_rendering_framework)->Init();
+    ((Framework*)created_rendering_framework)->Init(info, created_window->getSdlWindow());
 
     created_window->ShowWindow();
 
@@ -43,7 +45,7 @@ void Application::Run()
         created_window->ProcessEvents();
 		GetEvenBuss()->ResolveQue();
         ((Framework*)created_rendering_framework)->Tick();
-        ((Framework*)created_rendering_framework)->SwapWindow(created_window->getSdlWindow());
+        ((Framework*)created_rendering_framework)->SwapWindow();
     }
 }
 

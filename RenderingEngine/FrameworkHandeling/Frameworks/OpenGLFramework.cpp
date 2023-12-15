@@ -4,16 +4,15 @@
 #include <Core/Debugging/Debug.h>
 #include <GL/glew.h>
 
-void OpenGLFramework::Init()
+void OpenGLFramework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 {
-	
-
 	GLenum result = glewInit();
 	if (result != GLEW_OK) {
 		std::string error_text = "Glew init failed with error code: ";
 		error_text += result;
 		LP_CORE_ERROR(error_text);
 	}
+	this->window_access = window;
 }
 
 void OpenGLFramework::Tick()
@@ -22,9 +21,9 @@ void OpenGLFramework::Tick()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLFramework::SwapWindow(SDL_Window* window)
+void OpenGLFramework::SwapWindow()
 {
-	SDL_GL_SwapWindow(window);
+	SDL_GL_SwapWindow(this->window_access);
 }
 
 void OpenGLFramework::Cleanup()

@@ -8,7 +8,7 @@
 #include <Windows.h>
 int WINAPI main(int argc, char* argv[]) {
     Ref<ApplicationInfo> create_info = CreateRef<ApplicationInfo>();
-    create_info->renderer_type = getSystemSupportedRenderer();
+    create_info->renderer_type = RendererTypes::DirectX12;
     create_info->name = "Lowp Windows";
 
     create_info->resolution = CreateRef<Resolution>();
