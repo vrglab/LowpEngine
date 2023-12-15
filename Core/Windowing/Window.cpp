@@ -22,12 +22,22 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		return LowpResultCodes::SystemFailure;
 	}
 
+	if (create_info->renderer_type == RendererTypes::OpenGL) {
+		LP_CORE_INFO("Creating OpenGL Context");
+		SDL_GL_MakeCurrent(sdl_window, SDL_GL_CreateContext(sdl_window));
+	}
+
 	return LowpResultCodes::Success;
 }
 
 void Window::ShowWindow()
 {
 	SDL_ShowWindow(sdl_window);
+}
+
+void Window::HideWindow()
+{
+	SDL_HideWindow(sdl_window);
 }
 
 void Window::ProcessEvents()

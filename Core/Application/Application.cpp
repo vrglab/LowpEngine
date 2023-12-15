@@ -7,6 +7,12 @@ int Application::Init(Ref<ApplicationInfo> info)
     LP_CORE_INFO("Starting engine");
     created_window = CreateRef<Window>();
 
+    if (created_window->Init(info->GetWindowCreateInfo()) != LowpResultCodes::Success) 
+    {
+        LP_CORE_ERROR("Window initiation failed");
+        return LowpResultCodes::UnknowError;
+    }
+
     switch (info->renderer_type)
     {
     case RendererTypes::DirectX12:
@@ -21,11 +27,6 @@ int Application::Init(Ref<ApplicationInfo> info)
     }
     ((Framework*)created_rendering_framework)->Init();
 
-    if (created_window->Init(info->GetWindowCreateInfo()) != LowpResultCodes::Success) 
-    {
-        LP_CORE_ERROR("Window initiation failed");
-        return LowpResultCodes::UnknowError;
-    }
     created_window->ShowWindow();
 
 
@@ -41,6 +42,8 @@ void Application::Run()
     {
         created_window->ProcessEvents();
 		GetEvenBuss()->ResolveQue();
+        ((Framework*)created_rendering_framework)->Tick();
+        ((Framework*)created_rendering_framework)->SwapWindow(created_window->getSdlWindow());
     }
 }
 
