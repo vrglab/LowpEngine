@@ -554,6 +554,87 @@ project "RenderingEngine"
 		optimize "On"
 		defines {"RELEASE"}
 
+project "ShaderEngine"
+	location "ShaderEngine"
+	kind "StaticLib"
+	language "C++"
+	toolset "v143"
+	buildoptions
+	{
+		"/Zc:__cplusplus"
+	}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+	if os.target() == "windows" then
+		pchheader "pch.h"
+		cppdialect "C++latest"
+		links 
+		{
+			"d3d12",
+			"dxgi",
+			"D3DCompiler",
+			"OpenGL32"
+		}
+	elseif os.target() == "linux" then
+		pchheader "%{prj.name}/pch.h"
+		links 
+		{
+			"OpenGL",
+			"vulkan"
+		}
+	end
+
+	pchsource "%{prj.name}/pch.cpp"
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.h",
+		"%{prj.name}/**/**.cpp"
+	}
+
+	libdirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
+	}
+
+	includedirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"%{prj.name}",
+		"."
+	}
+	
+	links
+	{
+		"EngineCommons",
+		"glew32",
+		"GlU32"
+	}
+
+	vpaths {
+		["Headers/*"] = { "**.h", "**.hpp" },
+		["Sources/*"] = {"**.c", "**.cpp"}
+	}
+
+
+	filter "system:windows"
+		cppdialect "C++20"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+		defines {"DEBUG"}
+
+	filter "configurations:Release"
+		optimize "On"
+		defines {"RELEASE"}
+
 project "ScriptingEngine"
 	location "ScriptingEngine"
 	kind "StaticLib"
