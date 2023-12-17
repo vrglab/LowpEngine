@@ -97,7 +97,8 @@ project "Core"
 		"EventEngine",
 		"SDL2",
 		"spdlog",
-		"fmt"
+		"fmt",
+		"volk"
 	}
 
 	vpaths {
@@ -582,8 +583,7 @@ project "ShaderEngine"
 		pchheader "%{prj.name}/pch.h"
 		links 
 		{
-			"OpenGL",
-			"vulkan"
+			"OpenGL"
 		}
 	end
 
@@ -613,7 +613,8 @@ project "ShaderEngine"
 	{
 		"EngineCommons",
 		"glew32",
-		"GlU32"
+		"GlU32",
+		"volk"
 	}
 
 	vpaths {

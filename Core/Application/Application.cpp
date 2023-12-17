@@ -2,6 +2,7 @@
 #include "Application.h"
 #include <RenderingEngine/FrameworkHandeling/Frameworks/OpenGLFramework.h>
 #include <RenderingEngine/FrameworkHandeling/Frameworks/Directx12Framework.h>
+#include <RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -20,6 +21,7 @@ int Application::Init(Ref<ApplicationInfo> info)
         created_rendering_framework = new Directx12Framework();
         break;
     case RendererTypes::Vulkan:
+        created_rendering_framework = new VulkanFramework();
         break;
     case RendererTypes::OpenGL:
         created_rendering_framework = new OpenGLFramework();

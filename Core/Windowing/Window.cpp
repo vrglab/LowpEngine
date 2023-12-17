@@ -10,6 +10,10 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		create_info->tags |= SDL_WINDOW_OPENGL;
 	}
 
+	if (create_info->renderer_type == RendererTypes::Vulkan) {
+		create_info->tags |= SDL_WINDOW_VULKAN;
+	}
+
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		LP_CORE_ERROR(SDL_GetError());
 		return LowpResultCodes::SystemFailure;
