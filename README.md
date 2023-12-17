@@ -23,11 +23,10 @@ On linux running the `Generate.sh` file in the console using `sh`,should by defa
 
 # Currently Supported features
 This are all of the feature that are already fully or partially implemented into the Project
-1. Fuck all i'm still designing this shit
+1. OpenGl, Vulkan, DirectX12, Metal.
 
 # Planned to Support
 this are all feature i plan on supporting (that i can remember right now)
-1. OpenGl, Vulkan, DirectX11, Metal.
 1. Bash based executables.
 1. Asset Controll.
 1. Customizable Asset importer.
