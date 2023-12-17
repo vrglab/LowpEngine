@@ -9,9 +9,13 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 	if (create_info->renderer_type == RendererTypes::OpenGL) {
 		create_info->tags |= SDL_WINDOW_OPENGL;
 	}
-
+	
 	if (create_info->renderer_type == RendererTypes::Vulkan) {
 		create_info->tags |= SDL_WINDOW_VULKAN;
+	}
+
+	if (create_info->renderer_type == RendererTypes::Metal) {
+		create_info->tags |= SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_METAL;
 	}
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {

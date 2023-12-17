@@ -4,6 +4,7 @@
 
 void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 {
+#ifdef _WIN32
     LP_CORE_INFO("Starting DirectX12");
     this->window_access = window;
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "direct3d12");
@@ -80,10 +81,14 @@ void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window
 
     // Create a command list
     device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator, nullptr, IID_PPV_ARGS(&commandList));
+#else
+    LP_CORE_ERROR("DirectX12 is not supported on this device");
+#endif
 }
 
 void Directx12Framework::Tick()
 {
+#ifdef _WIN32
     // Create a command allocator
     const float clearColor[] = { 0.5f, 0.5f, 0.5f, 1.0f }; // RGBA
     D3D12_CPU_DESCRIPTOR_HANDLE currentRtvHandle(rtvHeap->GetCPUDescriptorHandleForHeapStart());
@@ -91,14 +96,17 @@ void Directx12Framework::Tick()
     currentRtvHandle.ptr += swapChain->GetCurrentBackBufferIndex() * rtvDescriptorIncrement;
 
     commandList->ClearRenderTargetView(currentRtvHandle, clearColor, 0, nullptr);
+#endif
 }
 
 void Directx12Framework::SwapWindow()
 {
+#ifdef _WIN32
     commandList->Close();
     ID3D12CommandList* lists[] = { commandList };
     commandQueue->ExecuteCommandLists(_countof(lists), lists);
     swapChain->Present(1, 0);
+#endif
 }
 
 void Directx12Framework::Cleanup()
