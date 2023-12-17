@@ -55,10 +55,6 @@ void Window::ProcessEvents()
 		if (event.type == SDL_QUIT) {
 			CloseWindow();
 		}
-		if(event.type == SDL_WINDOWEVENT_RESIZED)
-		{
-			Application::GetEvenBuss()->QueHandler(window_resize_event);
-		}
 	}
 }
 

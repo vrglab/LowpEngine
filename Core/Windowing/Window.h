@@ -21,7 +21,6 @@ private:
 	Ref<WindowCreateInfo> create_info;
 	bool quit = false;
 public:
-	Ref <EventHandler> window_resize_event;
 	inline SDL_Window* getSdlWindow() { return sdl_window; }
 	int Init(Ref<WindowCreateInfo> createInfo);
 	void ShowWindow();

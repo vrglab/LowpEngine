@@ -7,9 +7,31 @@
 int Application::Init(Ref<ApplicationInfo> info)
 {
     LP_CORE_INFO("Starting engine");
-    created_window = CreateRef<Window>();
+    app_info = info;
+    CreateAppWindow(info->GetWindowCreateInfo());
 
-    if (created_window->Init(info->GetWindowCreateInfo()) != LowpResultCodes::Success) 
+    return LowpResultCodes::Success;
+}
+
+void Application::Run()
+{
+   
+    while (!GetWindow()->ShouldClose())
+    {
+        created_window->created_window->ProcessEvents();
+        created_window->event_buss->ResolveQue();
+        ((Framework*)created_window->created_rendering_framework)->Tick();
+        ((Framework*)created_window->created_rendering_framework)->SwapWindow();
+    }
+    
+}
+
+int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
+{
+    Ref<AppWindow> app_window = CreateRef<AppWindow>();
+    Ref<Window> created_windo = CreateRef<Window>();
+
+    if (created_windo->Init(info) != LowpResultCodes::Success)
     {
         LP_CORE_ERROR("Window initiation failed");
         return LowpResultCodes::UnknowError;
@@ -18,42 +40,30 @@ int Application::Init(Ref<ApplicationInfo> info)
     switch (info->renderer_type)
     {
     case RendererTypes::DirectX12:
-        created_rendering_framework = new Directx12Framework();
+        app_window->created_rendering_framework = new Directx12Framework();
         break;
     case RendererTypes::Vulkan:
-        created_rendering_framework = new VulkanFramework();
+        app_window->created_rendering_framework = new VulkanFramework();
         break;
     case RendererTypes::OpenGL:
-        created_rendering_framework = new OpenGLFramework();
+        app_window->created_rendering_framework = new OpenGLFramework();
         break;
     case RendererTypes::Metal:
         break;
     }
-    ((Framework*)created_rendering_framework)->Init(info, created_window->getSdlWindow());
+    ((Framework*)app_window->created_rendering_framework)->Init(app_info, created_windo->getSdlWindow());
 
-    created_window->ShowWindow();
+    app_window->event_buss = CreateRef<EventBus>();
 
-
-    created_window->window_resize_event = CreateRef<EventHandler>();
-    event_buss = CreateRef<EventBus>(); 
-
+    created_windo->ShowWindow();
+    app_window->created_window = created_windo;
+    created_window = app_window;
     return LowpResultCodes::Success;
-}
-
-void Application::Run()
-{
-    while (!created_window->ShouldClose()) 
-    {
-        created_window->ProcessEvents();
-		GetEvenBuss()->ResolveQue();
-        ((Framework*)created_rendering_framework)->Tick();
-        ((Framework*)created_rendering_framework)->SwapWindow();
-    }
 }
 
 void Application::CleanUp()
 {
     LP_CORE_INFO("Closing engine");
-    ((Framework*)created_rendering_framework)->Cleanup();
-    created_window->CleanUp();
+    ((Framework*)created_window->created_rendering_framework)->Cleanup();
+    created_window->created_window->CleanUp();
 }

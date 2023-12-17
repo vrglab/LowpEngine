@@ -12,10 +12,11 @@ int WINAPI main(int argc, char* argv[]) {
     create_info->name = "Lowp Windows";
 
     create_info->resolution = CreateRef<Resolution>();
-    create_info->resolution->height = 400;
-    create_info->resolution->width = 600;
+    create_info->resolution->height = 800;
+    create_info->resolution->width = 1000;
+    create_info->flags |= SDL_WINDOW_RESIZABLE;
 
-    Application* app = new Application();
+    Ref<Application> app = CreateRef<Application>();
     app->Init(create_info);
     app->Run();
     app->CleanUp();

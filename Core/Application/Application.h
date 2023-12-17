@@ -14,15 +14,21 @@
 LP_Export class Application
 {
 private:
-	Ref<Window> created_window;
-	void* created_rendering_framework;
+	struct AppWindow
+	{
+	public:
+		Ref<Window> created_window;
+		void* created_rendering_framework;
+		Ref<EventBus> event_buss;
+	};
+	Ref<AppWindow> created_window;
 	Ref<ApplicationInfo> app_info;
-	static inline Ref<EventBus> event_buss = 0;
+	int CreateAppWindow(Ref<WindowCreateInfo>);
 
 public:
-	static Ref<EventBus> GetEvenBuss() { return event_buss; }
-	inline Ref<Window> GetWindow() { return created_window; }
-	inline void* GetRenderingframework() { return created_rendering_framework; }
+	inline Ref<EventBus> GetEvenBuss() { return created_window->event_buss; }
+	inline Ref<Window> GetWindow() { return created_window->created_window; }
+	inline void* GetRenderingframework() { return created_window->created_rendering_framework; }
 	int Init(Ref<ApplicationInfo> info);
 	void Run();
 	void CleanUp();
