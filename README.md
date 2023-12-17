@@ -13,7 +13,7 @@ C++/C# based Game Engine, fully free and open source.
 
 
 # Building/IDE Envoirment Generation
-Clone the project using `git clone git@github.com:vrglab/LowpEngine.git` and Run the `Generate` this should generate the default IDE envoirment after that you need to run the `InstallPackages` file for your os
+Clone the project using `git clone git@github.com:vrglab/LowpEngine.git` and Run the `Generate` this should generate the default IDE envoirment
 
 ### Windows
 On windows running the `Generate.bat` file should by default create `Visual Studio Comunity 2022` project files and using Viisual Studio you should be able to just build the project.
