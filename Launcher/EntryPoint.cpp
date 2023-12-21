@@ -8,11 +8,11 @@
 #include <Windows.h>
 int WINAPI main(int argc, char* argv[]) {
     Ref<ApplicationInfo> create_info = CreateRef<ApplicationInfo>();
-    create_info->renderer_type = getSystemSupportedRenderer();
+    create_info->renderer_type = RendererTypes::Vulkan;
     create_info->name = "Lowp Windows";
 
     create_info->resolution = CreateRef<Resolution>();
-    create_info->resolution->height = 800;
+    create_info->resolution->height = 600;
     create_info->resolution->width = 1000;
     create_info->flags |= SDL_WINDOW_RESIZABLE;
 

@@ -12,6 +12,8 @@
 
 #include "RenderingEngine/FrameworkHandeling/Framework.h"
 
+#include <SDL2/SDL_metal.h>
+
 class MetalFramework : Framework
 {
 private:

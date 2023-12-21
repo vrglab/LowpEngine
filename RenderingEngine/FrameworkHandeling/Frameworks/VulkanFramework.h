@@ -14,6 +14,8 @@
 
 #include <vulkan/vulkan.h>
 
+#include <SDL2/SDL_vulkan.h>
+
 
 class VulkanFramework : Framework
 {
