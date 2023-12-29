@@ -29,9 +29,9 @@ void Application::Run()
 int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
 {
     Ref<AppWindow> app_window = CreateRef<AppWindow>();
-    Ref<Window> created_windo = CreateRef<Window>();
+    Ref<Window> created_window = CreateRef<Window>();
 
-    if (created_windo->Init(info) != LowpResultCodes::Success)
+    if (created_window->Init(info) != LowpResultCodes::Success)
     {
         LP_CORE_ERROR("Window initiation failed");
         return LowpResultCodes::UnknowError;
@@ -51,12 +51,13 @@ int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
     case RendererTypes::Metal:
         break;
     }
-    ((Framework*)app_window->created_rendering_framework)->Init(app_info, created_windo->getSdlWindow());
+    LP_CORE_INFO("Opening window");
+    ((Framework*)app_window->created_rendering_framework)->Init(app_info, created_window->getSdlWindow());
 
     app_window->event_buss = CreateRef<EventBus>();
 
-    created_windo->ShowWindow();
-    app_window->created_window = created_windo;
+    created_window->ShowWindow();
+    app_window->created_window = created_window;
     created_window = app_window;
     return LowpResultCodes::Success;
 }
