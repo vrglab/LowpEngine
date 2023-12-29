@@ -25,10 +25,8 @@ int WINAPI main(int argc, char* argv[]) {
 
 #elif defined(__linux__) || defined(__APPLE__)
 int main(int argc, char* argv[]) {
-
     return 0;
 }
-
 #else
 #error "Unsupported platform"
 #endif
