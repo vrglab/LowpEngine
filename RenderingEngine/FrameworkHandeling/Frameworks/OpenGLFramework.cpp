@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "OpenGLFramework.h"
 
+
 #include <Core/Debugging/Debug.h>
 #include <GL/glew.h>
-
+ 
 void OpenGLFramework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 {
+	glewExperimental = GL_TRUE;
 	GLenum result = glewInit();
 	if (result != GLEW_OK) {
 		std::string error_text = "Glew init failed with error code: ";
@@ -28,4 +30,11 @@ void OpenGLFramework::SwapWindow()
 
 void OpenGLFramework::Cleanup()
 {
+}
+
+void OpenGLFramework::OnSdlSetup()
+{
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 }

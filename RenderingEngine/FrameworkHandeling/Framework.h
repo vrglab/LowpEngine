@@ -15,6 +15,7 @@ LP_Export class Framework
 protected:
 	SDL_Window* window_access;
 public:
+	virtual void OnSdlSetup() = 0;
 	virtual void Init(Ref<ApplicationInfo>, SDL_Window*) = 0;
 	virtual void Tick() = 0;
 	virtual void SwapWindow() = 0;

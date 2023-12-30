@@ -18,10 +18,10 @@ void Application::Run()
    
     while (!GetWindow()->ShouldClose())
     {
-        created_window->created_window->ProcessEvents();
-        created_window->event_buss->ResolveQue();
-        ((Framework*)created_window->created_rendering_framework)->Tick();
-        ((Framework*)created_window->created_rendering_framework)->SwapWindow();
+        window_data->created_window->ProcessEvents();
+        window_data->event_buss->ResolveQue();
+        ((Framework*)window_data->created_rendering_framework)->Tick();
+        ((Framework*)window_data->created_rendering_framework)->SwapWindow();
     }
     
 }
@@ -30,12 +30,6 @@ int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
 {
     Ref<AppWindow> app_window = CreateRef<AppWindow>();
     Ref<Window> created_window = CreateRef<Window>();
-
-    if (created_window->Init(info) != LowpResultCodes::Success)
-    {
-        LP_CORE_ERROR("Window initiation failed");
-        return LowpResultCodes::UnknowError;
-    }
 
     switch (info->renderer_type)
     {
@@ -51,6 +45,14 @@ int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
     case RendererTypes::Metal:
         break;
     }
+
+    ((Framework*)app_window->created_rendering_framework)->OnSdlSetup();
+    if (created_window->Init(info) != LowpResultCodes::Success)
+    {
+        LP_CORE_ERROR("Window initiation failed");
+        return LowpResultCodes::UnknowError;
+    }
+
     LP_CORE_INFO("Opening window");
     ((Framework*)app_window->created_rendering_framework)->Init(app_info, created_window->getSdlWindow());
 
@@ -58,13 +60,13 @@ int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
 
     created_window->ShowWindow();
     app_window->created_window = created_window;
-    created_window = app_window;
+    window_data = app_window;
     return LowpResultCodes::Success;
 }
 
 void Application::CleanUp()
 {
     LP_CORE_INFO("Closing engine");
-    ((Framework*)created_window->created_rendering_framework)->Cleanup();
-    created_window->created_window->CleanUp();
+    ((Framework*)window_data->created_rendering_framework)->Cleanup();
+    window_data->created_window->CleanUp();
 }

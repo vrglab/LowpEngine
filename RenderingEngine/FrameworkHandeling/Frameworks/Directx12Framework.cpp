@@ -112,3 +112,7 @@ void Directx12Framework::SwapWindow()
 void Directx12Framework::Cleanup()
 {
 }
+
+void Directx12Framework::OnSdlSetup()
+{
+}

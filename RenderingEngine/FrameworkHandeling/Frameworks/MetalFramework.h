@@ -26,5 +26,6 @@ public:
 	void Tick() override;
 	void SwapWindow() override;
 	void Cleanup() override;
+	void OnSdlSetup() override;
 };
 
