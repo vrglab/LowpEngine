@@ -32,3 +32,7 @@ void VulkanFramework::SwapWindow()
 void VulkanFramework::Cleanup()
 {
 }
+
+void VulkanFramework::OnSdlSetup()
+{
+}
