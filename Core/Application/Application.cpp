@@ -23,7 +23,6 @@ void Application::Run()
         ((Framework*)created_window->created_rendering_framework)->Tick();
         ((Framework*)created_window->created_rendering_framework)->SwapWindow();
     }
-    
 }
 
 int Application::CreateAppWindow(Ref<WindowCreateInfo> info)

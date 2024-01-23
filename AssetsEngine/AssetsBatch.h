@@ -6,13 +6,8 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-
-#include <cereal/cereal.hpp>
-
 #include <EngineCommons/EngineCommons.h>
 
-#include "Asset.h"
-#include "AssetImporters/AssetImporter.h"
-
-//Asset Database
-#include "AssetDatabase/AssetsDatabase.h"
+class AssetsBatch
+{
+};

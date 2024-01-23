@@ -11,6 +11,5 @@
 
 LP_Export class AssetsDatabase
 {
-private:
-	std::vector<Asset> loaded_assets;
+
 };
