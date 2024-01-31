@@ -3,11 +3,14 @@
 #include <RenderingEngine/FrameworkHandeling/Frameworks/OpenGLFramework.h>
 #include <RenderingEngine/FrameworkHandeling/Frameworks/Directx12Framework.h>
 #include <RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h>
+#include <AssetsEngine/AssetsEngine.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
-    LP_CORE_INFO("Starting engine");
+    LP_CORE_INFO("Starting LowpEngine on version 1.0.0");
+    info->ResourcesDir = getExecutablePath().append("\\").append(info->name).append(" data");
     app_info = info;
+    StartAssetsEngine(app_info);
     CreateAppWindow(info->GetWindowCreateInfo());
 
     return LowpResultCodes::Success;

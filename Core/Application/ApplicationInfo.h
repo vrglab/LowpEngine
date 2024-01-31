@@ -13,9 +13,8 @@
 class ApplicationInfo
 {
 public:
-	std::string name;
+	std::string name, ResourcesDir;
 	Ref<Resolution> resolution;
-	int flags, renderer_type, auio_system_type;
+	int flags, renderer_type, audio_system_type;
 	Ref<WindowCreateInfo> GetWindowCreateInfo();
 };
-

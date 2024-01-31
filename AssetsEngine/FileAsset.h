@@ -8,10 +8,10 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 
-LP_Export class Asset
+LP_Export class FileAsset
 {
 private:
 	char* file_content;
-	std::string file_path;
+	std::string name;
 	int importer_type;
 };

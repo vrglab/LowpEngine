@@ -11,8 +11,18 @@
 
 #include <EngineCommons/EngineCommons.h>
 
-#include "Asset.h"
+#include "FileAsset.h"
 #include "AssetImporters/AssetImporter.h"
 
 //Asset Database
 #include "AssetDatabase/AssetsDatabase.h"
+
+#include <Core/Debugging/Debug.h>
+#include <Core/Application/ApplicationInfo.h>
+#include <cereal/archives/binary.hpp>
+
+static inline void StartAssetsEngine(Ref<ApplicationInfo> info)
+{
+	LP_CORE_INFO("Starting Assets Engine");
+	LP_CORE_INFO(info->ResourcesDir);
+}

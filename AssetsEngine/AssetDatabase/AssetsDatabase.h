@@ -7,7 +7,7 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include "Asset.h"
+#include "FileAsset.h"
 
 LP_Export class AssetsDatabase
 {
