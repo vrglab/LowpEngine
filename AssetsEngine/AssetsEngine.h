@@ -17,12 +17,26 @@
 //Asset Database
 #include "AssetDatabase/AssetsDatabase.h"
 
+#include "AssetsBatch.h"
+
+#include <fstream>
 #include <Core/Debugging/Debug.h>
 #include <Core/Application/ApplicationInfo.h>
-#include <cereal/archives/binary.hpp>
+#include <cereal/archives/portable_binary.hpp>
 
 static inline void StartAssetsEngine(Ref<ApplicationInfo> info)
 {
 	LP_CORE_INFO("Starting Assets Engine");
-	LP_CORE_INFO(info->ResourcesDir);
+
+	AssetsBatch batch;
+	std::string assets_file = info->ResourcesDir;
+	assets_file.append("\\primaryassetsbatch.bat");
+	std::ifstream is(assets_file, std::ios::binary);
+	if(is.good())
+	{
+		cereal::PortableBinaryInputArchive inArchive(is);
+		inArchive(batch);
+	}
+
+	LP_CORE_INFO(assets_file);
 }
