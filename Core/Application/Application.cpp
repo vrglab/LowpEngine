@@ -4,6 +4,7 @@
 #include <RenderingEngine/FrameworkHandeling/Frameworks/Directx12Framework.h>
 #include <RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h>
 #include <AssetsEngine/AssetsEngine.h>
+#include <ScriptingEngine/ScriptingEngine.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -11,6 +12,7 @@ int Application::Init(Ref<ApplicationInfo> info)
     info->ResourcesDir = getExecutablePath().append("\\").append(info->name).append(" data");
     app_info = info;
     StartAssetsEngine(app_info);
+    ScriptingEngine::InitMono(app_info);
     CreateAppWindow(info->GetWindowCreateInfo());
 
     return LowpResultCodes::Success;
@@ -71,4 +73,5 @@ void Application::CleanUp()
     LP_CORE_INFO("Closing engine");
     ((Framework*)window_data->created_rendering_framework)->Cleanup();
     window_data->created_window->CleanUp();
+    ScriptingEngine::ShutdownMono();
 }

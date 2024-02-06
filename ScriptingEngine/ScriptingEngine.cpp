@@ -5,9 +5,17 @@
 void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
 {
     LP_CORE_INFO("Starting Scripting engine");
-	mono_set_dirs("Mono/lib", "Mono/etc");
+
+    std::string path_to_mono_libs = getExecutablePath();
+    path_to_mono_libs.append("\\Mono\\lib");
+
+    std::string path_to_mono_etc = getExecutablePath();
+    path_to_mono_etc.append("\\Mono\\etc");
+
+
+	mono_set_dirs(path_to_mono_libs.c_str(), path_to_mono_etc.c_str());
 	mono_config_parse(nullptr);
-    monoDomain = mono_jit_init("GameEngineDomain");
+    monoDomain = mono_jit_init("LowpDomain");
     if (!monoDomain) {
         LP_CORE_ERROR("Failed to initialize Mono JIT.");
         return;
