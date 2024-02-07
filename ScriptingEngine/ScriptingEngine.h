@@ -32,7 +32,7 @@ private:
 	static inline std::vector<MonoAssembly*> loaded_assemblies;
 
 public:
-	static void LoadAssembly(std::string assemblyPath);
+	static MonoAssembly* LoadAssembly(std::string assemblyPath);
 	static void LoadAllAssembliesFromDirectory(std::string directoryPath);
 	static void InitMono(Ref<ApplicationInfo>);
 	static void ShutdownMono();

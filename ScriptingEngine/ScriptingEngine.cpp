@@ -36,7 +36,7 @@ void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
     LoadAssembly(path_to_game_assembly);
 }
 
-void ScriptingEngine::LoadAssembly(std::string assemblyPath)
+MonoAssembly* ScriptingEngine::LoadAssembly(std::string assemblyPath)
 {
     MonoAssembly* assembly = mono_domain_assembly_open(monoDomain, assemblyPath.c_str());
     if (!assembly) {
@@ -44,9 +44,10 @@ void ScriptingEngine::LoadAssembly(std::string assemblyPath)
         error_txt.append("Failed to load assembly: ");
         error_txt.append(assemblyPath);
         LP_CORE_ERROR(error_txt.c_str());
-        return;
+        return nullptr;
     }
     loaded_assemblies.push_back(assembly);
+    return assembly;
 }
 
 void ScriptingEngine::LoadAllAssembliesFromDirectory(std::string directoryPath)
