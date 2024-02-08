@@ -122,7 +122,7 @@ project "Core"
 
 project "CoreBindings"
 	location "CoreBindings"
-	kind "StaticLib"
+	kind "SharedLib"
 	language "C++"
 	toolset "v143"
 	buildoptions

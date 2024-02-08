@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LowpEngine;
 
-public class TestClass : LowpBehaviour
+public class TestClass
 {
 
 }

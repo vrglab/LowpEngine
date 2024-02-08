@@ -10,4 +10,6 @@
 #include <Core/Debugging/Debug.h>
 
 
-LP_Export inline void Log(std::string msg);
+LP_Extern LP_Export inline void Log(char* msg);
+LP_Extern LP_Export inline void _ErrLog(char* msg);
+LP_Extern LP_Export inline void _WarnLog(char* msg);

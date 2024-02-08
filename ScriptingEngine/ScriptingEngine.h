@@ -22,7 +22,7 @@ namespace fs = std::filesystem;
 #elif defined(__linux__)
 #define ASSEMBLY_EXTENSION ".so"
 #elif defined(__APPLE__)
-#define ASSEMBLY_EXTENSION ".llyb"
+#define ASSEMBLY_EXTENSION ".dylib"
 #endif
 
 LP_Export class ScriptingEngine

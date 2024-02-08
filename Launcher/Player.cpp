@@ -7,7 +7,7 @@ Ref<ApplicationInfo> Player::LoadAppData()
 {
     Ref<ApplicationInfo> create_info = CreateRef<ApplicationInfo>();
 
-    std::ifstream inFile("Player Data/appInfo.bin", std::ios::binary); // Open the binary file
+    std::ifstream config_file_stream("\\Lowp_data\\config.bin", std::ios::binary);
 
 
     return create_info;

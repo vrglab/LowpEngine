@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ScriptingEngine.h"
 #include <Core/Debugging/Debug.h>
+#include <mono/metadata/debug-helpers.h>
 
 void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
 {
@@ -26,14 +27,54 @@ void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
     path_to_dependencies.append("\\Dependencies");
 
     std::string path_to_api_assembly = info->ResourcesDir;
-    path_to_api_assembly.append("\\LowpEngine.dll");
+    path_to_api_assembly.append("\\LowpEngine").append(ASSEMBLY_EXTENSION);
 
     std::string path_to_game_assembly = info->ResourcesDir;
-    path_to_game_assembly.append("\\game.dll");
+    path_to_game_assembly.append("\\CoreAssembly").append(ASSEMBLY_EXTENSION);
 
     LoadAllAssembliesFromDirectory(path_to_dependencies.c_str());
-    LoadAssembly(path_to_api_assembly);
+    MonoAssembly* api_assembly = LoadAssembly(path_to_api_assembly);
     LoadAssembly(path_to_game_assembly);
+
+
+    /***** TEST CODE BEGINS HERE *****/
+    MonoImage* image = mono_assembly_get_image(api_assembly);
+
+    MonoClass* klass = mono_class_from_name(image, "LowpEngine", "Debug");
+    if (!klass) {
+        // Handle error
+    }
+
+    MonoMethodDesc* methodDesc = mono_method_desc_new("LowpEngine.Debug:LogWarning(System.String)", FALSE);
+    MonoMethod* method = mono_class_get_method_from_name(klass, "LogWarning", 1);
+    
+    mono_method_desc_free(methodDesc);
+
+    if (!method) {
+        // Handle error
+    }
+
+    const char* argValue = "Hello world";
+    MonoString* monoArg = mono_string_new(monoDomain, argValue);
+    void* args[] = { monoArg };
+
+    MonoObject* exception = nullptr;
+    MonoObject* result = mono_runtime_invoke(method, nullptr, args, &exception);
+
+    if (exception) {
+        MonoMethod* get_message_method = mono_class_get_method_from_name(mono_get_exception_class(), "get_Message", 0);
+        MonoObject* message_obj = mono_runtime_invoke(get_message_method, exception, nullptr, nullptr);
+        if (message_obj != nullptr) {
+            MonoString* message_mono_str = (MonoString*)message_obj;
+            char* message = mono_string_to_utf8(message_mono_str);
+            LP_CORE_ERROR(message);
+            mono_free(message);
+        }
+    }
+    else {
+
+    }
+    /***** TEST CODE ENDS HERE *****/
 }
 
 MonoAssembly* ScriptingEngine::LoadAssembly(std::string assemblyPath)

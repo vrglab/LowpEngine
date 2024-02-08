@@ -1,7 +1,17 @@
 #include "pch.h"
 #include "DebugBindings.h"
 
-LP_Export void Log(std::string msg)
+LP_Extern LP_Export void Log(char* msg)
 {
-    LP_INFO(msg.c_str());
+	LP_INFO(msg);
+}
+
+LP_Extern LP_Export void _ErrLog(char* msg)
+{
+	LP_ERROR(msg);
+}
+
+LP_Extern LP_Export void _WarnLog(char* msg)
+{
+	LP_WARN(msg);
 }
