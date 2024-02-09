@@ -17,4 +17,5 @@ public:
 	Ref<Resolution> resolution;
 	int flags, renderer_type, audio_system_type;
 	Ref<WindowCreateInfo> GetWindowCreateInfo();
+	static Ref<ApplicationInfo> GetDefault();
 };

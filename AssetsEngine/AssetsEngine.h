@@ -30,7 +30,7 @@ static inline void StartAssetsEngine(Ref<ApplicationInfo> info)
 
 	AssetsBatch batch;
 	std::string assets_file = info->ResourcesDir;
-	assets_file.append("\\primaryassetsbatch.bat");
+	assets_file.append("\\primaryassetsbatch.bin");
 	std::ifstream is(assets_file, std::ios::binary);
 	if(is.good())
 	{
