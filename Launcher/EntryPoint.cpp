@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <iostream>
 #include <Core/LowpEngine.h>
+#include "Player.h"
 
 #undef main
 
@@ -8,8 +9,8 @@
 #include <Windows.h>
 int WINAPI main(int argc, char* argv[]) {
     
-    Ref<Application> app = CreateRef<Application>();
-    app->Init(ApplicationInfo::GetDefault());
+   Ref<Application> app = CreateRef<Application>();
+    app->Init(Player::LoadAppData());
     app->Run();
     app->CleanUp();
     return 0;

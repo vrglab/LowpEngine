@@ -17,6 +17,7 @@ Ref<ApplicationInfo> ApplicationInfo::GetDefault()
 	Ref<ApplicationInfo> create_info = CreateRef<ApplicationInfo>();
 	create_info->renderer_type = getSystemSupportedRenderer();
 	create_info->name = "Lowp Windows";
+	create_info->ResourcesDir = getExecutablePath().append("\\").append("Lowp_data");
 
 	create_info->resolution = CreateRef<Resolution>();
 	create_info->resolution->height = 600;

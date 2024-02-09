@@ -8,12 +8,16 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <Core/Application/ApplicationInfo.h>
-#include "ConfigsData.h"
+#include <cereal/types/memory.hpp>
+#include <cereal/types/string.hpp>
 
-LP_Export class Player
-{
+LP_Export struct ConfigsData {
 public:
-	static Ref<ApplicationInfo> LoadAppData();
-	static Ref<ApplicationInfo> MakeAppData(ConfigsData data);
+	std::string app_name;
+	int res_w, res_h;
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(app_name, res_w, res_h);
+	}
 };

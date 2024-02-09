@@ -9,7 +9,6 @@
 int Application::Init(Ref<ApplicationInfo> info)
 {
     LP_CORE_INFO("Starting LowpEngine on version 1.0.0");
-    info->ResourcesDir = getExecutablePath().append("\\").append("Lowp_data");
     app_info = info;
     StartAssetsEngine(info);
     ScriptingEngine::InitMono(info);
