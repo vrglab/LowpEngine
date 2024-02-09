@@ -22,13 +22,10 @@ private:
 		Ref<EventBus> event_buss;
 	};
 	Ref<AppWindow> window_data;
-	Ref<ApplicationInfo> app_info;
-	int CreateAppWindow(Ref<WindowCreateInfo>);
 
 public:
-	inline Ref<EventBus> GetEvenBuss() { return window_data->event_buss; }
-	inline Ref<Window> GetWindow() { return window_data->created_window; }
-	inline void* GetRenderingframework() { return window_data->created_rendering_framework; }
+	Ref<ApplicationInfo> app_info;
+	int CreateAppWindow(Ref<WindowCreateInfo>);
 	int Init(Ref<ApplicationInfo> info);
 	void Run();
 	void CleanUp();

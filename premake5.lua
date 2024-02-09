@@ -352,7 +352,7 @@ project "Launcher"
 
 project "Editor"
 	location "Editor"
-	kind "StaticLib"
+	kind "ConsoleApp"
 	language "C++"
 	toolset "v143"
 	buildoptions
@@ -396,7 +396,7 @@ project "Editor"
 	
 	links
 	{
-		"EngineCommons"
+		"Core"
 	}
 
 	vpaths {

@@ -20,7 +20,7 @@ int Application::Init(Ref<ApplicationInfo> info)
 void Application::Run()
 {
    
-    while (!GetWindow()->ShouldClose())
+    while (!window_data->created_window->ShouldClose())
     {
         window_data->created_window->ProcessEvents();
         window_data->event_buss->ResolveQue();
