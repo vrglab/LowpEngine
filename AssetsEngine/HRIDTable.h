@@ -6,28 +6,29 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-
-#include <cereal/cereal.hpp>
-
 #include <EngineCommons/EngineCommons.h>
+#include <cereal/types/string.hpp>
+#include <cereal/types/memory.hpp>
+#include <cereal/types/vector.hpp>
 
-#include "FileAsset.h"
-#include "AssetImporters/AssetImporter.h"
-
-//Asset Database
-#include "AssetDatabase/AssetsDatabase.h"
-
-#include "AssetsBatch.h"
-#include "HRIDTable.h"
-
-#include <fstream>
-#include <Core/Debugging/Debug.h>
-#include <Core/Application/ApplicationInfo.h>
-
-
-LP_Export class AssetsEngine {
+LP_Export struct HRID
+{
 
 public:
-	static inline AssetsDatabase database = {};
-	static void StartAssetsEngine(Ref<ApplicationInfo> info);
+    std::string hrid;
+    std::string guid;
+    template<class Archive>
+    void serialize(Archive& archive) {
+        archive(hrid, guid);
+    }
+};
+
+LP_Export struct HRIDTable
+{
+public:
+    std::vector<HRID> hrids;
+    template<class Archive>
+    void serialize(Archive& archive) {
+        archive(hrids);
+    }
 };

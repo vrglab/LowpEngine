@@ -7,9 +7,15 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include "AssetsBatch.h"
+#include "HRIDTable.h"
 #include "FileAsset.h"
 
 LP_Export class AssetsDatabase
 {
-
+public:
+	HRIDTable hrid_table;
+	AssetsBatch assets_batch;
+	void ImportFileAsAsset(std::string);
+	static void GenerateDatabaseFiles(HRIDTable, AssetsBatch);
 };

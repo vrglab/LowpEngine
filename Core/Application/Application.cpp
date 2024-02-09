@@ -10,7 +10,7 @@ int Application::Init(Ref<ApplicationInfo> info)
 {
     LP_CORE_INFO("Starting LowpEngine on version 1.0.0");
     app_info = info;
-    StartAssetsEngine(info);
+    AssetsEngine::StartAssetsEngine(info);
     ScriptingEngine::InitMono(info);
     CreateAppWindow(info->GetWindowCreateInfo());
 

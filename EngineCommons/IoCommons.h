@@ -11,3 +11,4 @@
 
 LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize);
 LP_Export std::string getExecutablePath();
+LP_Export std::string GUIDGen();

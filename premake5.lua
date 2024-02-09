@@ -89,6 +89,7 @@ project "Core"
 
 	links
 	{
+		"AssetsEngine",
 		"SoundEngine",
 		"PhysicsEngine",
 		"RenderingEngine",
@@ -176,6 +177,7 @@ project "CoreBindings"
 
 	links
 	{
+		"AssetsEngine",
 		"SoundEngine",
 		"PhysicsEngine",
 		"RenderingEngine",

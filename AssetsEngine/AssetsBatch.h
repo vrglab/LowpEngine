@@ -13,13 +13,8 @@
 
 class AssetsBatch
 {
-private:
-	std::vector<FileAsset> assets;
 public:
-	/**
-	 * \brief Return's a std::vector of FileAssets loaded from a batch file
-	 */
-	std::vector<FileAsset> get_assets();
+	std::vector<FileAsset> assets;
 
 	template <class Archive>
 	void serialize(Archive& archive) {

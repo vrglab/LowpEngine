@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "IoCommons.h"
-
+#include <sstream>
 
 LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize)
 {
@@ -31,10 +31,45 @@ LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize)
     return buffer;
 }
 
+#if defined(_WIN32)
+#include <objbase.h>
+#elif defined(__linux__) || defined(__APPLE__)
+#include <uuid/uuid.h>
+#endif
+#include <iomanip>
 
+LP_Export std::string GUIDGen()
+{
+    std::stringstream ss;
+#if defined(_WIN32)
+    GUID guid;
+    CoCreateGuid(&guid);
+    ss << std::hex
+        << std::uppercase
+        << std::setfill('0')
+        << std::setw(8) << guid.Data1 << '-'
+        << std::setw(4) << guid.Data2 << '-'
+        << std::setw(4) << guid.Data3 << '-'
+        << std::setw(2) << static_cast<short>(guid.Data4[0])
+        << std::setw(2) << static_cast<short>(guid.Data4[1]) << '-'
+        << std::setw(2) << static_cast<short>(guid.Data4[2])
+        << std::setw(2) << static_cast<short>(guid.Data4[3])
+        << std::setw(2) << static_cast<short>(guid.Data4[4])
+        << std::setw(2) << static_cast<short>(guid.Data4[5])
+        << std::setw(2) << static_cast<short>(guid.Data4[6])
+        << std::setw(2) << static_cast<short>(guid.Data4[7]);
+#elif defined(__linux__) || defined(__APPLE__)
+    uuid_t uuid;
+    uuid_generate_random(uuid);
+    char str[37]; // UUID string length + null terminator
+    uuid_unparse_upper(uuid, str);
+    ss << str;
+#endif
+
+    return ss.str();
+}
 
 #include <string>
-
 #ifdef _WIN32
 #include <windows.h>
 LP_Export std::string getExecutablePath()
