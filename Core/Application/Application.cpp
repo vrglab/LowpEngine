@@ -5,6 +5,7 @@
 #include <RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h>
 #include <AssetsEngine/AssetsEngine.h>
 #include <ScriptingEngine/ScriptingEngine.h>
+#include <SceneEngine/SceneManager.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -12,6 +13,7 @@ int Application::Init(Ref<ApplicationInfo> info)
     app_info = info;
     AssetsEngine::StartAssetsEngine(info);
     ScriptingEngine::InitMono(info);
+    SceneManager::Init("");
     CreateAppWindow(info->GetWindowCreateInfo());
 
     return LowpResultCodes::Success;

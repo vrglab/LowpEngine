@@ -7,7 +7,12 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include "ComponentVariableData.h"
 
-LP_Export class Scene
+LP_Export class Component
 {
+public:
+	std::string mono_id;
+	std::vector<ComponentVariableData> data;
 };
+

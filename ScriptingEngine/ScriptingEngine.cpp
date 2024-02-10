@@ -35,12 +35,12 @@ void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
     LoadAllAssembliesFromDirectory(path_to_dependencies.c_str());
     MonoAssembly* api_assembly = LoadAssembly(path_to_api_assembly);
     LoadAssembly(path_to_game_assembly);
+    api_image = mono_assembly_get_image(api_assembly);
 
 
     /***** TEST CODE BEGINS HERE *****/
-    MonoImage* image = mono_assembly_get_image(api_assembly);
 
-    MonoClass* klass = mono_class_from_name(image, "LowpEngine", "Debug");
+    MonoClass* klass = mono_class_from_name(api_image, "LowpEngine", "Debug");
     if (!klass) {
         // Handle error
     }

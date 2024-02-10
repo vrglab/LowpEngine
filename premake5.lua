@@ -96,6 +96,7 @@ project "Core"
 		"EngineCommons",
 		"ScriptingEngine",
 		"EventEngine",
+		"SceneEngine",
 		"SDL2",
 		"spdlog",
 		"fmt",
