@@ -22,9 +22,9 @@ Ref<ApplicationInfo> Player::LoadAppData()
     return app_info;
 }
 
-Ref<ApplicationInfo> Player::MakeAppData(ConfigsData data)
+Ref<ApplicationInfo> Player::MakeAppData(ConfigsData data, std::string path)
 {
-    std::ofstream  config_file_stream("config.bin", std::ios::binary);
+    std::ofstream  config_file_stream(path.c_str(), std::ios::binary);
     if (!config_file_stream.is_open()) {
         throw std::runtime_error("Failed to open config file for writing.");
     }

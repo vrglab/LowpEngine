@@ -15,5 +15,5 @@ LP_Export class Player
 {
 public:
 	static Ref<ApplicationInfo> LoadAppData();
-	static Ref<ApplicationInfo> MakeAppData(ConfigsData data);
+	static Ref<ApplicationInfo> MakeAppData(ConfigsData data, std::string);
 };

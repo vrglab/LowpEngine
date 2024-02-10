@@ -17,5 +17,5 @@ public:
 	HRIDTable hrid_table;
 	AssetsBatch assets_batch;
 	void ImportFileAsAsset(std::string);
-	static void GenerateDatabaseFiles(HRIDTable, AssetsBatch);
+	static void GenerateDatabaseFiles(HRIDTable, AssetsBatch, std::string);
 };
