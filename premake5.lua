@@ -855,6 +855,7 @@ project "SceneEngine"
 	links
 	{
 		"EngineCommons",
+		"ScriptingEngine",
 		"yaml-cpp"
 	}
 

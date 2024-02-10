@@ -7,17 +7,16 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include <Mono/metadata/object.h>
 
-#include "ComponentInstance.h"
-#include "SceneEngine/Serialized/GameObject.h"
+#include "SceneEngine/Serialized/Component/Component.h"
+#include "Serialized/GameObject.h"
 
-
-LP_Export class GameObjectInstance
+LP_Export class ComponentInstance
 {
-private:
-	std::vector<ComponentInstance> component_instances;
-
 public:
-	GameObject base;
-	void Awake();
+	Component base;
+	GameObject parent;
+	MonoObject* created_instance;
 };
+
