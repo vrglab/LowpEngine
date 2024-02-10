@@ -8,6 +8,7 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 #include <Core/Application/ApplicationInfo.h>
+#include <SceneEngine/Serialized/Component/Component.h>
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/assembly.h>
@@ -37,5 +38,6 @@ public:
 	static void LoadAllAssembliesFromDirectory(std::string directoryPath);
 	static void InitMono(Ref<ApplicationInfo>);
 	static void ShutdownMono();
+	static MonoObject* CreateComponentClass(Component);
 };
 

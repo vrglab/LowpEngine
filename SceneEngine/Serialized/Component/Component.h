@@ -12,7 +12,7 @@
 LP_Export class Component
 {
 public:
-	std::string mono_id;
+	std::string mono_class_name, mono_namespace_name;
 	std::vector<ComponentVariableData> data;
 };
 

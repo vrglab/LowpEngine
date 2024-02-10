@@ -14,8 +14,8 @@
 class SceneInstance
 {
 private:
-	std::vector<GameObjectInstance> obj_instances;
+	std::vector<Ref<GameObjectInstance>> obj_instances;
 public:
 	Scene base;
-	void CreateInstance();
+	void CreateInstance(GameObject);
 };
