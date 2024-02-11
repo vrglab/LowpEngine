@@ -18,4 +18,5 @@ private:
 public:
 	Scene base;
 	void CreateInstance(GameObject);
+	void CreateInstance();
 };

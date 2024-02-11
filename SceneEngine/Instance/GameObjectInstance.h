@@ -16,6 +16,7 @@ LP_Export class GameObjectInstance
 {
 private:
 	std::vector<ComponentInstance> component_instances;
+	void CreateComponentInstance(Component);
 
 public:
 	GameObject base;
