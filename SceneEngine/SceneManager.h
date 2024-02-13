@@ -14,8 +14,8 @@
 class SceneManager
 {
 private:
-	static std::vector<Scene> loaded_scenes;
-	static Ref<SceneInstance> current_scene;
+	static inline std::vector<Scene> loaded_scenes;
+	static inline Ref<SceneInstance> current_scene;
 public:
 	static void Init(std::string);
 	

@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using LowpEngine;
 
-public class TestClass
+public class TestClass : LowpBehaviour
 {
-
+    public void Start()
+    {
+        Debug.Log("test");
+    }
 }

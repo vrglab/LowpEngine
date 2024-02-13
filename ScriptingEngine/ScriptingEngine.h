@@ -32,9 +32,11 @@ LP_Export class ScriptingEngine
 {
 private:
 	static inline MonoDomain* monoDomain;
+	static inline MonoImage* game_image; 
 	static inline MonoImage* api_image;
 	static inline std::vector<MonoAssembly*> loaded_assemblies;
 	static inline ScriptsDatabase database;
+	static bool IsSubclassOf(MonoClass*, MonoClass*);
 
 public:
 	static MonoAssembly* LoadAssembly(std::string assemblyPath);

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "DebugBindings.h"
 
-LP_Extern LP_Export void Log(char* msg)
+LP_Extern LP_Export void _Log(char* msg)
 {
 	LP_INFO(msg);
 }

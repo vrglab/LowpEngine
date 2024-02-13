@@ -8,5 +8,6 @@ namespace LowpEngine
 {
     public abstract class LowpBehaviour
     {
+        
     }
 }

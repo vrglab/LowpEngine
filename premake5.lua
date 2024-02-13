@@ -185,6 +185,7 @@ project "CoreBindings"
 		"EngineCommons",
 		"ScriptingEngine",
 		"EventEngine",
+		"SceneEngine",
 		"SDL2",
 		"spdlog",
 		"fmt",
@@ -854,8 +855,14 @@ project "SceneEngine"
 	
 	links
 	{
+		"AssetsEngine",
+		"SoundEngine",
+		"PhysicsEngine",
+		"RenderingEngine",
 		"EngineCommons",
 		"ScriptingEngine",
+		"EventEngine",
+		"SceneEngine",
 		"yaml-cpp"
 	}
 
