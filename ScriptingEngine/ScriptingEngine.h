@@ -16,6 +16,8 @@
 
 #include <filesystem>
 
+#include "ScriptsDatabase.h"
+
 namespace fs = std::filesystem;
 
 #if _WIN32
@@ -32,6 +34,7 @@ private:
 	static inline MonoDomain* monoDomain;
 	static inline MonoImage* api_image;
 	static inline std::vector<MonoAssembly*> loaded_assemblies;
+	static inline ScriptsDatabase database;
 
 public:
 	static MonoAssembly* LoadAssembly(std::string assemblyPath);
@@ -39,5 +42,6 @@ public:
 	static void InitMono(Ref<ApplicationInfo>);
 	static void ShutdownMono();
 	static MonoObject* CreateComponentClass(Component);
+	static MonoClass* GetLoadedClassType(std::string);
 };
 

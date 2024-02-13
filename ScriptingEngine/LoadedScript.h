@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Scene Engine C/C++ header file.										        */
+/* LowpEngine - Scripting Engine C/C++ header file.											*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
@@ -7,12 +7,12 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include "ComponentVariableData.h"
+#include <mono/metadata/class.h>
 
-LP_Export class Component
+LP_Export class LoadedScript
 {
 public:
 	std::string engine_id;
-	std::vector<ComponentVariableData> data;
+	MonoClass* loaded_class_type;
 };
 

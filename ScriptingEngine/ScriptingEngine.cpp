@@ -110,11 +110,14 @@ void ScriptingEngine::ShutdownMono()
 
 MonoObject* ScriptingEngine::CreateComponentClass(Component component)
 {
-    MonoClass* klass = mono_class_from_name(api_image, component.mono_namespace_name.c_str(), component.mono_class_name.c_str());
+    MonoClass* klass = GetLoadedClassType(component.engine_id);
     MonoObject* obj = mono_object_new(monoDomain, klass);
     mono_runtime_object_init(obj);
 
-    MonoMethodDesc* methodDesc = mono_method_desc_new(component.mono_class_name.append(":Start()").c_str(), FALSE);
+    std::string start_method_find_string;
+    start_method_find_string.append(mono_class_get_name(klass)).append(":Start()");
+
+    MonoMethodDesc* methodDesc = mono_method_desc_new(start_method_find_string.c_str(), FALSE);
     MonoMethod* method = mono_class_get_method_from_name(klass, "Start", 1);
 
     mono_method_desc_free(methodDesc);
@@ -139,4 +142,9 @@ MonoObject* ScriptingEngine::CreateComponentClass(Component component)
         }
     }
     return obj;
+}
+
+MonoClass* ScriptingEngine::GetLoadedClassType(std::string id)
+{
+    return database.GetLoadedScript(id);
 }

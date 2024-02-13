@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LowpEngine
 {
-    public class LowpBehaviour
+    public abstract class LowpBehaviour
     {
     }
 }
