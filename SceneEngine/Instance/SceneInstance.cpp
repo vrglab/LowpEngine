@@ -14,6 +14,11 @@ void SceneInstance::CreateInstance()
 	GameObject obj = {};
 	obj.Name = "GameObject";
 	obj.guid = GUIDGen();
+
+	Component transform = {};
+	transform.engine_id = "lp_transform";
+	obj.components.push_back(transform);
+
 	created_instance->base = obj;
 	created_instance->Awake();
 }
