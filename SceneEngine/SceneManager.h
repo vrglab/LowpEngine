@@ -18,6 +18,9 @@ private:
 	static inline Ref<SceneInstance> current_scene;
 public:
 	static void Init(std::string);
-	
+	static inline Ref<SceneInstance> GetCurrentScene() 
+	{
+		return current_scene;
+	};
 };
 

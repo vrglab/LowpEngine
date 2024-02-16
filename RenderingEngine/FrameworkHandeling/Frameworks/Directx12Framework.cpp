@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Directx12Framework.h"
 #include <SDL2/SDL_syswm.h>
+#include <SceneEngine/SceneManager.h>
 
 void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 {
@@ -89,13 +90,15 @@ void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window
 void Directx12Framework::Tick()
 {
 #ifdef _WIN32
-    // Create a command allocator
-    const float clearColor[] = { 0.5f, 0.5f, 0.5f, 1.0f }; // RGBA
+    Ref<SceneInstance> current_scene = SceneManager::GetCurrentScene();
+
     D3D12_CPU_DESCRIPTOR_HANDLE currentRtvHandle(rtvHeap->GetCPUDescriptorHandleForHeapStart());
     SIZE_T rtvDescriptorIncrement = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
     currentRtvHandle.ptr += swapChain->GetCurrentBackBufferIndex() * rtvDescriptorIncrement;
 
-    commandList->ClearRenderTargetView(currentRtvHandle, clearColor, 0, nullptr);
+    float* clear_Color = static_cast<float*>(current_scene->GetConfig("bgd_color"));
+    float clearColors[] = { clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3] };
+    commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
 #endif
 }
 

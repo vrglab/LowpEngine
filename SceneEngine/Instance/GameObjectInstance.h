@@ -15,6 +15,7 @@
 LP_Export class GameObjectInstance
 {
 private:
+	MonoObject* obj_instance;
 	std::vector<ComponentInstance> component_instances;
 	void CreateComponentInstance(Component);
 

@@ -4,6 +4,7 @@
 
 #include <Core/Debugging/Debug.h>
 #include <GL/glew.h>
+#include <SceneEngine/SceneManager.h>
  
 void OpenGLFramework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 {
@@ -19,7 +20,9 @@ void OpenGLFramework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 
 void OpenGLFramework::Tick()
 {
-	glClearColor(0.5f, 0.5f, 0.5f, 1);
+	Ref<SceneInstance> current_scene = SceneManager::GetCurrentScene();
+	float* clear_Color = static_cast<float*>(current_scene->GetConfig("bgd_color"));
+	glClearColor(clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

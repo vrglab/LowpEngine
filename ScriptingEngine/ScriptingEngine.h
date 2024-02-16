@@ -44,6 +44,7 @@ public:
 	static void InitMono(Ref<ApplicationInfo>);
 	static void ShutdownMono();
 	static MonoObject* CreateComponentClass(Component);
-	static MonoClass* GetLoadedClassType(std::string);
+	static MonoClass* GetGameLoadedClassType(std::string);
+	static MonoClass* GetApiLoadedClassType(std::string);
 };
 

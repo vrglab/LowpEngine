@@ -37,26 +37,6 @@ void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
     MonoAssembly* game_assembly = LoadAssembly(path_to_game_assembly);
     api_image = mono_assembly_get_image(api_assembly);
     game_image = mono_assembly_get_image(game_assembly);
-
-
-    MonoClass* baseClass = mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour");
-
-    const MonoTableInfo* typeTable = mono_image_get_table_info(game_image, MONO_TABLE_TYPEDEF);
-    int rows = mono_table_info_get_rows(typeTable);
-    for (int i = 1; i <= rows; i++) {
-        uint32_t cols[MONO_TYPEDEF_SIZE];
-        mono_metadata_decode_row(typeTable, i - 1, cols, MONO_TYPEDEF_SIZE);
-        const char* name = mono_metadata_string_heap(game_image, cols[MONO_TYPEDEF_NAME]);
-        const char* nameSpace = mono_metadata_string_heap(game_image, cols[MONO_TYPEDEF_NAMESPACE]);
-        MonoClass* klass = mono_class_from_name(game_image, nameSpace, name);
-
-        if (IsSubclassOf(klass, baseClass)) {
-            LoadedScript ls = {};
-            ls.engine_id = name;
-            ls.loaded_class_type = klass;
-            database.scripts.push_back(ls);
-        }
-    }
 }
 
 MonoAssembly* ScriptingEngine::LoadAssembly(std::string assemblyPath)
@@ -92,7 +72,10 @@ void ScriptingEngine::ShutdownMono()
 
 MonoObject* ScriptingEngine::CreateComponentClass(Component component)
 {
-    MonoClass* klass = GetLoadedClassType(component.engine_id);
+    MonoClass* klass = GetGameLoadedClassType(component.engine_id);
+    if (!klass) {
+        klass = GetApiLoadedClassType(component.engine_id);
+    }
     MonoObject* obj = mono_object_new(monoDomain, klass);
     mono_runtime_object_init(obj);
 
@@ -126,9 +109,58 @@ MonoObject* ScriptingEngine::CreateComponentClass(Component component)
     return obj;
 }
 
-MonoClass* ScriptingEngine::GetLoadedClassType(std::string id)
+MonoClass* ScriptingEngine::GetGameLoadedClassType(std::string id)
 {
-    return database.GetLoadedScript(id);
+    MonoClass* klass = database.GetLoadedScript(id);
+    if (!klass) {
+        MonoClass* baseClass = mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour");
+
+        const MonoTableInfo* typeTable = mono_image_get_table_info(game_image, MONO_TABLE_TYPEDEF);
+        int rows = mono_table_info_get_rows(typeTable);
+        for (int i = 1; i <= rows; i++) {
+            uint32_t cols[MONO_TYPEDEF_SIZE];
+            mono_metadata_decode_row(typeTable, i - 1, cols, MONO_TYPEDEF_SIZE);
+            const char* name = mono_metadata_string_heap(game_image, cols[MONO_TYPEDEF_NAME]);
+            const char* nameSpace = mono_metadata_string_heap(game_image, cols[MONO_TYPEDEF_NAMESPACE]);
+            MonoClass* klasss = mono_class_from_name(game_image, nameSpace, name);
+
+            if (IsSubclassOf(klasss, baseClass) && name == id) {
+                LoadedScript ls = {};
+                ls.engine_id = name;
+                ls.loaded_class_type = klasss;
+                database.scripts.push_back(ls);
+                return klasss;
+            }
+        }
+    }
+    return klass;
+}
+
+MonoClass* ScriptingEngine::GetApiLoadedClassType(std::string id)
+{
+    MonoClass* klass = database.GetLoadedScript(id);
+    if (!klass) {
+        MonoClass* baseClass = mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour");
+
+        const MonoTableInfo* typeTable = mono_image_get_table_info(api_image, MONO_TABLE_TYPEDEF);
+        int rows = mono_table_info_get_rows(typeTable);
+        for (int i = 1; i <= rows; i++) {
+            uint32_t cols[MONO_TYPEDEF_SIZE];
+            mono_metadata_decode_row(typeTable, i - 1, cols, MONO_TYPEDEF_SIZE);
+            const char* name = mono_metadata_string_heap(api_image, cols[MONO_TYPEDEF_NAME]);
+            const char* nameSpace = mono_metadata_string_heap(api_image, cols[MONO_TYPEDEF_NAMESPACE]);
+            MonoClass* klasss = mono_class_from_name(api_image, nameSpace, name);
+
+            if (IsSubclassOf(klasss, baseClass) && name == id) {
+                LoadedScript ls = {};
+                ls.engine_id = name;
+                ls.loaded_class_type = klasss;
+                database.scripts.push_back(ls);
+                return klasss;
+            }
+        }
+    }
+    return klass;
 }
 
 bool ScriptingEngine::IsSubclassOf(MonoClass* child, MonoClass* parent) {

@@ -616,6 +616,7 @@ project "RenderingEngine"
 	includedirs
 	{
 		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"Packages/c++/includes",
 		"%{prj.name}",
 		"."
 	}
@@ -624,7 +625,8 @@ project "RenderingEngine"
 	{
 		"EngineCommons",
 		"glew32",
-		"GlU32"
+		"GlU32",
+		"SceneEngine"
 	}
 
 	vpaths {
@@ -858,12 +860,11 @@ project "SceneEngine"
 		"AssetsEngine",
 		"SoundEngine",
 		"PhysicsEngine",
-		"RenderingEngine",
 		"EngineCommons",
 		"ScriptingEngine",
 		"EventEngine",
-		"SceneEngine",
-		"yaml-cpp"
+		"yaml-cpp",
+		"mono-2.0-sgen"
 	}
 
 	vpaths {

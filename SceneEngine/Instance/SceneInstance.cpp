@@ -17,10 +17,37 @@ void SceneInstance::CreateInstance()
 	obj.guid = GUIDGen();
 
 	Component transform = {};
-	transform.engine_id = "TestClass";
+	transform.engine_id = "Transform";
 	obj.components.push_back(transform);
 
 	created_instance->base = obj;
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
+}
+
+void* SceneInstance::GetConfig(std::string id)
+{
+	for (size_t i = 0; i < configs.size(); i++)
+	{
+		if (configs[i].id == id) {
+			return configs[i].value;
+		}
+	}
+	return nullptr;
+}
+
+void SceneInstance::SetConfig(std::string id, void* val)
+{
+	for (size_t i = 0; i < configs.size(); i++)
+	{
+		if (configs[i].id == id) {
+			configs[i].value = val;
+			return;
+		}
+	}
+
+	SceneInstanceConfigs sic = {};
+	sic.id = id;
+	sic.value = val;
+	configs.push_back(sic);
 }
