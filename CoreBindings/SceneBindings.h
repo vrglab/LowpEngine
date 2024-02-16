@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Scene Engine C/C++ header file.										        */
+/* LowpEngine - CoreBindings C/C++ header file.												*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
@@ -7,20 +7,8 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include "SceneEngine/Serialized/Scene.h"
-#include "SceneEngine/Serialized/GameObject.h"
-#include "GameObjectInstance.h"
-#include "SceneInstanceConfigs.h"
+#include <SceneEngine/SceneManager.h>
 
-class SceneInstance
-{
-private:
-	std::vector<SceneInstanceConfigs> configs;
-	std::vector<Ref<GameObjectInstance>> obj_instances;
-public:
-	Scene base;
-	void CreateInstance(GameObject);
-	GameObjectInstance* CreateInstance();
-	void* GetConfig(std::string);
-	void SetConfig(std::string, void*);
-};
+
+LP_Extern LP_Export inline SceneInstance* GetCurrentScene();
+LP_Extern LP_Export inline GameObjectInstance* InstantiateGameObject();

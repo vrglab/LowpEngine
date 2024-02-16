@@ -100,7 +100,8 @@ project "Core"
 		"SDL2",
 		"spdlog",
 		"fmt",
-		"volk"
+		"volk",
+		"mono-2.0-sgen"
 	}
 
 	vpaths {

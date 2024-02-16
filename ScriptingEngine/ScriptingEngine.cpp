@@ -87,25 +87,25 @@ MonoObject* ScriptingEngine::CreateComponentClass(Component component)
 
     mono_method_desc_free(methodDesc);
 
-    if (method) {
+        if (method) {
 
-        MonoObject* exception = nullptr;
-        mono_runtime_invoke(method, obj, {}, &exception);
+            MonoObject* exception = nullptr;
+            mono_runtime_invoke(method, obj, {}, &exception);
 
-        if (exception) {
-            MonoMethod* get_message_method = mono_class_get_method_from_name(mono_get_exception_class(), "get_Message", 0);
-            MonoObject* message_obj = mono_runtime_invoke(get_message_method, exception, nullptr, nullptr);
-            if (message_obj != nullptr) {
-                MonoString* message_mono_str = (MonoString*)message_obj;
-                char* message = mono_string_to_utf8(message_mono_str);
-                LP_ERROR(message);
-                mono_free(message);
+            if (exception) {
+                MonoMethod* get_message_method = mono_class_get_method_from_name(mono_get_exception_class(), "get_Message", 0);
+                MonoObject* message_obj = mono_runtime_invoke(get_message_method, exception, nullptr, nullptr);
+                if (message_obj != nullptr) {
+                    MonoString* message_mono_str = (MonoString*)message_obj;
+                    char* message = mono_string_to_utf8(message_mono_str);
+                    LP_ERROR(message);
+                    mono_free(message);
+                }
+            }
+            else {
+
             }
         }
-        else {
-
-        }
-    }
     return obj;
 }
 

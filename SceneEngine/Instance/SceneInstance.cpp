@@ -9,7 +9,7 @@ void SceneInstance::CreateInstance(GameObject obj_data)
 	obj_instances.push_back(created_instance);
 }
 
-void SceneInstance::CreateInstance()
+GameObjectInstance* SceneInstance::CreateInstance()
 {
 	Ref<GameObjectInstance> created_instance = CreateRef<GameObjectInstance>();
 	GameObject obj = {};
@@ -23,6 +23,7 @@ void SceneInstance::CreateInstance()
 	created_instance->base = obj;
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
+	return created_instance.get();
 }
 
 void* SceneInstance::GetConfig(std::string id)
