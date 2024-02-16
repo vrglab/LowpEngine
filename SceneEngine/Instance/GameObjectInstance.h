@@ -15,11 +15,11 @@
 LP_Export class GameObjectInstance
 {
 private:
-	MonoObject* obj_instance;
-	std::vector<ComponentInstance> component_instances;
 	void CreateComponentInstance(Component);
 
 public:
+	MonoObject* obj_instance;
+	std::vector<ComponentInstance> component_instances;
 	GameObject base;
 	void Awake();
 };

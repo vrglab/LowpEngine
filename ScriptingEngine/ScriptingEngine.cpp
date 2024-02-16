@@ -109,6 +109,29 @@ MonoObject* ScriptingEngine::CreateComponentClass(Component component)
     return obj;
 }
 
+MonoObject* ScriptingEngine::CreateGameObjectClass(GameObjectInstance* instance)
+{
+    MonoClass* klass = mono_class_from_name(api_image, "LowpEngine", "GameObject");
+
+    MonoMethodDesc* ctorDesc = mono_method_desc_new(":.ctor(System.IntPtr)", FALSE);
+    MonoMethod* constructor = mono_method_desc_search_in_class(ctorDesc, klass);
+    mono_method_desc_free(ctorDesc);
+
+    if (!constructor) {
+        LP_CORE_ERROR("Constructor not found.");
+        return nullptr;
+    }
+
+    void* args[1];
+    intptr_t myIntPtrValue = reinterpret_cast<uintptr_t>(instance);
+    args[0] = &myIntPtrValue;
+
+    MonoObject* obj = mono_object_new(monoDomain, klass);
+    mono_runtime_invoke(constructor, instance, args, nullptr);
+
+    return obj;
+}
+
 MonoClass* ScriptingEngine::GetGameLoadedClassType(std::string id)
 {
     MonoClass* klass = database.GetLoadedScript(id);

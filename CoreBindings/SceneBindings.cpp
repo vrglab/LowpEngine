@@ -8,5 +8,5 @@ LP_Extern LP_Export inline SceneInstance* GetCurrentScene()
 
 LP_Extern LP_Export inline GameObjectInstance* InstantiateGameObject()
 {
-	return SceneManager::GetCurrentScene()->CreateInstance();
+	return SceneManager::GetCurrentScene()->CreateInstance(true);
 }

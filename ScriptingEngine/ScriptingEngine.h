@@ -16,6 +16,8 @@
 
 #include <filesystem>
 
+#include <SceneEngine/Instance/GameObjectInstance.h>
+
 #include "ScriptsDatabase.h"
 
 namespace fs = std::filesystem;
@@ -44,6 +46,7 @@ public:
 	static void InitMono(Ref<ApplicationInfo>);
 	static void ShutdownMono();
 	static MonoObject* CreateComponentClass(Component);
+	static MonoObject* CreateGameObjectClass(GameObjectInstance*);
 	static MonoClass* GetGameLoadedClassType(std::string);
 	static MonoClass* GetApiLoadedClassType(std::string);
 };

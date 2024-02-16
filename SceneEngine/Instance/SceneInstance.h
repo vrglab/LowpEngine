@@ -20,7 +20,7 @@ private:
 public:
 	Scene base;
 	void CreateInstance(GameObject);
-	GameObjectInstance* CreateInstance();
+	GameObjectInstance* CreateInstance(bool instatiate_in_sharp);
 	void* GetConfig(std::string);
 	void SetConfig(std::string, void*);
 };

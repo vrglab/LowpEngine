@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Scene Engine C/C++ header file.										        */
+/* LowpEngine - CoreBindings C/C++ header file.												*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
@@ -7,15 +7,7 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <Mono/metadata/object.h>
+#include <SceneEngine/SceneManager.h>
 
-#include "SceneEngine/Serialized/Component/Component.h"
-
-LP_Export class ComponentInstance
-{
-public:
-	Component base;
-	uintptr_t parent;
-	MonoObject* created_instance;
-};
-
+LP_Extern LP_Export inline char* GetGameOBJName(GameObjectInstance*);
+LP_Extern LP_Export inline void SetGameOBJName(GameObjectInstance*, char*);

@@ -10,6 +10,5 @@ public class TestClass : LowpBehaviour
     public void Start()
     {
         Debug.Log("test");
-        Instatiate();
     }
 }

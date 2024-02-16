@@ -1,15 +1,17 @@
 #include "pch.h"
 #include "SceneInstance.h"
+#include <ScriptingEngine/ScriptingEngine.h>
 
 void SceneInstance::CreateInstance(GameObject obj_data)
 {
 	Ref<GameObjectInstance> created_instance = CreateRef<GameObjectInstance>();
 	created_instance->base = obj_data;
+	created_instance->obj_instance = ScriptingEngine::CreateGameObjectClass(created_instance.get());
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
 }
 
-GameObjectInstance* SceneInstance::CreateInstance()
+GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp = true)
 {
 	Ref<GameObjectInstance> created_instance = CreateRef<GameObjectInstance>();
 	GameObject obj = {};
@@ -21,6 +23,9 @@ GameObjectInstance* SceneInstance::CreateInstance()
 	obj.components.push_back(transform);
 
 	created_instance->base = obj;
+	if (instatiate_in_sharp) {
+		created_instance->obj_instance = ScriptingEngine::CreateGameObjectClass(created_instance.get());
+	}
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
 	return created_instance.get();
