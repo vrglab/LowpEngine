@@ -12,7 +12,6 @@
 #include <EngineCommons/EngineCommons.h>
 
 #include "FileAsset.h"
-#include "AssetImporters/AssetImporter.h"
 
 //Asset Database
 #include "AssetDatabase/AssetsDatabase.h"
@@ -28,6 +27,6 @@
 LP_Export class AssetsEngine {
 
 public:
-	static inline AssetsDatabase database = {};
+	static inline AssetsDatabase database;
 	static void StartAssetsEngine(Ref<ApplicationInfo> info);
 };

@@ -13,10 +13,9 @@ LP_Export class FileAsset
 {
 public:
     std::string id, file_content;
-    int importer_type;
 
     template<class Archive>
     void serialize(Archive& archive) {
-        archive(file_content, id, importer_type);
+        archive(file_content, id);
     }
 };

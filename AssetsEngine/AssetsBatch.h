@@ -15,6 +15,7 @@ class AssetsBatch
 {
 public:
 	std::vector<FileAsset> assets;
+	std::string GetByGUID(std::string);
 
 	template <class Archive>
 	void serialize(Archive& archive) {

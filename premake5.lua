@@ -179,18 +179,7 @@ project "CoreBindings"
 
 	links
 	{
-		"AssetsEngine",
-		"SoundEngine",
-		"PhysicsEngine",
-		"RenderingEngine",
-		"EngineCommons",
-		"ScriptingEngine",
-		"EventEngine",
-		"SceneEngine",
-		"SDL2",
-		"spdlog",
-		"fmt",
-		"volk"
+		"Core"
 	}
 
 	vpaths {

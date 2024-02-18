@@ -22,7 +22,7 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uint
 	Component transform = {};
 	transform.engine_id = "Transform";
 	obj.components.push_back(transform);
-
+	LP_CORE_INFO("Fuck this shit");
 	created_instance->base = obj;
 	if (instatiate_in_sharp) {
 		created_instance->obj_instance = ScriptingEngine::CreateGameObjectClass(created_instance.get());
@@ -30,8 +30,10 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uint
 	{
 		created_instance->obj_instance = mono_gchandle_get_target(_obj);
 	}
+	LP_CORE_INFO("Im Fucked");
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
+	LP_CORE_INFO("Go TO HELL");
 	return created_instance.get();
 }
 

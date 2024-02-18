@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Asset Engine C/C++ header file.												*/
+/* LowpEngine - CoreBindings C/C++ header file.												*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
@@ -8,7 +8,5 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 
-class AssetImporter
-{
-};
 
+LP_Extern LP_Export inline char* GetHRIDFileContent(char*);

@@ -27,6 +27,8 @@ LP_Export struct HRIDTable
 {
 public:
     std::vector<HRID> hrids;
+    std::string GetGUIDFromHRID(std::string);
+
     template<class Archive>
     void serialize(Archive& archive) {
         archive(hrids);

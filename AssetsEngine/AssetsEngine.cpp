@@ -28,5 +28,5 @@ void AssetsEngine::StartAssetsEngine(Ref<ApplicationInfo> info)
 		archive(hrid_table);
 	}
 
-	database = { hrid_table, batch };
+	AssetsEngine::database = { hrid_table, batch };
 }

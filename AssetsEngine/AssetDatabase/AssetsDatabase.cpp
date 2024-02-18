@@ -44,16 +44,23 @@ void AssetsDatabase::ImportFileAsAsset(std::string file)
     }
 }
 
+std::string AssetsDatabase::GetFileContentFromHRID(std::string hrid)
+{
+    return assets_batch.GetByGUID(hrid_table.GetGUIDFromHRID(hrid));
+}
+
 void AssetsDatabase::GenerateDatabaseFiles(HRIDTable hrid_table, AssetsBatch batch, std::string filepath)
 {
-    std::ofstream  hrid_file_stream(filepath.append("primaryassetsbatch.bin").c_str(), std::ios::binary);
+    std::string a_path = filepath;
+    std::string b_path = filepath;
+    std::ofstream  hrid_file_stream(a_path.append("primaryassetsbatch.bin").c_str(), std::ios::binary);
     if (!hrid_file_stream.is_open()) {
         throw std::runtime_error("Failed to open batch file for writing.");
     }
     cereal::BinaryOutputArchive   archive_hrid(hrid_file_stream);
     archive_hrid(hrid_table);
 
-    std::ofstream  batch_file_stream(filepath.append("hrid_table.bin").c_str(), std::ios::binary);
+    std::ofstream  batch_file_stream(b_path.append("hrid_table.bin").c_str(), std::ios::binary);
     if (!batch_file_stream.is_open()) {
         throw std::runtime_error("Failed to open hrid file for writing.");
     }
