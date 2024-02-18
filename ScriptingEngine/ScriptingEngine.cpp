@@ -33,8 +33,8 @@ void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
     path_to_game_assembly.append("\\CoreAssembly").append(ASSEMBLY_EXTENSION);
 
     LoadAllAssembliesFromDirectory(path_to_dependencies.c_str());
-    MonoAssembly* api_assembly = LoadAssembly(path_to_api_assembly);
-    MonoAssembly* game_assembly = LoadAssembly(path_to_game_assembly);
+    api_assembly = LoadAssembly(path_to_api_assembly);
+    game_assembly = LoadAssembly(path_to_game_assembly);
     api_image = mono_assembly_get_image(api_assembly);
     game_image = mono_assembly_get_image(game_assembly);
 }
@@ -70,7 +70,7 @@ void ScriptingEngine::ShutdownMono()
     }
 }
 
-MonoObject* ScriptingEngine::CreateComponentClass(Component component)
+MonoObject* ScriptingEngine::CreateComponentClass(Component component, MonoObject* parent_game_obj)
 {
     MonoClass* klass = GetGameLoadedClassType(component.engine_id);
     if (!klass) {
@@ -78,6 +78,11 @@ MonoObject* ScriptingEngine::CreateComponentClass(Component component)
     }
     MonoObject* obj = mono_object_new(monoDomain, klass);
     mono_runtime_object_init(obj);
+
+    MonoClass* parentClass = mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour");
+
+    MonoClassField* field = mono_class_get_field_from_name(parentClass, "_gameobj");
+    mono_field_set_value(obj, field, parent_game_obj);
 
     std::string start_method_find_string;
     start_method_find_string.append(mono_class_get_name(klass)).append(":Start()");
@@ -113,21 +118,20 @@ MonoObject* ScriptingEngine::CreateGameObjectClass(GameObjectInstance* instance)
 {
     MonoClass* klass = mono_class_from_name(api_image, "LowpEngine", "GameObject");
 
-    MonoMethodDesc* ctorDesc = mono_method_desc_new(":.ctor(System.IntPtr)", FALSE);
-    MonoMethod* constructor = mono_method_desc_search_in_class(ctorDesc, klass);
-    mono_method_desc_free(ctorDesc);
-
-    if (!constructor) {
-        LP_CORE_ERROR("Constructor not found.");
-        return nullptr;
-    }
-
     void* args[1];
     intptr_t myIntPtrValue = reinterpret_cast<uintptr_t>(instance);
     args[0] = &myIntPtrValue;
 
     MonoObject* obj = mono_object_new(monoDomain, klass);
-    mono_runtime_invoke(constructor, instance, args, nullptr);
+    mono_runtime_object_init(obj);
+
+    MonoClassField* field = mono_class_get_field_from_name(klass, "instance_pointer");
+    if (field) {
+        mono_field_set_value(obj, field, &myIntPtrValue);
+    }
+    else {
+        // Handle the error: Field not found
+    }
 
     return obj;
 }

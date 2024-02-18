@@ -9,6 +9,7 @@ public class TestClass : LowpBehaviour
 {
     public void Start()
     {
-        Debug.Log("test");
+        gameObject.Name = "Test";
+        Debug.Log($"Obj name:{gameObject.Name}");
     }
 }

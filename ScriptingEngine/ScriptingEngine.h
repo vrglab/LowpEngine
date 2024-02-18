@@ -36,6 +36,8 @@ private:
 	static inline MonoDomain* monoDomain;
 	static inline MonoImage* game_image; 
 	static inline MonoImage* api_image;
+	static inline MonoAssembly* api_assembly;
+	static inline MonoAssembly* game_assembly;
 	static inline std::vector<MonoAssembly*> loaded_assemblies;
 	static inline ScriptsDatabase database;
 	static bool IsSubclassOf(MonoClass*, MonoClass*);
@@ -45,7 +47,7 @@ public:
 	static void LoadAllAssembliesFromDirectory(std::string directoryPath);
 	static void InitMono(Ref<ApplicationInfo>);
 	static void ShutdownMono();
-	static MonoObject* CreateComponentClass(Component);
+	static MonoObject* CreateComponentClass(Component, MonoObject*);
 	static MonoObject* CreateGameObjectClass(GameObjectInstance*);
 	static MonoClass* GetGameLoadedClassType(std::string);
 	static MonoClass* GetApiLoadedClassType(std::string);

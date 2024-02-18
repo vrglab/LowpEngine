@@ -9,6 +9,14 @@ namespace LowpEngine
 {
     public abstract class LowpBehaviour
     {
-       
+        public GameObject gameObject
+        {
+            get
+            {
+                return _gameobj;
+            }
+        }
+
+        private GameObject _gameobj;
     }
 }

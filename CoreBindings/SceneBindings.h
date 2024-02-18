@@ -11,4 +11,4 @@
 
 
 LP_Extern LP_Export inline SceneInstance* GetCurrentScene();
-LP_Extern LP_Export inline GameObjectInstance* InstantiateGameObject();
+LP_Extern LP_Export inline GameObjectInstance* InstantiateGameObject(bool, uintptr_t);

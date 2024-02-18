@@ -7,7 +7,7 @@ void GameObjectInstance::CreateComponentInstance(Component component)
 	ComponentInstance instance = {};
 	instance.parent = reinterpret_cast<uintptr_t>(this);
 	instance.base = component;
-	instance.created_instance = ScriptingEngine::CreateComponentClass(component);
+	instance.created_instance = ScriptingEngine::CreateComponentClass(component, obj_instance);
 	component_instances.push_back(instance);
 }
 

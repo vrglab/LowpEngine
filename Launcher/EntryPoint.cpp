@@ -8,8 +8,7 @@
 #ifdef _WIN32
 #include <Windows.h>
 int WINAPI main(int argc, char* argv[]) {
-    
-   Ref<Application> app = CreateRef<Application>();
+    Ref<Application> app = CreateRef<Application>();
     app->Init(Player::LoadAppData());
     app->Run();
     app->CleanUp();

@@ -16,7 +16,7 @@ namespace LowpEngine
 
         void Start()
         {
-            Debug.Log($"{x}/{y}/{z}");
+            Debug.Log($"{gameObject.Name}: {x}/{y}/{z}");
         }
     }
 }

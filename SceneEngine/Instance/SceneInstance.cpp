@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "SceneInstance.h"
 #include <ScriptingEngine/ScriptingEngine.h>
+#include <Core/Debugging/Debug.h>
 
 void SceneInstance::CreateInstance(GameObject obj_data)
 {
@@ -11,7 +12,7 @@ void SceneInstance::CreateInstance(GameObject obj_data)
 	obj_instances.push_back(created_instance);
 }
 
-GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp = true)
+GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uintptr_t _obj)
 {
 	Ref<GameObjectInstance> created_instance = CreateRef<GameObjectInstance>();
 	GameObject obj = {};
@@ -25,6 +26,9 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp = tru
 	created_instance->base = obj;
 	if (instatiate_in_sharp) {
 		created_instance->obj_instance = ScriptingEngine::CreateGameObjectClass(created_instance.get());
+	} else
+	{
+		created_instance->obj_instance = mono_gchandle_get_target(_obj);
 	}
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
