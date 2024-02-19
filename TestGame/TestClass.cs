@@ -12,5 +12,8 @@ public class TestClass : LowpBehaviour
     {
         gameObject.Name = "Test"; 
         Debug.Log($"Obj name is {gameObject.Name} and it says: {AssetsLoader.GetRawAssetContent("Test.txt")}");
+        GameObject obj = GameObject.Instatiate();
+        obj.Name = "Fallout boy is fun";
+        Debug.Log($"Obj named {gameObject.Name} made a new gameobject named {obj.Name}");
     }
 }

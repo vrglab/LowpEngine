@@ -30,16 +30,18 @@ namespace fs = std::filesystem;
 #define ASSEMBLY_EXTENSION ".dylib"
 #endif
 
+LP_Extern LP_API MonoDomain* monoDomain;
+LP_Extern LP_API MonoImage* game_image;
+LP_Extern LP_API MonoImage* api_image;
+LP_Extern LP_API MonoAssembly* api_assembly;
+LP_Extern LP_API MonoAssembly* game_assembly;
+LP_Extern LP_API std::vector<MonoAssembly*> loaded_assemblies;
+LP_Extern LP_API ScriptsDatabase database;
+
+
 class ScriptingEngine
 {
 private:
-	static inline MonoDomain* monoDomain;
-	static inline MonoImage* game_image; 
-	static inline MonoImage* api_image;
-	static inline MonoAssembly* api_assembly;
-	static inline MonoAssembly* game_assembly;
-	static inline std::vector<MonoAssembly*> loaded_assemblies;
-	static inline ScriptsDatabase database;
 	static bool IsSubclassOf(MonoClass*, MonoClass*);
 
 public:

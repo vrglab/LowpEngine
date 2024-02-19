@@ -3,6 +3,9 @@
 
 #include <Core/Debugging/Debug.h>
 
+std::vector<Scene> loaded_scenes;
+Ref<SceneInstance> current_scene;
+
 void SceneManager::Init(std::string scene_list_file)
 {
 	LP_CORE_INFO("Starting Scene Engine");

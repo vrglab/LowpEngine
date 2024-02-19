@@ -3,6 +3,14 @@
 #include <Core/Debugging/Debug.h>
 #include <mono/metadata/debug-helpers.h>
 
+MonoDomain* monoDomain;
+MonoImage* game_image;
+MonoImage* api_image;
+MonoAssembly* api_assembly;
+MonoAssembly* game_assembly;
+std::vector<MonoAssembly*> loaded_assemblies;
+ScriptsDatabase database;
+
 void ScriptingEngine::InitMono(Ref<ApplicationInfo> info)
 {
     LP_CORE_INFO("Starting Scripting engine");
