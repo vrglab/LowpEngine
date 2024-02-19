@@ -11,3 +11,5 @@
 
 LP_Extern LP_BINDINGS_API inline char* GetGameOBJName(GameObjectInstance*);
 LP_Extern LP_BINDINGS_API inline void SetGameOBJName(GameObjectInstance*, char*);
+
+LP_Extern LP_BINDINGS_API inline char* GetGameOBJId(GameObjectInstance*);

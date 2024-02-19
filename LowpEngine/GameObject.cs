@@ -18,6 +18,9 @@ namespace LowpEngine
         [DllImport("CoreBindings.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void SetGameOBJName(IntPtr instance, string name);
 
+        [DllImport("CoreBindings.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr GetGameOBJId(IntPtr instance);
+
 
         public string Name
         {
@@ -33,9 +36,18 @@ namespace LowpEngine
             }
         }
 
+        public string ID
+        {
+            get
+            {
+                IntPtr ptr = GetGameOBJId(instance_pointer);
+                string result = Marshal.PtrToStringAnsi(ptr);
+                return result;
+            }
+        }
+        
 
         private IntPtr instance_pointer;
-
 
         private GameObject(IntPtr instance)
         {
