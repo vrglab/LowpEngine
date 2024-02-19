@@ -34,4 +34,4 @@ public:
     }
 };
 
-LP_Extern LP_API std::string GetGUIDFromHRID(std::string, HRIDTable);
+LP_API std::string GetGUIDFromHRID(std::string, HRIDTable);

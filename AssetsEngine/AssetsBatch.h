@@ -22,4 +22,4 @@ public:
 	}
 };
 
-LP_Extern LP_API std::string GetByGUID(std::string, AssetsBatch);
+LP_API std::string GetByGUID(std::string, AssetsBatch);

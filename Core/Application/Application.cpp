@@ -14,6 +14,7 @@ int Application::Init(Ref<ApplicationInfo> info)
     AssetsEngine::StartAssetsEngine(info);
     ScriptingEngine::InitMono(info);
     SceneManager::Init("");
+    GetFileContentFromHRID("", assets_database);
     CreateAppWindow(info->GetWindowCreateInfo());
 
     return LowpResultCodes::Success;

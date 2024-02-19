@@ -10,7 +10,7 @@
 #include <AssetsEngine/AssetsBatch.h>
 #include <AssetsEngine/HRIDTable.h>
 
-LP_Extern class AssetsDatabase
+class AssetsDatabase
 {
 public:
 	HRIDTable hrid_table;
@@ -19,4 +19,4 @@ public:
 	LP_API static void GenerateDatabaseFiles(HRIDTable, AssetsBatch, std::string);
 };
 
-LP_Extern LP_API std::string GetFileContentFromHRID(std::string, AssetsDatabase);
+LP_API std::string GetFileContentFromHRID(std::string, AssetsDatabase);

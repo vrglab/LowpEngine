@@ -364,6 +364,10 @@ project "Editor"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		libdirs
+		{
+			"Packages/c++/libs/windows"
+		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
 	end
