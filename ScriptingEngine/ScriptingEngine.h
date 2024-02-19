@@ -18,6 +18,8 @@
 
 #include <SceneEngine/Instance/GameObjectInstance.h>
 
+#include <EventEngine/EventEngine.h>
+
 #include "ScriptsDatabase.h"
 
 namespace fs = std::filesystem;
@@ -37,7 +39,6 @@ LP_Extern LP_API MonoAssembly* api_assembly;
 LP_Extern LP_API MonoAssembly* game_assembly;
 LP_Extern LP_API std::vector<MonoAssembly*> loaded_assemblies;
 LP_Extern LP_API ScriptsDatabase database;
-
 
 class ScriptingEngine
 {

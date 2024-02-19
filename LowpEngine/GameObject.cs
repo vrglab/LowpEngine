@@ -40,13 +40,16 @@ namespace LowpEngine
         {
             get
             {
-                IntPtr ptr = GetGameOBJId(instance_pointer);
-                string result = Marshal.PtrToStringAnsi(ptr);
-                return result;
+                if(string.IsNullOrEmpty(id))
+                {
+                    IntPtr ptr = GetGameOBJId(instance_pointer);
+                    id = Marshal.PtrToStringAnsi(ptr);
+                }
+                return id;
             }
         }
-        
 
+        private string id;
         private IntPtr instance_pointer;
 
         private GameObject(IntPtr instance)

@@ -23,4 +23,5 @@ public:
 	GameObjectInstance* CreateInstance(bool instatiate_in_sharp, uintptr_t);
 	void* GetConfig(std::string);
 	void SetConfig(std::string, void*);
+	void Update();
 };

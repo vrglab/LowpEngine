@@ -11,7 +11,7 @@
 #include "Windowing/Window.h"
 #include "ApplicationInfo.h"
 
-class Application
+class LP_API Application
 {
 private:
 	struct AppWindow
@@ -25,9 +25,9 @@ private:
 
 public:
 	Ref<ApplicationInfo> app_info;
-	LP_API int CreateAppWindow(Ref<WindowCreateInfo>);
-	LP_API int Init(Ref<ApplicationInfo> info);
-	LP_API void Run();
-	LP_API void CleanUp();
+	int CreateAppWindow(Ref<WindowCreateInfo>);
+	int Init(Ref<ApplicationInfo> info);
+	void Run();
+	void CleanUp();
 };
 

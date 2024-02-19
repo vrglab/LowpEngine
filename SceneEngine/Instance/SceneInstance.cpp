@@ -75,3 +75,11 @@ void SceneInstance::SetConfig(std::string id, void* val)
 	sic.value = val;
 	configs.push_back(sic);
 }
+
+void SceneInstance::Update()
+{
+	for (size_t i = 0; i < obj_instances.size(); i++)
+	{
+		obj_instances[i]->Update();
+	}
+}

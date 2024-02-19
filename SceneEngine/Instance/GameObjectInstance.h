@@ -22,4 +22,5 @@ public:
 	std::vector<ComponentInstance> component_instances;
 	GameObject base;
 	void Awake();
+	void Update();
 };

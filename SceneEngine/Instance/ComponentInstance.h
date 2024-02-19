@@ -16,6 +16,8 @@ class ComponentInstance
 public:
 	Component base;
 	uintptr_t parent;
+	MonoClass* class_type;
 	MonoObject* created_instance;
+	void Update();
 };
 
