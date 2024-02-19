@@ -8,7 +8,7 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 
-LP_Export class SceneInstanceConfigs
+class SceneInstanceConfigs
 {
 public:
 	std::string id;

@@ -35,7 +35,7 @@ workspace "LowpEngine"
 group "C++"
 project "Core"
 	location "Core"
-	kind "StaticLib"
+	kind "SharedLib"
 	language "C++"
 	toolset "v143"
 	buildoptions
@@ -117,11 +117,11 @@ project "Core"
 
 	filter "configurations:Debug"
 		symbols "On"
-		defines {"DEBUG"}
+		defines {"DEBUG", "LP_API_EXPORTS"}
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "CoreBindings"
 	location "CoreBindings"
@@ -140,12 +140,6 @@ project "CoreBindings"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
-		links 
-		{
-			"d3d12",
-			"dxgi",
-			"D3DCompiler"
-		}
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -179,7 +173,13 @@ project "CoreBindings"
 
 	links
 	{
-		"Core"
+		"AssetsEngine",
+		"Core",
+		"SDL2",
+		"spdlog",
+		"fmt",
+		"volk",
+		"mono-2.0-sgen"
 	}
 
 	vpaths {
@@ -195,11 +195,11 @@ project "CoreBindings"
 
 	filter "configurations:Debug"
 		symbols "On"
-		defines {"DEBUG"}
+		defines {"DEBUG", "LP_BINDINGS_API_EXPORTS"}
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_BINDINGS_API_EXPORTS"}
 
 project "EngineCommons"
 	location "EngineCommons"
@@ -263,11 +263,11 @@ project "EngineCommons"
 
 	filter "configurations:Debug"
 		symbols "On"
-		defines {"DEBUG"}
+		defines {"DEBUG", "LP_API_EXPORTS"}
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "Launcher"
 	location "Launcher"
@@ -320,7 +320,12 @@ project "Launcher"
 	
 	links
 	{
-		"Core"
+		"Core",
+		"SDL2",
+		"spdlog",
+		"fmt",
+		"volk",
+		"mono-2.0-sgen"
 	}
 
 	vpaths {
@@ -388,7 +393,12 @@ project "Editor"
 	
 	links
 	{
-		"Core"
+		"Core",
+		"SDL2",
+		"spdlog",
+		"fmt",
+		"volk",
+		"mono-2.0-sgen"
 	}
 
 	vpaths {
@@ -485,7 +495,7 @@ project "SoundEngine"
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "PhysicsEngine"
 	location "PhysicsEngine"
@@ -549,11 +559,11 @@ project "PhysicsEngine"
 
 	filter "configurations:Debug"
 		symbols "On"
-		defines {"DEBUG"}
+		defines {"DEBUG", "LP_API_EXPORTS"}
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "RenderingEngine"
 	location "RenderingEngine"
@@ -632,11 +642,11 @@ project "RenderingEngine"
 
 	filter "configurations:Debug"
 		symbols "On"
-		defines {"DEBUG"}
+		defines {"DEBUG", "LP_API_EXPORTS"}
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "ShaderEngine"
 	location "ShaderEngine"
@@ -713,11 +723,11 @@ project "ShaderEngine"
 
 	filter "configurations:Debug"
 		symbols "On"
-		defines {"DEBUG"}
+		defines {"DEBUG", "LP_API_EXPORTS"}
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "ScriptingEngine"
 	location "ScriptingEngine"
@@ -795,7 +805,7 @@ project "ScriptingEngine"
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "SceneEngine"
 	location "SceneEngine"
@@ -874,7 +884,7 @@ project "SceneEngine"
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "AssetsEngine"
 	location "AssetsEngine"
@@ -947,7 +957,7 @@ project "AssetsEngine"
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "EventEngine"
 	location "EventEngine"
@@ -1019,7 +1029,7 @@ project "EventEngine"
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 group("C#")
 project "LowpEngine"
@@ -1047,7 +1057,7 @@ project "LowpEngine"
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "TestGame"
 	location "TestGame"
@@ -1079,4 +1089,4 @@ project "TestGame"
 
 	filter "configurations:Release"
 		optimize "On"
-		defines {"RELEASE"}
+		defines {"RELEASE", "LP_API_EXPORTS"}

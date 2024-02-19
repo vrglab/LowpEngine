@@ -7,6 +7,6 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include <AssetsEngine/AssetsEngine.h>
 
-
-LP_Extern LP_Export inline char* GetHRIDFileContent(char*);
+LP_Extern LP_BINDINGS_API inline char* GetHRIDFileContent(char*);

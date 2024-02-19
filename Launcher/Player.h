@@ -11,7 +11,7 @@
 #include <Core/Application/ApplicationInfo.h>
 #include "ConfigsData.h"
 
-LP_Export class Player
+class Player
 {
 public:
 	static Ref<ApplicationInfo> LoadAppData();

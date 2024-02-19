@@ -30,7 +30,7 @@ namespace fs = std::filesystem;
 #define ASSEMBLY_EXTENSION ".dylib"
 #endif
 
-LP_Export class ScriptingEngine
+class ScriptingEngine
 {
 private:
 	static inline MonoDomain* monoDomain;

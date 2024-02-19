@@ -11,7 +11,7 @@
 #include <cereal/types/memory.hpp>
 #include <cereal/types/string.hpp>
 
-LP_Export struct ConfigsData {
+struct ConfigsData {
 public:
 	std::string app_name;
 	int res_w, res_h;

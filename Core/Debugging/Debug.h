@@ -11,7 +11,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-LP_Export class Debug
+class Debug
 {
 public:
 	static int Init();

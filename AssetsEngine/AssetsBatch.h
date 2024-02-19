@@ -15,10 +15,11 @@ class AssetsBatch
 {
 public:
 	std::vector<FileAsset> assets;
-	std::string GetByGUID(std::string);
 
 	template <class Archive>
 	void serialize(Archive& archive) {
 		archive(assets);
 	}
 };
+
+LP_Extern LP_API std::string GetByGUID(std::string, AssetsBatch);

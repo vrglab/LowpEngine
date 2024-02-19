@@ -12,7 +12,7 @@
 #include "SceneEngine/Serialized/GameObject.h"
 
 
-LP_Export class GameObjectInstance
+class GameObjectInstance
 {
 private:
 	void CreateComponentInstance(Component);

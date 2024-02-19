@@ -9,7 +9,7 @@
 #include <EngineCommons/EngineCommons.h>
 #include "EventHandler.h"
 
-LP_Export class EventBus
+class EventBus
 {
 public:
 	void QueHandler(Ref<EventHandler> event_handler);

@@ -9,7 +9,7 @@
 #include <EngineCommons/EngineCommons.h>
 #include <cereal/types/string.hpp>
 
-LP_Export class FileAsset
+class FileAsset
 {
 public:
     std::string id, file_content;

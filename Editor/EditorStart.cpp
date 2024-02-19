@@ -20,7 +20,7 @@ int WINAPI main(int argc, char* argv[]) {
     app->CleanUp();*/
 
     AssetsDatabase ad = { {},{} };
-    ad.ImportFileAsAsset("C:\\Users\\arad8\\Documents\\Test.txt");
+    ad.ImportFileAsAsset("C:\\Users\\a.bozorgmehr\\Documents\\Test.txt");
 
     AssetsDatabase::GenerateDatabaseFiles(ad.hrid_table, ad.assets_batch, "");
     return 0;

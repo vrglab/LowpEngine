@@ -9,7 +9,7 @@
 #include <EngineCommons/EngineCommons.h>
 #include "GameObject.h"
 
-LP_Export class Scene
+class Scene
 {
 public:
 	std::vector<GameObject> game_objects;

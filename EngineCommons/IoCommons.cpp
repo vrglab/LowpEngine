@@ -2,7 +2,7 @@
 #include "IoCommons.h"
 #include <sstream>
 
-LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize)
+LP_API char* read_bytes(const std::string& filepath, uint32_t* outSize)
 {
 
     std::ifstream stream(filepath, std::ios::binary | std::ios::ate);
@@ -38,7 +38,7 @@ LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize)
 #endif
 #include <iomanip>
 
-LP_Export std::string GUIDGen()
+LP_API std::string GUIDGen()
 {
     std::stringstream ss;
 #if defined(_WIN32)
@@ -72,7 +72,7 @@ LP_Export std::string GUIDGen()
 #include <string>
 #ifdef _WIN32
 #include <windows.h>
-LP_Export std::string getExecutablePath()
+LP_API std::string getExecutablePath()
 {
     char path[MAX_PATH];
     GetModuleFileNameA(NULL, path, MAX_PATH);

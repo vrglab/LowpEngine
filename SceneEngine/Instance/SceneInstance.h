@@ -19,8 +19,8 @@ private:
 	std::vector<Ref<GameObjectInstance>> obj_instances;
 public:
 	Scene base;
-	void CreateInstance(GameObject);
-	GameObjectInstance* CreateInstance(bool instatiate_in_sharp, uintptr_t);
-	void* GetConfig(std::string);
-	void SetConfig(std::string, void*);
+	LP_API void CreateInstance(GameObject);
+	LP_API GameObjectInstance* CreateInstance(bool instatiate_in_sharp, uintptr_t);
+	LP_API void* GetConfig(std::string);
+	LP_API void SetConfig(std::string, void*);
 };

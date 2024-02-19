@@ -10,7 +10,7 @@
 #include <vk_video/vulkan_video_codecs_common.h>
 
 
-LP_Export enum RendererTypes
+LP_API enum RendererTypes
 {
 	OpenGL = 0,
 	Vulkan = 1,
@@ -18,4 +18,4 @@ LP_Export enum RendererTypes
 	Metal = 3
 };
 
-LP_Export int getSystemSupportedRenderer();
+LP_API int getSystemSupportedRenderer();

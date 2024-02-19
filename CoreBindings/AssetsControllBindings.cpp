@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "AssetsControllBindings.h"
-#include <AssetsEngine/AssetsEngine.h>
 
-LP_Extern LP_Export char* GetHRIDFileContent(char* hrid)
+LP_Extern LP_BINDINGS_API char* GetHRIDFileContent(char* hrid)
 {
-    return AssetsEngine::database.GetFileContentFromHRID(hrid).data();
+    return GetFileContentFromHRID(hrid, assets_database).data();
 }

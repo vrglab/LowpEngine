@@ -3,7 +3,7 @@
 #include "FrameworkHandeling/Framework.h"
 #include "FrameworkHandeling/Frameworks/OpenGLFramework.h"
 
-LP_Export int getSystemSupportedRenderer()
+LP_API int getSystemSupportedRenderer()
 {
 #if defined(_WIN32)
 	return RendererTypes::DirectX12;

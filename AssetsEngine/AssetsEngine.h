@@ -23,10 +23,10 @@
 #include <Core/Debugging/Debug.h>
 #include <Core/Application/ApplicationInfo.h>
 
+extern LP_API AssetsDatabase assets_database;
 
-LP_Export class AssetsEngine {
+class AssetsEngine {
 
 public:
-	static inline AssetsDatabase database;
 	static void StartAssetsEngine(Ref<ApplicationInfo> info);
 };

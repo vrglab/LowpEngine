@@ -10,5 +10,5 @@
 #include <SceneEngine/SceneManager.h>
 
 
-LP_Extern LP_Export inline SceneInstance* GetCurrentScene();
-LP_Extern LP_Export inline GameObjectInstance* InstantiateGameObject(bool, uintptr_t);
+LP_Extern LP_BINDINGS_API inline SceneInstance* GetCurrentScene();
+LP_Extern LP_BINDINGS_API inline GameObjectInstance* InstantiateGameObject(bool, uintptr_t);

@@ -9,7 +9,7 @@
 #include <EngineCommons/EngineCommons.h>
 #include "Component/Component.h"
 
-LP_Export class GameObject
+class GameObject
 {
 public:
 	std::string guid, Name;

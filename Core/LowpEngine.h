@@ -16,6 +16,8 @@
 //Engine Commons
 #include <EngineCommons/EngineCommons.h>
 
+#include <SceneEngine/SceneManager.h>
+
 //Rendering Engine
 #include <RenderingEngine/RenderingEngine.h>
 

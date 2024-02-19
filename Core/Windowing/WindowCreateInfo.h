@@ -10,7 +10,7 @@
 #include <EngineCommons/EngineCommons.h>
 #include "Resolution.h"
 
-LP_Export struct WindowCreateInfo
+struct WindowCreateInfo
 {
 public:
 	std::string window_title;

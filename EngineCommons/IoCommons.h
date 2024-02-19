@@ -9,6 +9,6 @@
 #include "Macros.h"
 #include <string>
 
-LP_Export char* read_bytes(const std::string& filepath, uint32_t* outSize);
-LP_Export std::string getExecutablePath();
-LP_Export std::string GUIDGen();
+LP_API char* read_bytes(const std::string& filepath, uint32_t* outSize);
+LP_API std::string getExecutablePath();
+LP_API std::string GUIDGen();

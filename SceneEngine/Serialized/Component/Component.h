@@ -9,7 +9,7 @@
 #include <EngineCommons/EngineCommons.h>
 #include "ComponentVariableData.h"
 
-LP_Export class Component
+class Component
 {
 public:
 	std::string engine_id;

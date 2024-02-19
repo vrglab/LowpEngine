@@ -11,7 +11,7 @@
 
 #include "SceneEngine/Serialized/Component/Component.h"
 
-LP_Export class ComponentInstance
+class ComponentInstance
 {
 public:
 	Component base;

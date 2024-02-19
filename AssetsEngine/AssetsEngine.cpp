@@ -4,6 +4,8 @@
 #include <fstream>
 #include <cereal/archives/binary.hpp>
 
+AssetsDatabase assets_database;
+
 void AssetsEngine::StartAssetsEngine(Ref<ApplicationInfo> info)
 {
 	LP_CORE_INFO("Starting Assets Engine");
@@ -28,5 +30,5 @@ void AssetsEngine::StartAssetsEngine(Ref<ApplicationInfo> info)
 		archive(hrid_table);
 	}
 
-	AssetsEngine::database = { hrid_table, batch };
+	assets_database = { hrid_table, batch };
 }

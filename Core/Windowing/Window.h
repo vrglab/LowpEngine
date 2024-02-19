@@ -14,7 +14,7 @@
 #include "Debugging/Debug.h"
 #include "WindowCreateInfo.h"
 
-LP_Export class Window
+class Window
 {
 private:
 	SDL_Window* sdl_window;

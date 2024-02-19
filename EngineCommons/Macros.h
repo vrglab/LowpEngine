@@ -6,18 +6,21 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 
-//LP_EXPORT
+//LP_API
 #ifdef _WIN32
-#define LP_Export __declspec(dllexport)
+#ifdef LP_API_EXPORTS
+#define LP_API __declspec(dllexport)
 #else
-#define LP_Export __attribute__((visibility("default")))
+#define LP_API __declspec(dllimport)
+#endif
+#else
+#ifdef LP_API_EXPORTS
+#define LP_API __attribute__((visibility("default")))
+#else
+#define LP_API __attribute__((visibility("default")))
+#endif
 #endif
 
-#ifdef _WIN32
-#define LP_Import __declspec(dllimport)
-#else
-#define LP_Import __attribute__((visibility("default")))
-#endif
 
 //LP_EXTERN
 #define LP_Extern extern "C"

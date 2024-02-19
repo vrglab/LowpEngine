@@ -10,7 +10,7 @@
 #include <SDL2/SDL.h>
 #include <Core/Application/ApplicationInfo.h>
 
-LP_Export class Framework
+class Framework
 {
 protected:
 	SDL_Window* window_access;

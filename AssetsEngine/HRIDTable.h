@@ -11,7 +11,7 @@
 #include <cereal/types/memory.hpp>
 #include <cereal/types/vector.hpp>
 
-LP_Export struct HRID
+struct HRID
 {
 
 public:
@@ -23,14 +23,15 @@ public:
     }
 };
 
-LP_Export struct HRIDTable
+struct HRIDTable
 {
 public:
     std::vector<HRID> hrids;
-    std::string GetGUIDFromHRID(std::string);
 
     template<class Archive>
     void serialize(Archive& archive) {
         archive(hrids);
     }
 };
+
+LP_Extern LP_API std::string GetGUIDFromHRID(std::string, HRIDTable);

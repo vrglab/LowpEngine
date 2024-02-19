@@ -16,6 +16,6 @@ public:
 	std::string name, ResourcesDir;
 	Ref<Resolution> resolution;
 	int flags, renderer_type, audio_system_type;
-	Ref<WindowCreateInfo> GetWindowCreateInfo();
-	static Ref<ApplicationInfo> GetDefault();
+	LP_API Ref<WindowCreateInfo> GetWindowCreateInfo();
+	LP_API static Ref<ApplicationInfo> GetDefault();
 };

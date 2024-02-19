@@ -44,9 +44,9 @@ void AssetsDatabase::ImportFileAsAsset(std::string file)
     }
 }
 
-std::string AssetsDatabase::GetFileContentFromHRID(std::string hrid)
+std::string GetFileContentFromHRID(std::string hrid, AssetsDatabase database)
 {
-    return assets_batch.GetByGUID(hrid_table.GetGUIDFromHRID(hrid));
+    return GetByGUID(GetGUIDFromHRID(hrid, database.hrid_table), database.assets_batch);
 }
 
 void AssetsDatabase::GenerateDatabaseFiles(HRIDTable hrid_table, AssetsBatch batch, std::string filepath)
