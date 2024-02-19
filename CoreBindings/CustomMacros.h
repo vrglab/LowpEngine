@@ -7,16 +7,16 @@
 /* ======================================================================================== */
 #pragma once
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 #ifdef LP_BINDINGS_API_EXPORTS
 #define LP_BINDINGS_API __declspec(dllexport)
 #else
 #define LP_BINDINGS_API __declspec(dllimport)
 #endif
 #else
-#ifdef LP_BINDINGS_API_EXPORTS
-#define LP_BINDINGS_API __attribute__((visibility("default")))
+#if __GNUC__ >= 4
+#define LP_BINDINGS_API __attribute__ ((visibility("default")))
 #else
-#define LP_BINDINGS_API __attribute__((visibility("default")))
+#define LP_BINDINGS_API
 #endif
 #endif

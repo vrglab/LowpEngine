@@ -7,17 +7,17 @@
 /* ======================================================================================== */
 
 //LP_API
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 #ifdef LP_API_EXPORTS
 #define LP_API __declspec(dllexport)
 #else
 #define LP_API __declspec(dllimport)
 #endif
 #else
-#ifdef LP_API_EXPORTS
-#define LP_API __attribute__((visibility("default")))
+#if __GNUC__ >= 4
+#define LP_API __attribute__ ((visibility("default")))
 #else
-#define LP_API __attribute__((visibility("default")))
+#define LP_API
 #endif
 #endif
 
