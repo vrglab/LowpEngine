@@ -19,10 +19,24 @@ int WINAPI main(int argc, char* argv[]) {
     app->Run();
     app->CleanUp();*/
 
-    AssetsDatabase ad = { {},{} };
-    ad.ImportFileAsAsset("C:\\Users\\a.bozorgmehr\\Documents\\Test.txt");
+    std::vector<Scene> loaded_scenes = {};
 
-    AssetsDatabase::GenerateDatabaseFiles(ad.hrid_table, ad.assets_batch, "");
+    Scene scene = {};
+
+    GameObject obj = {};
+    obj.Name = "Loli";
+    obj.guid = GUIDGen();
+    Component transform = {};
+    transform.engine_id = "Transform";
+    obj.components.push_back(transform);
+
+    Component testClass = {};
+    testClass.engine_id = "TestClass";
+    obj.components.push_back(testClass);
+    scene.game_objects.push_back(obj);
+    loaded_scenes.push_back(scene);
+    GenerateSceneListFile("", loaded_scenes);
+
     return 0;
 }
 

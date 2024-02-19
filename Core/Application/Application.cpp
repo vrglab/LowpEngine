@@ -13,7 +13,7 @@ int Application::Init(Ref<ApplicationInfo> info)
     app_info = info;
     AssetsEngine::StartAssetsEngine(info);
     ScriptingEngine::InitMono(info);
-    SceneManager::Init("");
+    SceneManager::Init(info);
     GetFileContentFromHRID("", assets_database);
     CreateAppWindow(info->GetWindowCreateInfo());
 
