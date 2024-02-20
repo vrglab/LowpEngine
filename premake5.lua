@@ -60,7 +60,7 @@ workspace "LowpEngine"
 		optimize "On"
 		defines {"RELEASE", "EDITOR"}
 			
-group "C++"
+group "C++/Engine"
 project "Core"
 	location "Core"
 	kind "SharedLib"
@@ -405,77 +405,8 @@ project "Launcher"
 		staticruntime "On"
 		systemversion "latest"
 
-project "Editor"
-	location "Editor"
-	kind "ConsoleApp"
-	language "C++"
-	toolset "v143"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-
-	if os.target() == "windows" then
-		pchheader "pch.h"
-		cppdialect "C++latest"
-		libdirs
-		{
-			"Packages/c++/libs/windows"
-		}
-	elseif os.target() == "linux" then
-		pchheader "%{prj.name}/pch.h"
-	end
-
-	pchsource "%{prj.name}/pch.cpp"
-
-	files 
-	{
-		"%{prj.name}/**.h",
-		"%{prj.name}/**.cpp",
-		"%{prj.name}/**/**.h",
-		"%{prj.name}/**/**.cpp"
-	}
-
-	libdirs
-	{
-		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
-	}
-
-	includedirs
-	{
-		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
-		"%{prj.name}",
-		".",
-		"Packages/c++/includes"
-	}
-	
-	links
-	{
-		"Core",
-		"SDL2",
-		"spdlog",
-		"fmt",
-		"volk",
-		"mono-2.0-sgen"
-	}
-
-	vpaths {
-		["Headers/*"] = { "**.h", "**.hpp" },
-		["Sources/*"] = {"**.c", "**.cpp"}
-	}
-
-
-	filter "system:windows"
-		cppdialect "C++20"
-		staticruntime "On"
-		systemversion "latest"
-
 -- C++ Subsystems that are used in the engine
-group "C++/SubEngines"
+group "C++/Engine/SubEngines"
 project "SoundEngine"
 	location "SoundEngine"
 	kind "StaticLib"
@@ -1193,7 +1124,6 @@ project "LowpEngine"
 		staticruntime "On"
 		systemversion "latest"
 
-
 project "TestGame"
 	location "TestGame"
 	kind "SharedLib"
@@ -1215,5 +1145,75 @@ project "TestGame"
 	}
 
 	filter "system:windows"
+		staticruntime "On"
+		systemversion "latest"
+
+group("C++/Editor")
+project "Editor"
+	location "Editor"
+	kind "ConsoleApp"
+	language "C++"
+	toolset "v143"
+	buildoptions
+	{
+		"/Zc:__cplusplus"
+	}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+	if os.target() == "windows" then
+		pchheader "pch.h"
+		cppdialect "C++latest"
+		libdirs
+		{
+			"Packages/c++/libs/windows"
+		}
+	elseif os.target() == "linux" then
+		pchheader "%{prj.name}/pch.h"
+	end
+
+	pchsource "%{prj.name}/pch.cpp"
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.h",
+		"%{prj.name}/**/**.cpp"
+	}
+
+	libdirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
+	}
+
+	includedirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"%{prj.name}",
+		".",
+		"Packages/c++/includes"
+	}
+	
+	links
+	{
+		"Core",
+		"SDL2",
+		"spdlog",
+		"fmt",
+		"volk",
+		"mono-2.0-sgen"
+	}
+
+	vpaths {
+		["Headers/*"] = { "**.h", "**.hpp" },
+		["Sources/*"] = {"**.c", "**.cpp"}
+	}
+
+
+	filter "system:windows"
+		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
