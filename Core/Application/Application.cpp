@@ -33,14 +33,14 @@ void Application::Run()
 #endif
 #ifdef EDITOR
             ImGui_ImplOpenGL3_NewFrame();
-#ifdef _WIN32 
-            ImGui_ImplDX12_NewFrame();
-#endif
             ImGui_ImplSDL2_NewFrame();
             ImGui::NewFrame();
 
+            ImGui::ShowDemoWindow();
 
             ImGui::Render();
+            ((Framework*)window_data->created_rendering_framework)->Tick();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 #endif
         ((Framework*)window_data->created_rendering_framework)->SwapWindow();
     }

@@ -25,7 +25,7 @@ void OpenGLFramework::Tick()
 	glClearColor(clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3]);
 #endif
 #ifdef EDITOR
-	glClearColor(0, 1, 0, 0);
+	glClearColor(0, 0, 0, 0);
 #endif
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

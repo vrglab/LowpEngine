@@ -90,6 +90,7 @@ void Window::CloseWindow()
 int Window::CleanUp()
 {
 #ifdef EDITOR
+	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
 #endif
