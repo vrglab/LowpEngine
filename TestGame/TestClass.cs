@@ -19,9 +19,4 @@ public class TestClass : LowpBehaviour
         obj.Name = "Fallout boy is fun";
         Debug.Log($"Obj named {gameObject.Name} made a new GameObject with the id of {obj.ID}");
     }
-
-    public void Update()
-    {
-        Debug.Log($"Hello from {obj.ID}");
-    }
 }
