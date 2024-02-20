@@ -88,6 +88,10 @@ void Window::CloseWindow()
 
 int Window::CleanUp()
 {
+#ifdef EDITOR
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
+#endif
 	SDL_DestroyWindow(sdl_window);
 	SDL_Quit();
 	return LowpResultCodes::Success;

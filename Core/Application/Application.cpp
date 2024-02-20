@@ -29,8 +29,19 @@ void Application::Run()
         window_data->event_buss->ResolveQue();
 #ifdef GAME
             current_scene->Update();
+            ((Framework*)window_data->created_rendering_framework)->Tick();
 #endif
-        ((Framework*)window_data->created_rendering_framework)->Tick();
+#ifdef EDITOR
+            ImGui_ImplOpenGL3_NewFrame();
+#ifdef _WIN32 
+            ImGui_ImplDX12_NewFrame();
+#endif
+            ImGui_ImplSDL2_NewFrame(window_data->created_window->getSdlWindow());
+            ImGui::NewFrame();
+
+
+            ImGui::Render();
+#endif
         ((Framework*)window_data->created_rendering_framework)->SwapWindow();
     }
 }

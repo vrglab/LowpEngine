@@ -17,6 +17,9 @@
 #include <imgui_stdlib.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_opengl3.h>
+#ifdef _WIN32
+#include <imgui_impl_dx12.h>
+#endif
 #endif
 #include "Debugging/Debug.h"
 #include "WindowCreateInfo.h"
