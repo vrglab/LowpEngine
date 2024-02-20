@@ -159,14 +159,14 @@ project "Core"
 		defines {"LP_API_EXPORTS"}
 		links
 		{
-			"imgui"
+			"ImGui"
 		}
 
 	filter "configurations:Release_Editor"
 		defines {"LP_API_EXPORTS"}
 		links
 		{
-			"imgui"
+			"ImGui"
 		}
 
 project "CoreBindings"
@@ -661,14 +661,14 @@ project "RenderingEngine"
 		defines {"LP_API_EXPORTS"}
 		links
 		{
-			"imgui"
+			"ImGui"
 		}
 
 	filter "configurations:Release_Editor"
 		defines {"LP_API_EXPORTS"}
 		links
 		{
-			"imgui"
+			"ImGui"
 		}
 
 project "ShaderEngine"
@@ -1200,6 +1200,74 @@ project "Editor"
 	links
 	{
 		"Core",
+		"SDL2",
+		"spdlog",
+		"fmt",
+		"volk",
+		"mono-2.0-sgen"
+	}
+
+	vpaths {
+		["Headers/*"] = { "**.h", "**.hpp" },
+		["Sources/*"] = {"**.c", "**.cpp"}
+	}
+
+
+	filter "system:windows"
+		cppdialect "C++20"
+		staticruntime "On"
+		systemversion "latest"
+
+
+
+group("C++/Editor/Dependent")
+project "ImGui"
+	location "ImGui"
+	kind "StaticLib"
+	language "C++"
+	toolset "v143"
+	buildoptions
+	{
+		"/Zc:__cplusplus"
+	}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+	if os.target() == "windows" then
+		cppdialect "C++latest"
+		libdirs
+		{
+			"Packages/c++/libs/windows"
+		}
+	elseif os.target() == "linux" then
+	end
+
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.h",
+		"%{prj.name}/**/**.cpp"
+	}
+
+	libdirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
+	}
+
+	includedirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"%{prj.name}",
+		".",
+		"Packages/c++/includes"
+	}
+	
+	links
+	{
 		"SDL2",
 		"spdlog",
 		"fmt",

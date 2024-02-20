@@ -13,12 +13,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #ifdef EDITOR
-#include <imgui.h>
-#include <imgui_stdlib.h>
-#include <imgui_impl_sdl2.h>
-#include <imgui_impl_opengl3.h>
+#include <ImGui/imgui.h>
+#include <ImGui/misc/cpp/imgui_stdlib.h>
+#include <ImGui/backends/imgui_impl_sdl2.h>
+#include <ImGui/backends/imgui_impl_opengl3.h>
 #ifdef _WIN32
-#include <imgui_impl_dx12.h>
+#include <ImGui/backends/imgui_impl_dx12.h>
 #endif
 #endif
 #include "Debugging/Debug.h"

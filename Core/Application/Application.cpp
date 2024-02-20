@@ -36,7 +36,7 @@ void Application::Run()
 #ifdef _WIN32 
             ImGui_ImplDX12_NewFrame();
 #endif
-            ImGui_ImplSDL2_NewFrame(window_data->created_window->getSdlWindow());
+            ImGui_ImplSDL2_NewFrame();
             ImGui::NewFrame();
 
 
