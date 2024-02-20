@@ -54,11 +54,11 @@ workspace "LowpEngine"
 
 	filter "configurations:Debug_Editor"
 		symbols "On"
-		defines {"DEBUG", "Editor"}
+		defines {"DEBUG", "EDITOR"}
 
 	filter "configurations:Release_Editor"
 		optimize "On"
-		defines {"RELEASE", "Editor"}
+		defines {"RELEASE", "EDITOR"}
 			
 group "C++"
 project "Core"

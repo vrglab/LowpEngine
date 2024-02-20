@@ -99,11 +99,10 @@ void Directx12Framework::Tick()
         float* clear_Color = static_cast<float*>(current_scene->GetConfig("bgd_color"));
         float clearColors[] = { clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3] };
         commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
-#else 
+#endif
 #ifdef EDITOR
         float clearColors[] = { 0, 1, 0, 0 };
         commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
-#endif
 #endif
 
 #endif
