@@ -20,9 +20,14 @@ void OpenGLFramework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 
 void OpenGLFramework::Tick()
 {
-	Ref<SceneInstance> current_scene = SceneManager::GetCurrentScene();
+#ifdef GAME
 	float* clear_Color = static_cast<float*>(current_scene->GetConfig("bgd_color"));
 	glClearColor(clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3]);
+#endif
+#ifdef EDITOR
+	glClearColor(0, 1, 0, 0);
+#endif
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

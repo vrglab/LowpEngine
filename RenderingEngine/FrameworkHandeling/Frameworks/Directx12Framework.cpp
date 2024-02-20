@@ -90,7 +90,6 @@ void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window
 void Directx12Framework::Tick()
 {
 #ifdef _WIN32
-    Ref<SceneInstance> current_scene = SceneManager::GetCurrentScene();
 
     D3D12_CPU_DESCRIPTOR_HANDLE currentRtvHandle(rtvHeap->GetCPUDescriptorHandleForHeapStart());
     SIZE_T rtvDescriptorIncrement = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
