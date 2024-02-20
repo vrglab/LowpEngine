@@ -157,9 +157,17 @@ project "Core"
 
 	filter "configurations:Debug_Editor"
 		defines {"LP_API_EXPORTS"}
+		links
+		{
+			"imgui"
+		}
 
 	filter "configurations:Release_Editor"
 		defines {"LP_API_EXPORTS"}
+		links
+		{
+			"imgui"
+		}
 
 project "CoreBindings"
 	location "CoreBindings"
@@ -720,9 +728,17 @@ project "RenderingEngine"
 
 	filter "configurations:Debug_Editor"
 		defines {"LP_API_EXPORTS"}
+		links
+		{
+			"imgui"
+		}
 
 	filter "configurations:Release_Editor"
 		defines {"LP_API_EXPORTS"}
+		links
+		{
+			"imgui"
+		}
 
 project "ShaderEngine"
 	location "ShaderEngine"

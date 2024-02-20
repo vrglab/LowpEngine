@@ -11,6 +11,12 @@
 #include <EventEngine/EventHandler.h>
 #include <EventEngine/EventBus.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
+#ifdef EDITOR
+#include <imgui.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_opengl3.h>
+#endif
 #include "Debugging/Debug.h"
 #include "WindowCreateInfo.h"
 

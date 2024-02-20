@@ -29,11 +29,27 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		LP_CORE_ERROR(SDL_GetError());
 		return LowpResultCodes::SystemFailure;
 	}
-
+	SDL_GLContext gl_context = {};
 	if (create_info->renderer_type == RendererTypes::OpenGL) {
 		LP_CORE_INFO("Creating OpenGL Context");
-		SDL_GL_MakeCurrent(sdl_window, SDL_GL_CreateContext(sdl_window));
+		gl_context = SDL_GL_CreateContext(sdl_window);
+		SDL_GL_MakeCurrent(sdl_window, gl_context);
 	}
+#ifdef EDITOR
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+	// Setup ImGui style
+	ImGui::StyleColorsDark();
+
+
+	if (create_info->renderer_type == RendererTypes::OpenGL) {
+		ImGui_ImplSDL2_InitForOpenGL(sdl_window, gl_context);
+		ImGui_ImplOpenGL3_Init("#version 130");
+	}
+
+#endif
 
 	return LowpResultCodes::Success;
 }
@@ -52,6 +68,9 @@ void Window::ProcessEvents()
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
+#ifdef EDITOR
+		ImGui_ImplSDL2_ProcessEvent(&event);
+#endif
 		if (event.type == SDL_QUIT) {
 			CloseWindow();
 		}

@@ -13,6 +13,7 @@ int WINAPI main(int argc, char* argv[]) {
 
     Ref<ApplicationInfo> info = ApplicationInfo::GetDefault();
     info->name = "Lowp Editor";
+    info->renderer_type = RendererTypes::OpenGL;
 
     app->app_info = info;
     app->CreateAppWindow(info->GetWindowCreateInfo());

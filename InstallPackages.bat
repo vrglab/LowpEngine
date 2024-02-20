@@ -17,14 +17,14 @@ Programs\vcpkg\vcpkg install mnn
 Programs\vcpkg\vcpkg install tinyexr
 Programs\vcpkg\vcpkg install yaml-cpp
 Programs\vcpkg\vcpkg install imgui
-Programs\vcpkg\vcpkg install imgui[vulkan-binding]
-Programs\vcpkg\vcpkg install imgui[sdl2-binding]
-Programs\vcpkg\vcpkg install imgui[opengl2-binding]
-Programs\vcpkg\vcpkg install imgui[opengl3-binding]
-Programs\vcpkg\vcpkg install imgui[dx12-binding]
-Programs\vcpkg\vcpkg install imgui[metal-binding]
-Programs\vcpkg\vcpkg install imgui[sdl2-renderer-binding]
-Programs\vcpkg\vcpkg install imguizmo
+Programs\vcpkg\vcpkg install imgui[vulkan-binding] --recurse
+Programs\vcpkg\vcpkg install imgui[sdl2-binding] --recurse
+Programs\vcpkg\vcpkg install imgui[opengl2-binding] --recurse
+Programs\vcpkg\vcpkg install imgui[opengl3-binding] --recurse
+Programs\vcpkg\vcpkg install imgui[dx12-binding] --recurse
+Programs\vcpkg\vcpkg install imgui[metal-binding] --recurse
+Programs\vcpkg\vcpkg install imgui[sdl2-renderer-binding] --recurse
+Programs\vcpkg\vcpkg install imguizmo 
 Programs\vcpkg\vcpkg install implot
 Programs\vcpkg\vcpkg install spdlog
 Programs\vcpkg\vcpkg install cereal
