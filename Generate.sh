@@ -1,3 +1,3 @@
-sh GenerateProjectFiles.sh
 sh Programs\vcpkg.sh
+sh GenerateProjectFiles.sh
 sh InstallPackages.sh
