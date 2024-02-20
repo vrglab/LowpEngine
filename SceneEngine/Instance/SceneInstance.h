@@ -24,4 +24,5 @@ public:
 	void* GetConfig(std::string);
 	void SetConfig(std::string, void*);
 	void Update();
+	void Init();
 };

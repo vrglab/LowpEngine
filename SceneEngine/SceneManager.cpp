@@ -30,6 +30,9 @@ void SceneManager::Init(Ref<ApplicationInfo> info)
 {
 	LP_CORE_INFO("Starting Scene Engine");
 	current_scene = CreateRef<SceneInstance>();
+	current_scene->Init();
+
+
 	std::string levels_file = info->ResourcesDir;
 	levels_file.append("\\levels_table.bin");
 	std::ifstream is_level_file(levels_file, std::ios::binary);

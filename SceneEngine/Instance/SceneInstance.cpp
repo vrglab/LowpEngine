@@ -78,8 +78,16 @@ void SceneInstance::SetConfig(std::string id, void* val)
 
 void SceneInstance::Update()
 {
-	for (size_t i = 0; i < obj_instances.size(); i++)
-	{
-		obj_instances[i]->Update();
+	if (!obj_instances.empty()) {
+		for (size_t i = 0; i < obj_instances.size(); i++)
+		{
+			obj_instances[i]->Update();
+		}
 	}
+}
+
+void SceneInstance::Init()
+{
+	obj_instances = {};
+	configs = {};
 }

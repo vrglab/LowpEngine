@@ -26,11 +26,39 @@ workspace "LowpEngine"
 	configurations 
 	{
 		"Debug",
-		"Release"
+		"Release",
+		"Debug_Game",
+		"Release_Game",
+		"Debug_Editor",
+		"Release_Editor"
 	}
 	platforms { "x86", "x64", "ARM", "ARM64" }
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	vcpkg_arg_dir = determine_architecture().."-"..determine_os();
+
+	filter "configurations:Debug"
+		symbols "On"
+		defines {"DEBUG"}
+
+	filter "configurations:Release"
+		optimize "On"
+		defines {"RELEASE"}
+
+	filter "configurations:Debug_Game"
+		symbols "On"
+		defines {"DEBUG", "GAME"}
+
+	filter "configurations:Release_Game"
+		optimize "On"
+		defines {"RELEASE", "GAME"}
+
+	filter "configurations:Debug_Editor"
+		symbols "On"
+		defines {"DEBUG", "Editor"}
+
+	filter "configurations:Release_Editor"
+		optimize "On"
+		defines {"RELEASE", "Editor"}
 			
 group "C++"
 project "Core"
@@ -116,12 +144,22 @@ project "Core"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "CoreBindings"
 	location "CoreBindings"
@@ -194,12 +232,22 @@ project "CoreBindings"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG", "LP_BINDINGS_API_EXPORTS"}
+		defines {"LP_BINDINGS_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_BINDINGS_API_EXPORTS"}
+		defines {"LP_BINDINGS_API_EXPORTS"}
+	
+	filter "configurations:Debug_Game"
+		defines {"LP_BINDINGS_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_BINDINGS_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_BINDINGS_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_BINDINGS_API_EXPORTS"}
 
 project "EngineCommons"
 	location "EngineCommons"
@@ -262,12 +310,22 @@ project "EngineCommons"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "Launcher"
 	location "Launcher"
@@ -339,14 +397,6 @@ project "Launcher"
 		staticruntime "On"
 		systemversion "latest"
 
-	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG"}
-
-	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE"}
-
 project "Editor"
 	location "Editor"
 	kind "ConsoleApp"
@@ -415,14 +465,6 @@ project "Editor"
 		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
-
-	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG"}
-
-	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE"}
 
 -- C++ Subsystems that are used in the engine
 group "C++/SubEngines"
@@ -494,12 +536,22 @@ project "SoundEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines { "DEBUG"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "PhysicsEngine"
 	location "PhysicsEngine"
@@ -562,12 +614,22 @@ project "PhysicsEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "RenderingEngine"
 	location "RenderingEngine"
@@ -645,12 +707,22 @@ project "RenderingEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "ShaderEngine"
 	location "ShaderEngine"
@@ -726,12 +798,22 @@ project "ShaderEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines {"DEBUG", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "ScriptingEngine"
 	location "ScriptingEngine"
@@ -804,12 +886,22 @@ project "ScriptingEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines { "DEBUG"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "SceneEngine"
 	location "SceneEngine"
@@ -883,12 +975,22 @@ project "SceneEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines { "DEBUG"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "AssetsEngine"
 	location "AssetsEngine"
@@ -956,12 +1058,22 @@ project "AssetsEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines { "DEBUG"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 project "EventEngine"
 	location "EventEngine"
@@ -1028,12 +1140,22 @@ project "EventEngine"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		symbols "On"
-		defines { "DEBUG"}
+		defines {"LP_API_EXPORTS"}
 
 	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Game"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_GAME"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Debug_Editor"
+		defines {"LP_API_EXPORTS"}
+
+	filter "configurations:Release_Editor"
+		defines {"LP_API_EXPORTS"}
 
 group("C#")
 project "LowpEngine"
@@ -1055,13 +1177,6 @@ project "LowpEngine"
 		staticruntime "On"
 		systemversion "latest"
 
-	filter "configurations:Debug"
-		symbols "On"
-		defines { "DEBUG"}
-
-	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}
 
 project "TestGame"
 	location "TestGame"
@@ -1086,11 +1201,3 @@ project "TestGame"
 	filter "system:windows"
 		staticruntime "On"
 		systemversion "latest"
-
-	filter "configurations:Debug"
-		symbols "On"
-		defines { "DEBUG"}
-
-	filter "configurations:Release"
-		optimize "On"
-		defines {"RELEASE", "LP_API_EXPORTS"}

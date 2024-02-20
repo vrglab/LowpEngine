@@ -27,7 +27,9 @@ void Application::Run()
     {
         window_data->created_window->ProcessEvents();
         window_data->event_buss->ResolveQue();
-        current_scene->Update();
+#ifdef GAME
+            current_scene->Update();
+#endif
         ((Framework*)window_data->created_rendering_framework)->Tick();
         ((Framework*)window_data->created_rendering_framework)->SwapWindow();
     }
