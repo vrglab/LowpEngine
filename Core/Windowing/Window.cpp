@@ -36,6 +36,7 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		SDL_GL_MakeCurrent(sdl_window, gl_context);
 	}
 #ifdef EDITOR
+	LP_CORE_INFO("starting ImGui version 1.90.2");
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
