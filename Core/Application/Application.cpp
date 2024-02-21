@@ -40,7 +40,6 @@ void Application::Run()
 
             ImGui::Render();
             ((Framework*)window_data->created_rendering_framework)->Tick();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 #endif
         ((Framework*)window_data->created_rendering_framework)->SwapWindow();
     }

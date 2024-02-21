@@ -1,6 +1,15 @@
 #include "pch.h"
 #include "OpenGLFramework.h"
 
+#ifdef EDITOR
+#include <ImGui/imgui.h>
+#include <ImGui/misc/cpp/imgui_stdlib.h>
+#include <ImGui/backends/imgui_impl_sdl2.h>
+#include <ImGui/backends/imgui_impl_opengl3.h>
+#ifdef _WIN32
+#include <ImGui/backends/imgui_impl_dx12.h>
+#endif
+#endif
 
 #include <Core/Debugging/Debug.h>
 #include <GL/glew.h>
@@ -29,6 +38,10 @@ void OpenGLFramework::Tick()
 #endif
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+#ifdef EDITOR
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	
+#endif
 }
 
 void OpenGLFramework::SwapWindow()
