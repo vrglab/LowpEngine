@@ -10,6 +10,8 @@
 // Implemented features:
 //  [X] Renderer: User texture binding. Use 'SDL_Texture*' as ImTextureID. Read the FAQ about ImTextureID!
 //  [X] Renderer: Large meshes support (64k+ vertices) with 16-bit indices.
+// Missing features:
+//  [ ] Renderer: Multi-viewport support (multiple windows).
 
 // You can copy and use unmodified imgui_impl_* files in your project. See examples/ folder for examples of using this.
 // Prefer including the entire imgui/ repository into your project (either as a copy or as a submodule), and only build the backends you need.
@@ -27,7 +29,7 @@
 //  2021-10-06: Backup and restore modified ClipRect/Viewport.
 //  2021-09-21: Initial version.
 
-#include "imgui.h"
+#include <ImGui/imgui.h>
 #ifndef IMGUI_DISABLE
 #include "imgui_impl_sdlrenderer2.h"
 #include <stdint.h>     // intptr_t
