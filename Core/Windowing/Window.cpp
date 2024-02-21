@@ -49,6 +49,10 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		ImGui_ImplSDL2_InitForOpenGL(sdl_window, gl_context);
 		ImGui_ImplOpenGL3_Init("#version 130");
 	}
+
+	if (create_info->renderer_type == RendererTypes::DirectX12) {
+		ImGui_ImplSDL2_InitForD3D(sdl_window);
+	}
 #endif
 
 	return LowpResultCodes::Success;

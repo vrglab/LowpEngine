@@ -3,6 +3,15 @@
 #include <SDL2/SDL_syswm.h>
 #include <SceneEngine/SceneManager.h>
 
+#ifdef EDITOR
+#include <ImGui/imgui.h>
+#include <ImGui/misc/cpp/imgui_stdlib.h>
+#include <ImGui/backends/imgui_impl_sdl2.h>
+#ifdef _WIN32
+#include <ImGui/backends/imgui_impl_dx12.h>
+#endif
+#endif
+
 void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window)
 {
 #ifdef _WIN32
@@ -82,6 +91,9 @@ void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window
 
     // Create a command list
     device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator, nullptr, IID_PPV_ARGS(&commandList));
+#ifdef EDITOR
+    ImGui_ImplDX12_Init(device, 5000, DXGI_FORMAT_R8G8B8A8_UNORM, rtvHeap, rtvHeap->GetCPUDescriptorHandleForHeapStart(), rtvHeap->GetGPUDescriptorHandleForHeapStart());
+#endif
 #else
     LP_CORE_ERROR("DirectX12 is not supported on this device");
 #endif
@@ -102,6 +114,7 @@ void Directx12Framework::Tick()
 #ifdef EDITOR
         float clearColors[] = { 0, 1, 0, 0 };
         commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
+        ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), commandList);
 #endif
 
 #endif
@@ -119,6 +132,9 @@ void Directx12Framework::SwapWindow()
 
 void Directx12Framework::Cleanup()
 {
+#ifdef EDITOR
+    ImGui_ImplDX12_Shutdown();
+#endif
 }
 
 void Directx12Framework::OnSdlSetup()

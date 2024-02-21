@@ -6,9 +6,6 @@
 #include <ImGui/misc/cpp/imgui_stdlib.h>
 #include <ImGui/backends/imgui_impl_sdl2.h>
 #include <ImGui/backends/imgui_impl_opengl3.h>
-#ifdef _WIN32
-#include <ImGui/backends/imgui_impl_dx12.h>
-#endif
 #endif
 
 #include <Core/Debugging/Debug.h>

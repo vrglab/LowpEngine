@@ -54,6 +54,11 @@ void Application::Run()
               ImGui::RenderPlatformWindowsDefault();
               SDL_GL_MakeCurrent(window_data->created_window->getSdlWindow(), context);
             }
+
+            if (app_info->renderer_type == RendererTypes::DirectX12) {
+                ImGui::UpdatePlatformWindows();
+                ImGui::RenderPlatformWindowsDefault();
+            }
 #endif
         ((Framework*)window_data->created_rendering_framework)->SwapWindow();
     }
