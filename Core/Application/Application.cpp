@@ -37,7 +37,9 @@ void Application::Run()
                 ImGui_ImplOpenGL3_NewFrame();
             }
 #ifdef _WIN32
-            ImGui_ImplDX12_NewFrame();
+            if (app_info->renderer_type == RendererTypes::DirectX12) {
+                ImGui_ImplDX12_NewFrame();
+            }
 #endif
             ImGui_ImplSDL2_NewFrame();
             ImGui::NewFrame();
