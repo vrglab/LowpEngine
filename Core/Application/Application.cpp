@@ -3,6 +3,7 @@
 #include <RenderingEngine/FrameworkHandeling/Frameworks/OpenGLFramework.h>
 #include <RenderingEngine/FrameworkHandeling/Frameworks/Directx12Framework.h>
 #include <RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h>
+#include <RenderingEngine/FrameworkHandeling/Frameworks/MetalFramework.h>
 #include <AssetsEngine/AssetsEngine.h>
 #include <ScriptingEngine/ScriptingEngine.h>
 #include <SceneEngine/SceneManager.h>
@@ -83,6 +84,7 @@ int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
         app_window->created_rendering_framework = new OpenGLFramework();
         break;
     case RendererTypes::Metal:
+        app_window->created_rendering_framework = new MetalFramework();
         break;
     }
 

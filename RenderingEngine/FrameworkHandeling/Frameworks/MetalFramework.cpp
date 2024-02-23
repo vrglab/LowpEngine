@@ -23,3 +23,15 @@ void MetalFramework::Tick()
     [commandBuffer commit];
 #endif
 }
+
+void MetalFramework::SwapWindow()
+{
+}
+
+void MetalFramework::Cleanup()
+{
+}
+
+void MetalFramework::OnSdlSetup()
+{
+}

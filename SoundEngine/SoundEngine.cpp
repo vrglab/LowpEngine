@@ -15,12 +15,12 @@ void SoundEngine::Init(Ref<ApplicationInfo> info)
 		LP_CORE_INFO("Starting OpenAL");
 		sound_device = (ALCdevice*)alcOpenDevice(nullptr);
 		if (!sound_device) {
-			LP_CORE_ERROR("OpenAL soundsystem failed device init");
+			LP_CORE_ERROR("OpenAL sound system failed device init");
 		}
 
 		sound_context = (ALCcontext*)alcCreateContext((ALCdevice*)sound_device, nullptr);
 		if (!sound_context) {
-			LP_CORE_ERROR("OpenAL soundsystem failed device init");
+			LP_CORE_ERROR("OpenAL sound system failed context init");
 		}
 		alcMakeContextCurrent((ALCcontext*)sound_context);
 	}
@@ -69,6 +69,10 @@ void SoundEngine::Shutdown()
 			ALuint buffer = (ALuint)created_buffers[i];
 			alDeleteBuffers(1, &buffer);
 		}
+
+		alcMakeContextCurrent(nullptr);
+		alcDestroyContext((ALCcontext*)sound_context);
+		alcCloseDevice((ALCdevice*)sound_device);
 	}
 
 	if (sound_system_backend_type == SoundSystemBackendType::Fmod) {
