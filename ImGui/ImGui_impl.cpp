@@ -35,6 +35,7 @@ void ImGUI::Init(Ref<WindowCreateInfo> info, SDL_Window* _sdl_window, SDL_GLCont
 
 void ImGUI::Tick(Ref<ApplicationInfo> app_info, void* rendering_framework)
 {
+#ifdef EDITOR
 	if (app_info->renderer_type == RendererTypes::OpenGL) {
 		ImGui_ImplOpenGL3_NewFrame();
 	}
@@ -106,5 +107,6 @@ void ImGUI::Tick(Ref<ApplicationInfo> app_info, void* rendering_framework)
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
 	}
+#endif
 #endif
 }
