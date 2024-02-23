@@ -7,6 +7,7 @@
 #include <RenderingEngine/FrameworkHandeling/Frameworks/Directx12Framework.h>
 
 #include "RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h"
+#include <imgui_internal.h>
 
 void ImGUI::Init(Ref<WindowCreateInfo> info, SDL_Window* _sdl_window, SDL_GLContext gl_context)
 {
@@ -21,7 +22,6 @@ void ImGUI::Init(Ref<WindowCreateInfo> info, SDL_Window* _sdl_window, SDL_GLCont
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable | ImGuiConfigFlags_ViewportsEnable;
 	
 	ImGui::StyleColorsDark();
-
 
 	if (info->renderer_type == RendererTypes::OpenGL) {
 		ImGui_ImplSDL2_InitForOpenGL(sdl_window, gl_context);
@@ -78,9 +78,11 @@ void ImGUI::Tick(Ref<ApplicationInfo> app_info, void* rendering_framework)
 		ImGui::EndMainMenuBar();
 	}
 
-
+	dockspace_id = ImGui::GetID("EditorSpace");
 
 	((Framework*)rendering_framework)->Tick();
+
+	ImGui::DockSpace(dockspace_id);
 
 	ImGui::Render();
 

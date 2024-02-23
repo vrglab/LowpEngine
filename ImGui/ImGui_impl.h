@@ -29,6 +29,7 @@ class ImGUI
 {
 private:
 	static inline SDL_Window* sdl_window;
+	static inline ImGuiID dockspace_id;
 public:
 	static void Init(Ref<WindowCreateInfo>, SDL_Window* sdl_window, SDL_GLContext gl_context);
 	static void Tick(Ref<ApplicationInfo>, void*);
