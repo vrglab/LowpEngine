@@ -92,7 +92,9 @@ void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window
     // Create a command list
     device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator, nullptr, IID_PPV_ARGS(&commandList));
 #ifdef EDITOR
-    ImGui_ImplDX12_Init(device, 5000, DXGI_FORMAT_R8G8B8A8_UNORM, rtvHeap, rtvHeap->GetCPUDescriptorHandleForHeapStart(), rtvHeap->GetGPUDescriptorHandleForHeapStart());
+    ImGui_ImplDX12_Init(device, 3, DXGI_FORMAT_R8G8B8A8_UNORM, rtvHeap, 
+        rtvHeap->GetCPUDescriptorHandleForHeapStart(), 
+        rtvHeap->GetGPUDescriptorHandleForHeapStart());
 #endif
 #else
     LP_CORE_ERROR("DirectX12 is not supported on this device");
@@ -102,7 +104,9 @@ void Directx12Framework::Init(Ref<ApplicationInfo> init_info, SDL_Window* window
 void Directx12Framework::Tick()
 {
 #ifdef _WIN32
-
+#ifdef EDITOR
+    ImGui_ImplDX12_CreateDeviceObjects();
+#endif
     D3D12_CPU_DESCRIPTOR_HANDLE currentRtvHandle(rtvHeap->GetCPUDescriptorHandleForHeapStart());
     SIZE_T rtvDescriptorIncrement = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
     currentRtvHandle.ptr += swapChain->GetCurrentBackBufferIndex() * rtvDescriptorIncrement;
