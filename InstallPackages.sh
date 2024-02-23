@@ -7,7 +7,6 @@ Programs\vcpkg\vcpkg install assimp
 Programs\vcpkg\vcpkg install shaderwriter
 Programs\vcpkg\vcpkg install vulkan
 Programs\vcpkg\vcpkg install volk
-Programs\vcpkg\vcpkg install stb
 Programs\vcpkg\vcpkg install glm
 Programs\vcpkg\vcpkg install ode
 Programs\vcpkg\vcpkg install box2d

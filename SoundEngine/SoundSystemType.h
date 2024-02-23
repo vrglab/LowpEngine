@@ -10,7 +10,7 @@
 
 LP_API enum SoundSystemBackendType {
 	OpenAL = 0,
-	FMOD = 1
+	Fmod = 1
 };
 
 LP_API enum SoundSystemType {

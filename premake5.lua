@@ -457,6 +457,7 @@ project "SoundEngine"
 	
 	links
 	{
+		"STB",
 		"OpenAL32",
 		"fmod",
 		"fmodstudio",
@@ -1220,7 +1221,7 @@ project "Editor"
 
 
 
-group("C++/Editor/Dependent")
+group("C++/Vendors")
 project "ImGui"
 	location "ImGui"
 	kind "StaticLib"
@@ -1273,6 +1274,69 @@ project "ImGui"
 		"fmt",
 		"volk",
 		"mono-2.0-sgen"
+	}
+
+	vpaths {
+		["Headers/*"] = { "**.h", "**.hpp" },
+		["Sources/*"] = {"**.c", "**.cpp"}
+	}
+
+
+	filter "system:windows"
+		cppdialect "C++20"
+		staticruntime "On"
+		systemversion "latest"
+
+project "STB"
+	location "STB"
+	kind "StaticLib"
+	language "C++"
+	toolset "v143"
+	buildoptions
+	{
+		"/Zc:__cplusplus"
+	}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+	if os.target() == "windows" then
+		cppdialect "C++latest"
+		libdirs
+		{
+			"Packages/c++/libs/windows"
+		}
+	elseif os.target() == "linux" then
+	end
+
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.h",
+		"%{prj.name}/**/**.cpp",
+		"%{prj.name}/**.c",
+		"%{prj.name}/**/**.c"
+	}
+
+	libdirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/lib"
+	}
+
+	includedirs
+	{
+		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
+		"%{prj.name}",
+		".",
+		"Packages/c++/includes"
+	}
+	
+	links
+	{
+
 	}
 
 	vpaths {

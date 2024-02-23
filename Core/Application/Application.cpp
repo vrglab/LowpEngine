@@ -109,5 +109,6 @@ void Application::CleanUp()
     LP_CORE_INFO("Closing engine");
     ((Framework*)window_data->created_rendering_framework)->Cleanup();
     window_data->created_window->CleanUp();
+    SoundEngine::Shutdown();
     ScriptingEngine::ShutdownMono();
 }
