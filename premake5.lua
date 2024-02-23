@@ -451,8 +451,8 @@ project "SoundEngine"
 	{
 		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
 		"%{prj.name}",
-		"EngineCommons",
-		"Packages/c++/includes"
+		"Packages/c++/includes",
+		"."
 	}
 	
 	links

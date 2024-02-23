@@ -6,6 +6,7 @@
 #include <AssetsEngine/AssetsEngine.h>
 #include <ScriptingEngine/ScriptingEngine.h>
 #include <SceneEngine/SceneManager.h>
+#include <SoundEngine/SoundEngine.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -13,6 +14,7 @@ int Application::Init(Ref<ApplicationInfo> info)
     app_info = info;
     AssetsEngine::StartAssetsEngine(info);
     ScriptingEngine::InitMono(info);
+    SoundEngine::Init(info);
     SceneManager::Init(info);
     GetFileContentFromHRID("", assets_database);
     CreateAppWindow(info->GetWindowCreateInfo());
