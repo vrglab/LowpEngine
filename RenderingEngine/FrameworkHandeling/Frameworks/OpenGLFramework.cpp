@@ -29,17 +29,20 @@ void OpenGLFramework::Tick()
 #ifdef GAME
 	float* clear_Color = static_cast<float*>(current_scene->GetConfig("bgd_color"));
 	glClearColor(clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3]);
-#endif
-#ifdef EDITOR
-	glClearColor(0, 0, 0, 0);
-#endif
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+#endif
 #ifdef EDITOR
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	
+	ImGui::ShowDemoWindow();
 #endif
 }
+
+#ifdef EDITOR
+void OpenGLFramework::CleanWindow()
+{
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+#endif
 
 void OpenGLFramework::SwapWindow()
 {

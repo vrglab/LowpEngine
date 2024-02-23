@@ -36,23 +36,7 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 		SDL_GL_MakeCurrent(sdl_window, gl_context);
 	}
 #ifdef EDITOR
-	LP_CORE_INFO("starting ImGui version 1.90.4 WIP");
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable | ImGuiConfigFlags_ViewportsEnable;
-	// Setup ImGui style
-	ImGui::StyleColorsDark();
-
-
-	if (create_info->renderer_type == RendererTypes::OpenGL) {
-		ImGui_ImplSDL2_InitForOpenGL(sdl_window, gl_context);
-		ImGui_ImplOpenGL3_Init("#version 130");
-	}
-
-	if (create_info->renderer_type == RendererTypes::DirectX12) {
-		ImGui_ImplSDL2_InitForD3D(sdl_window);
-	}
+	ImGUI::Init(create_info, sdl_window, gl_context);
 #endif
 
 	return LowpResultCodes::Success;

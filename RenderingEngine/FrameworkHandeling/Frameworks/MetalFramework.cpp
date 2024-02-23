@@ -28,6 +28,12 @@ void MetalFramework::SwapWindow()
 {
 }
 
+#ifdef EDITOR
+void MetalFramework::CleanWindow()
+{
+}
+#endif
+
 void MetalFramework::Cleanup()
 {
 }

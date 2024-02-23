@@ -18,6 +18,9 @@ public:
 	virtual void OnSdlSetup() = 0;
 	virtual void Init(Ref<ApplicationInfo>, SDL_Window*) = 0;
 	virtual void Tick() = 0;
+#ifdef EDITOR
+	virtual void CleanWindow() = 0;
+#endif
 	virtual void SwapWindow() = 0;
 	virtual void Cleanup() = 0;
 };

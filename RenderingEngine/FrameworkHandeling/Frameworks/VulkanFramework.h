@@ -19,12 +19,14 @@
 
 class VulkanFramework : Framework
 {
-private:
-	VkInstance instance;
-
 public:
+	VkInstance instance;
+	VkCommandBuffer c_buffer;
 	void Init(Ref<ApplicationInfo>, SDL_Window*) override;
 	void Tick() override;
+#ifdef EDITOR
+	void CleanWindow() override;
+#endif
 	void SwapWindow() override;
 	void Cleanup() override;
 	void OnSdlSetup() override;

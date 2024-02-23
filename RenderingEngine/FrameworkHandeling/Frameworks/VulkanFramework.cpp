@@ -25,6 +25,12 @@ void VulkanFramework::Tick()
 {
 }
 
+#ifdef EDITOR
+void VulkanFramework::CleanWindow()
+{
+}
+#endif
+
 void VulkanFramework::SwapWindow()
 {
 }

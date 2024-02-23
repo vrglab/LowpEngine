@@ -35,33 +35,7 @@ void Application::Run()
             ((Framework*)window_data->created_rendering_framework)->Tick();
 #endif
 #ifdef EDITOR
-
-            if (app_info->renderer_type == RendererTypes::OpenGL) {
-                ImGui_ImplOpenGL3_NewFrame();
-            }
-#ifdef _WIN32
-            if (app_info->renderer_type == RendererTypes::DirectX12) {
-                ImGui_ImplDX12_NewFrame();
-            }
-#endif
-            ImGui_ImplSDL2_NewFrame();
-            ImGui::NewFrame();
-
-            ImGui::ShowDemoWindow();
-
-            ImGui::Render();
-            ((Framework*)window_data->created_rendering_framework)->Tick();
-            if (app_info->renderer_type == RendererTypes::OpenGL) {
-              SDL_GLContext context =  SDL_GL_GetCurrentContext();
-              ImGui::UpdatePlatformWindows();
-              ImGui::RenderPlatformWindowsDefault();
-              SDL_GL_MakeCurrent(window_data->created_window->getSdlWindow(), context);
-            }
-
-            if (app_info->renderer_type == RendererTypes::DirectX12) {
-                ImGui::UpdatePlatformWindows();
-                ImGui::RenderPlatformWindowsDefault();
-            }
+            ImGUI::Tick(app_info, window_data->created_rendering_framework);
 #endif
         ((Framework*)window_data->created_rendering_framework)->SwapWindow();
     }

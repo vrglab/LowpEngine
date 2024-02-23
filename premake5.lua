@@ -1269,6 +1269,7 @@ project "ImGui"
 	
 	links
 	{
+		"EngineCommons",
 		"SDL2",
 		"spdlog",
 		"fmt",

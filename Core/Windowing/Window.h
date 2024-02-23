@@ -11,16 +11,7 @@
 #include <EventEngine/EventHandler.h>
 #include <EventEngine/EventBus.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_opengl.h>
-#ifdef EDITOR
-#include <ImGui/imgui.h>
-#include <ImGui/misc/cpp/imgui_stdlib.h>
-#include <ImGui/backends/imgui_impl_sdl2.h>
-#include <ImGui/backends/imgui_impl_opengl3.h>
-#ifdef _WIN32
-#include <ImGui/backends/imgui_impl_dx12.h>
-#endif
-#endif
+#include <ImGui/ImGui_impl.h>
 #include "Debugging/Debug.h"
 #include "WindowCreateInfo.h"
 

@@ -23,7 +23,7 @@
 
 class Directx12Framework : Framework
 {
-private:
+public:
 #ifdef _WIN32
 	ID3D12Device* device;
 	ID3D12CommandQueue* commandQueue;
@@ -34,10 +34,11 @@ private:
 	ID3D12CommandAllocator* commandAllocator;
 	ID3D12GraphicsCommandList* commandList;
 #endif
-
-public:
 	void Init(Ref<ApplicationInfo>, SDL_Window*) override;
 	void Tick() override;
+#ifdef EDITOR
+	void CleanWindow() override;
+#endif
 	void SwapWindow() override;
 	void Cleanup() override;
 	void OnSdlSetup() override;

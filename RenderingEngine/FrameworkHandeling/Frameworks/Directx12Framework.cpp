@@ -107,22 +107,34 @@ void Directx12Framework::Tick()
 #ifdef EDITOR
     ImGui_ImplDX12_CreateDeviceObjects();
 #endif
+
+#ifdef GAME
     D3D12_CPU_DESCRIPTOR_HANDLE currentRtvHandle(rtvHeap->GetCPUDescriptorHandleForHeapStart());
     SIZE_T rtvDescriptorIncrement = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
     currentRtvHandle.ptr += swapChain->GetCurrentBackBufferIndex() * rtvDescriptorIncrement;
-#ifdef GAME
         float* clear_Color = static_cast<float*>(current_scene->GetConfig("bgd_color"));
         float clearColors[] = { clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3] };
         commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
 #endif
-#ifdef EDITOR
-        float clearColors[] = { 0, 1, 0, 0 };
-        commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
-        ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), commandList);
-#endif
+
 
 #endif
 }
+
+#ifdef EDITOR
+void Directx12Framework::CleanWindow()
+{
+#ifdef _WIN32
+    D3D12_CPU_DESCRIPTOR_HANDLE currentRtvHandle(rtvHeap->GetCPUDescriptorHandleForHeapStart());
+    SIZE_T rtvDescriptorIncrement = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+    currentRtvHandle.ptr += swapChain->GetCurrentBackBufferIndex() * rtvDescriptorIncrement;
+
+    float clearColors[] = { 0, 1, 0, 0 };
+    commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
+#endif
+}
+#endif
+
 
 void Directx12Framework::SwapWindow()
 {
