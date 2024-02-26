@@ -33,7 +33,12 @@ void EditorScripting::LoadAllAssembliesFromDirectory(std::string directoryPath)
 
 EditorPageType EditorScripting::GetPage_(std::string id)
 {
+#ifdef EDITOR
     return database.GetLoadedScript_(id);
+#endif
+#ifdef GAME
+    return {};
+#endif
 }
 
 MonoClass* EditorScripting::GetPage(std::string id)
