@@ -7,19 +7,13 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <Core/Application/ApplicationInfo.h>
+#include <ScriptingEngine/EditorPageType.h>
 
-#ifdef GAME
-#include "GameScripting.h"
-#endif
-#ifdef EDITOR
-#include "EditorScripting.h"
-#endif
 
-class ScriptingEngine
-{
+class EditorPageInstance {
 public:
-	static void InitMono(Ref<ApplicationInfo>);
-	static void ShutdownMono();
+	EditorPageType page_type;
+	std::string id;
+	MonoObject* instance;
+	void Render();
 };
-

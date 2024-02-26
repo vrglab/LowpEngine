@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Scripting Engine C/C++ header file.											*/
+/* LowpEngine - CoreBindings C/C++ header file.												*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
@@ -7,19 +7,4 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <Core/Application/ApplicationInfo.h>
-
-#ifdef GAME
-#include "GameScripting.h"
-#endif
-#ifdef EDITOR
-#include "EditorScripting.h"
-#endif
-
-class ScriptingEngine
-{
-public:
-	static void InitMono(Ref<ApplicationInfo>);
-	static void ShutdownMono();
-};
-
+#include <ImGui/ImGui_impl.h>

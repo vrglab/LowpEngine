@@ -4,16 +4,18 @@
 
 void GameObjectInstance::CreateComponentInstance(Component component)
 {
+#ifdef GAME
 	ComponentInstance instance = {};
 	instance.parent = reinterpret_cast<uintptr_t>(this);
 	instance.base = component;
-	instance.created_instance = ScriptingEngine::CreateComponentClass(component, obj_instance);
-	MonoClass* klass = ScriptingEngine::GetGameLoadedClassType(component.engine_id);
+	instance.created_instance = GameScripting::CreateComponentClass(component, obj_instance);
+	MonoClass* klass = GameScripting::GetGameLoadedClassType(component.engine_id);
 	if (!klass) {
-		klass = ScriptingEngine::GetApiLoadedClassType(component.engine_id);
+		klass = GameScripting::GetApiLoadedClassType(component.engine_id);
 	}
 	instance.class_type = klass;
 	component_instances.push_back(instance);
+#endif
 }
 
 void GameObjectInstance::Awake()

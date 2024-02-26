@@ -41,3 +41,11 @@
 #endif
 
 #define BIT(x) (1 << x)
+
+#if _WIN32
+#define ASSEMBLY_EXTENSION ".dll"
+#elif defined(__linux__)
+#define ASSEMBLY_EXTENSION ".so"
+#elif defined(__APPLE__)
+#define ASSEMBLY_EXTENSION ".dylib"
+#endif

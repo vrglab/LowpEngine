@@ -27,6 +27,7 @@ public:
 	Ref<ApplicationInfo> app_info;
 	int CreateAppWindow(Ref<WindowCreateInfo>);
 	int Init(Ref<ApplicationInfo> info);
+	void InitSubEngines();
 	void Run();
 	void CleanUp();
 };

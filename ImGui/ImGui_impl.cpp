@@ -9,6 +9,9 @@
 #include "RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h"
 #include <imgui_internal.h>
 
+#include <ScriptingEngine/EditorScripting.h>
+#include <SceneEngine/SceneManager.h>
+
 void ImGUI::Init(Ref<WindowCreateInfo> info, SDL_Window* _sdl_window, SDL_GLContext gl_context)
 {
 	sdl_window = _sdl_window;
@@ -75,10 +78,30 @@ void ImGUI::Tick(Ref<ApplicationInfo> app_info, void* rendering_framework)
 			ImGui::MenuItem("Paste", NULL, false, true);
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("View"))
+		{
+			std::vector<std::string> pages = EditorScripting::GetPages();
+			for (size_t i = 0; i < pages.size(); i++)
+			{
+				std::string page = pages[i];
+				if (ImGui::MenuItem(page.c_str(), NULL, false, true)) {
+
+					EditorScripting::GetPage(page);
+					SceneManager::CreatePageInstance(EditorScripting::GetPage_(page));
+				}
+			}
+			ImGui::EndMenu();
+		}
 		ImGui::EndMainMenuBar();
 	}
 
 	dockspace_id = ImGui::GetID("EditorSpace");
+
+	for (size_t i = 0; i < created_pages.size(); i++)
+	{
+		Ref<EditorPageInstance> page = created_pages[i];
+		page->Render();
+	}
 
 	((Framework*)rendering_framework)->Tick();
 

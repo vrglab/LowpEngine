@@ -13,14 +13,19 @@ int Application::Init(Ref<ApplicationInfo> info)
 {
     LP_CORE_INFO("Starting LowpEngine on version 1.0.0");
     app_info = info;
-    AssetsEngine::StartAssetsEngine(info);
-    ScriptingEngine::InitMono(info);
-    SoundEngine::Init(info);
-    SceneManager::Init(info);
+    InitSubEngines();
     GetFileContentFromHRID("", assets_database);
     CreateAppWindow(info->GetWindowCreateInfo());
 
     return LowpResultCodes::Success;
+}
+
+void Application::InitSubEngines()
+{
+    AssetsEngine::StartAssetsEngine(app_info);
+    ScriptingEngine::InitMono(app_info);
+    SoundEngine::Init(app_info);
+    SceneManager::Init(app_info);
 }
 
 void Application::Run()

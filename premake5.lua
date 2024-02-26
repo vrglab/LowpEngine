@@ -1149,6 +1149,26 @@ project "TestGame"
 		staticruntime "On"
 		systemversion "latest"
 
+project "LowpEditor"
+	location "LowpEditor"
+	kind "SharedLib"
+	language "C#"
+
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/**.cs",
+		"%{prj.name}/**/**.cs",
+	}
+
+	filter "system:windows"
+		staticruntime "On"
+		systemversion "latest"
+
+
 group("C++/Editor")
 project "Editor"
 	location "Editor"
@@ -1201,6 +1221,14 @@ project "Editor"
 	links
 	{
 		"Core",
+		"AssetsEngine",
+		"SoundEngine",
+		"PhysicsEngine",
+		"RenderingEngine",
+		"EngineCommons",
+		"ScriptingEngine",
+		"EventEngine",
+		"SceneEngine",
 		"SDL2",
 		"spdlog",
 		"fmt",

@@ -9,6 +9,9 @@
 
 std::vector<Scene> loaded_scenes;
 Ref<SceneInstance> current_scene;
+#ifdef EDITOR
+std::vector<Ref<EditorPageInstance>> created_pages;
+#endif
 
 Ref<SceneInstance> SceneManager::CreateSceneInstance(Scene base)
 {
@@ -29,6 +32,7 @@ Ref<SceneInstance> SceneManager::CreateSceneInstance(Scene base)
 void SceneManager::Init(Ref<ApplicationInfo> info)
 {
 	LP_CORE_INFO("Starting Scene Engine");
+#ifdef GAME
 	current_scene = CreateRef<SceneInstance>();
 	current_scene->Init();
 
@@ -43,6 +47,11 @@ void SceneManager::Init(Ref<ApplicationInfo> info)
 	}
 
 	current_scene = CreateSceneInstance(loaded_scenes[0]);
+#endif
+#ifdef EDITOR
+	current_scene = CreateRef<SceneInstance>();
+	current_scene->Init();
+#endif
 }
 
 void GenerateSceneListFile(std::string filepath, std::vector<Scene> scene_list)
@@ -54,3 +63,14 @@ void GenerateSceneListFile(std::string filepath, std::vector<Scene> scene_list)
 	cereal::BinaryOutputArchive archive_levle(level_file_stream);
 	archive_levle(scene_list);
 }
+
+#ifdef EDITOR
+Ref<EditorPageInstance> SceneManager::CreatePageInstance(EditorPageType page)
+{
+	Ref<EditorPageInstance> ref = CreateRef<EditorPageInstance>();
+	ref->page_type = page;
+	ref->id = GUIDGen();
+	ref->instance = EditorScripting::CreatePageInstance(page);
+	created_pages.push_back(ref);
+}
+#endif

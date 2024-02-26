@@ -1,6 +1,8 @@
 #include "pch.h"
 #include <iostream>
 #include <Core/LowpEngine.h>
+#include <ScriptingEngine/ScriptingEngine.h>
+#include <SoundEngine/SoundEngine.h>
 
 #undef main
 
@@ -16,6 +18,7 @@ int WINAPI main(int argc, char* argv[]) {
     info->renderer_type = RendererTypes::OpenGL;
 
     app->app_info = info;
+    app->InitSubEngines();
     app->CreateAppWindow(info->GetWindowCreateInfo());
     app->Run();
     app->CleanUp();

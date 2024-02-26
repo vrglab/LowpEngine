@@ -18,6 +18,13 @@
 LP_Extern LP_API std::vector<Scene> loaded_scenes;
 LP_Extern LP_API Ref<SceneInstance> current_scene;
 
+#ifdef EDITOR
+#include "Instance/EditorPageInstance.h"
+#include <ScriptingEngine/EditorPageType.h>
+#include <ScriptingEngine/EditorScripting.h>
+LP_Extern LP_API std::vector<Ref<EditorPageInstance>> created_pages;
+#endif
+
 class SceneManager
 {
 
@@ -30,6 +37,9 @@ public:
 	{
 		return current_scene;
 	};
+#ifdef EDITOR
+	static Ref<EditorPageInstance> CreatePageInstance(EditorPageType);
+#endif
 };
 
 LP_API void GenerateSceneListFile(std::string, std::vector<Scene>);

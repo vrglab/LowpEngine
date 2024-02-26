@@ -5,15 +5,18 @@
 
 void SceneInstance::CreateInstance(GameObject obj_data)
 {
+#ifdef GAME
 	Ref<GameObjectInstance> created_instance = CreateRef<GameObjectInstance>();
 	created_instance->base = obj_data;
-	created_instance->obj_instance = ScriptingEngine::CreateGameObjectClass(created_instance.get());
+	created_instance->obj_instance = GameScripting::CreateGameObjectClass(created_instance.get());
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
+#endif
 }
 
 GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uintptr_t _obj)
 {
+#ifdef GAME
 	Ref<GameObjectInstance> created_instance = CreateRef<GameObjectInstance>();
 	GameObject obj = {};
 	obj.Name = "GameObject";
@@ -25,7 +28,7 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uint
 
 	created_instance->base = obj;
 	if (instatiate_in_sharp) {
-		created_instance->obj_instance = ScriptingEngine::CreateGameObjectClass(created_instance.get());
+		created_instance->obj_instance = GameScripting::CreateGameObjectClass(created_instance.get());
 	} else
 	{
 		created_instance->obj_instance = mono_gchandle_get_target(_obj);
@@ -47,6 +50,10 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uint
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);
 	return created_instance.get();
+#endif
+#ifdef EDITOR
+	return nullptr;
+#endif
 }
 
 void* SceneInstance::GetConfig(std::string id)
