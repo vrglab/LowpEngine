@@ -8,6 +8,7 @@
 #include <ScriptingEngine/ScriptingEngine.h>
 #include <SceneEngine/SceneManager.h>
 #include <SoundEngine/SoundEngine.h>
+#include <PhysicsEngine/PhysicsEngine.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -25,6 +26,7 @@ void Application::InitSubEngines()
     AssetsEngine::StartAssetsEngine(app_info);
     ScriptingEngine::InitMono(app_info);
     SoundEngine::Init(app_info);
+    PhysicsEngine::Init(app_info);
     SceneManager::Init(app_info);
 }
 
