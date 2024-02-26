@@ -15,10 +15,6 @@
 #include <mono/jit/jit.h>
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/mono-config.h>
-
-#include <mono/jit/jit.h>
-#include <mono/metadata/assembly.h>
-#include <mono/metadata/mono-config.h>
 #include <filesystem>
 
 #include <SceneEngine/Instance/GameObjectInstance.h>

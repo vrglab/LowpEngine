@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "GameScripting.h"
 
+#include <ScriptingEngine/ScriptingUtils.h>
+
 MonoImage* game_image;
 MonoImage* api_image;
 MonoAssembly* api_assembly;
@@ -59,33 +61,7 @@ MonoObject* GameScripting::CreateComponentClass(Component component, MonoObject*
     MonoClassField* field = mono_class_get_field_from_name(parentClass, "_gameobj");
     mono_field_set_value(obj, field, parent_game_obj);
 
-    std::string start_method_find_string;
-    start_method_find_string.append(mono_class_get_name(klass)).append(":Start()");
-
-    MonoMethodDesc* methodDesc = mono_method_desc_new(start_method_find_string.c_str(), FALSE);
-    MonoMethod* method = mono_class_get_method_from_name(klass, "Start", 0);
-
-    mono_method_desc_free(methodDesc);
-
-    if (method) {
-
-        MonoObject* exception = nullptr;
-        mono_runtime_invoke(method, obj, {}, &exception);
-
-        if (exception) {
-            MonoMethod* get_message_method = mono_class_get_method_from_name(mono_get_exception_class(), "get_Message", 0);
-            MonoObject* message_obj = mono_runtime_invoke(get_message_method, exception, nullptr, nullptr);
-            if (message_obj != nullptr) {
-                MonoString* message_mono_str = (MonoString*)message_obj;
-                char* message = mono_string_to_utf8(message_mono_str);
-                LP_ERROR(message);
-                mono_free(message);
-            }
-        }
-        else {
-
-        }
-    }
+    ScriptingUtils::InvokeMethod(ScriptingUtils::GetMethod("Start", klass), obj);
     return obj;
 }
 

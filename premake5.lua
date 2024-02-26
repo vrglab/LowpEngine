@@ -1164,6 +1164,11 @@ project "LowpEditor"
 		"%{prj.name}/**/**.cs",
 	}
 
+	links 
+	{
+		"LowpEngine"
+	}
+
 	filter "system:windows"
 		staticruntime "On"
 		systemversion "latest"
