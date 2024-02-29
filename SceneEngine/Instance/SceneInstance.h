@@ -12,6 +12,7 @@
 #include "GameObjectInstance.h"
 #include "SceneInstanceConfigs.h"
 
+
 class LP_API SceneInstance
 {
 private:
@@ -19,6 +20,7 @@ private:
 	std::vector<Ref<GameObjectInstance>> obj_instances;
 public:
 	Scene base;
+	void* physics_scene;
 	void CreateInstance(GameObject);
 	GameObjectInstance* CreateInstance(bool instatiate_in_sharp, uintptr_t);
 	void* GetConfig(std::string);

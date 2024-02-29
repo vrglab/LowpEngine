@@ -11,8 +11,7 @@ Programs\vcpkg\vcpkg install shaderwriter
 Programs\vcpkg\vcpkg install vulkan
 Programs\vcpkg\vcpkg install volk
 Programs\vcpkg\vcpkg install glm
-Programs\vcpkg\vcpkg install ode
-Programs\vcpkg\vcpkg install box2d
+Programs\vcpkg\vcpkg install physx
 Programs\vcpkg\vcpkg install mnn
 Programs\vcpkg\vcpkg install tinyexr
 Programs\vcpkg\vcpkg install yaml-cpp
