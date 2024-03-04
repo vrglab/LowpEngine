@@ -1,36 +1,28 @@
 #include "pch.h"
 #include "PhysicsEngine.h"
 
-PxDefaultAllocator gAllocator;
-PxDefaultErrorCallback gErrorCallback;
-PxFoundation* gFoundation = nullptr;
-PxPhysics* gPhysics = nullptr;
-PxDefaultCpuDispatcher* gDispatcher = nullptr;
+#include <SceneEngine/SceneManager.h>
 
 void PhysicsEngine::Init(Ref<ApplicationInfo> info)
 {
 	LP_CORE_INFO("Starting Physics Engine");
-    gFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, gAllocator, gErrorCallback);
-    gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(), true);
-    gDispatcher = PxDefaultCpuDispatcherCreate(2);
+	dInitODE();
 }
 
-PxScene* PhysicsEngine::CreatePhysicsWorld()
+dWorldID PhysicsEngine::CreatePhysicsWorld()
 {
-    PxSceneDesc sceneDesc(gPhysics->getTolerancesScale());
-    sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
-    sceneDesc.cpuDispatcher = gDispatcher;
-    sceneDesc.filterShader = PxDefaultSimulationFilterShader;
-    return gPhysics->createScene(sceneDesc);
+	dWorldID world = dWorldCreate();
+	dWorldSetGravity(world, 0, -9.81, 0);
+	return world;
 }
 
 void PhysicsEngine::Simulate()
 {
+	dWorldStep((dWorldID)current_scene->GetConfig("phys_world"), 0.01);
 }
 
 void PhysicsEngine::Cleanup()
 {
-    gDispatcher->release();
-    gPhysics->release();
-    gFoundation->release();
+	dWorldDestroy((dWorldID)current_scene->GetConfig("phys_world"));
+	dCloseODE();
 }
