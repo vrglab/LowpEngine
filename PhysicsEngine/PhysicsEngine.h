@@ -17,6 +17,7 @@ class PhysicsEngine
 public:
 	static void Init(Ref<ApplicationInfo>);
 	static dWorldID CreatePhysicsWorld();
+	static dSpaceID CreatePhysicsSpace();
 	static void Simulate();
 	static void Cleanup();
 };

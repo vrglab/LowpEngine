@@ -16,6 +16,11 @@ dWorldID PhysicsEngine::CreatePhysicsWorld()
 	return world;
 }
 
+dSpaceID PhysicsEngine::CreatePhysicsSpace()
+{
+	return dSimpleSpaceCreate(0);
+}
+
 void PhysicsEngine::Simulate()
 {
 	dWorldStep((dWorldID)current_scene->GetConfig("phys_world"), 0.01);
@@ -23,6 +28,7 @@ void PhysicsEngine::Simulate()
 
 void PhysicsEngine::Cleanup()
 {
+	dSpaceDestroy((dSpaceID)current_scene->GetConfig("phys_space"));
 	dWorldDestroy((dWorldID)current_scene->GetConfig("phys_world"));
 	dCloseODE();
 }

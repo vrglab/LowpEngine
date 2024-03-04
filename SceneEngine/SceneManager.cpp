@@ -28,6 +28,7 @@ Ref<SceneInstance> SceneManager::CreateSceneInstance(Scene base)
 	float* clearColor = new float[4] { 0.4f, 0.4f, 1.0f, 0.5f };
 	_instance->SetConfig("bgd_color", clearColor);
 	_instance->SetConfig("phys_world", PhysicsEngine::CreatePhysicsWorld());
+	_instance->SetConfig("phys_space", PhysicsEngine::CreatePhysicsSpace());
 
 	return _instance;
 }
