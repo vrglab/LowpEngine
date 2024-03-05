@@ -23,12 +23,12 @@ dSpaceID PhysicsEngine::CreatePhysicsSpace()
 
 void PhysicsEngine::Simulate()
 {
-	dWorldStep((dWorldID)current_scene->GetConfig("phys_world"), 0.01);
+	dWorldStep((dWorldID)current_scene->configs.GetConfig("phys_world"), 0.01);
 }
 
 void PhysicsEngine::Cleanup()
 {
-	dSpaceDestroy((dSpaceID)current_scene->GetConfig("phys_space"));
-	dWorldDestroy((dWorldID)current_scene->GetConfig("phys_world"));
+	dSpaceDestroy((dSpaceID)current_scene->configs.GetConfig("phys_space"));
+	dWorldDestroy((dWorldID)current_scene->configs.GetConfig("phys_world"));
 	dCloseODE();
 }

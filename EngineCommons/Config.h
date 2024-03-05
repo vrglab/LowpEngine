@@ -1,27 +1,28 @@
 /* ======================================================================================== */
-/* LowpEngine - Scene Engine C/C++ header file.										        */
+/* LowpEngine - Engine Commons C/C++ header file.											*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-#include <EngineCommons/EngineCommons.h>
-#include "SceneEngine/Serialized/Scene.h"
-#include "SceneEngine/Serialized/GameObject.h"
-#include "GameObjectInstance.h"
-#include "SceneInstanceConfigs.h"
 
 
-class LP_API SceneInstance
+
+class ConfigData
+{
+public:
+	std::string id;
+	void* value;
+};
+
+
+class Config
 {
 private:
-	std::vector<Ref<GameObjectInstance>> obj_instances;
+	std::vector<ConfigData> configs = {};
 public:
-	Scene base;
-	Config configs;
-	void CreateInstance(GameObject);
-	GameObjectInstance* CreateInstance(bool instatiate_in_sharp, uintptr_t);
-	void Update();
-	void Init();
+	void* GetConfig(std::string);
+	void SetConfig(std::string, void*);
 };
+
