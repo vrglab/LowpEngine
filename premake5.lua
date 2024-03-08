@@ -65,7 +65,6 @@ project "Core"
 	location "Core"
 	kind "SharedLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -77,6 +76,7 @@ project "Core"
 
 	if os.target() == "windows" then
 		pchheader "pch.h"
+		toolset "v143"
 		cppdialect "C++latest"
 		links 
 		{
@@ -173,7 +173,6 @@ project "CoreBindings"
 	location "CoreBindings"
 	kind "SharedLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -185,6 +184,7 @@ project "CoreBindings"
 
 	if os.target() == "windows" then
 		pchheader "pch.h"
+		toolset "v143"
 		cppdialect "C++latest"
 		libdirs
 		{
@@ -263,7 +263,6 @@ project "EngineCommons"
 	location "EngineCommons"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -274,6 +273,7 @@ project "EngineCommons"
 
 
 	if os.target() == "windows" then
+		toolset "v143"
 		pchheader "pch.h"
 		cppdialect "C++latest"
 	elseif os.target() == "linux" then
@@ -341,7 +341,6 @@ project "Launcher"
 	location "Launcher"
 	kind "ConsoleApp"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -355,6 +354,7 @@ project "Launcher"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -413,7 +413,6 @@ project "SoundEngine"
 	location "SoundEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -426,6 +425,7 @@ project "SoundEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -499,7 +499,6 @@ project "PhysicsEngine"
 	location "PhysicsEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -512,6 +511,7 @@ project "PhysicsEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
 	end
@@ -577,7 +577,6 @@ project "RenderingEngine"
 	location "RenderingEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -590,6 +589,7 @@ project "RenderingEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		links 
 		{
 			"d3d12",
@@ -678,7 +678,6 @@ project "ShaderEngine"
 	location "ShaderEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -691,6 +690,7 @@ project "ShaderEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		links 
 		{
 			"d3d12",
@@ -769,7 +769,6 @@ project "ScriptingEngine"
 	location "ScriptingEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -782,6 +781,7 @@ project "ScriptingEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		links 
 		{
 			"d3d12",
@@ -857,7 +857,6 @@ project "SceneEngine"
 	location "SceneEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -870,6 +869,7 @@ project "SceneEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -946,7 +946,6 @@ project "AssetsEngine"
 	location "AssetsEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -959,6 +958,7 @@ project "AssetsEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -1029,7 +1029,6 @@ project "EventEngine"
 	location "EventEngine"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -1042,6 +1041,7 @@ project "EventEngine"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -1181,7 +1181,6 @@ project "Editor"
 	location "Editor"
 	kind "ConsoleApp"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -1194,6 +1193,7 @@ project "Editor"
 	if os.target() == "windows" then
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -1261,7 +1261,6 @@ project "ImGui"
 	location "ImGui"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -1273,6 +1272,7 @@ project "ImGui"
 
 	if os.target() == "windows" then
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
@@ -1327,7 +1327,6 @@ project "STB"
 	location "STB"
 	kind "StaticLib"
 	language "C++"
-	toolset "v143"
 	buildoptions
 	{
 		"/Zc:__cplusplus"
@@ -1339,6 +1338,7 @@ project "STB"
 
 	if os.target() == "windows" then
 		cppdialect "C++latest"
+		toolset "v143"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
