@@ -179,7 +179,8 @@ project "Core"
 		"spdlog",
 		"fmt",
 		"volk",
-		"mono-2.0-sgen"
+		"mono-2.0-sgen",
+		"ode_double"
 	}
 
 	vpaths {
@@ -277,7 +278,8 @@ project "CoreBindings"
 		"spdlog",
 		"fmt",
 		"volk",
-		"mono-2.0-sgen"
+		"mono-2.0-sgen",
+		"ode_double"
 	}
 
 	vpaths {
