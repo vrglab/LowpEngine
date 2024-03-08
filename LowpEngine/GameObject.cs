@@ -21,6 +21,9 @@ namespace LowpEngine
         [DllImport("CoreBindings.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr GetGameOBJId(IntPtr instance);
 
+        [DllImport("CoreBindings.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void AddComponentToObj(IntPtr instance, string id);
+
 
         public string Name
         {
@@ -65,17 +68,18 @@ namespace LowpEngine
             SetGameOBJName(instance_pointer, name);
         }
 
-        public GameObject(bool instantiate = true)
+        internal GameObject(bool instantiate = true)
         {
             if (instantiate)
             {
                 GCHandle handle = GCHandle.Alloc(this, GCHandleType.Pinned);
                 IntPtr ptr = GCHandle.ToIntPtr(handle);
+                Debug.Log("this is called");
                 instance_pointer = InstantiateGameObject(false, ptr);
             }
         }
 
-        public GameObject()
+        internal GameObject()
         {
             
         }
@@ -87,6 +91,12 @@ namespace LowpEngine
             IntPtr ptr = GCHandle.ToIntPtr(handle);
             obj.instance_pointer = InstantiateGameObject(false, ptr);
             return obj;
+        }
+
+        public void AddComponent<t>() where t : LowpBehaviour
+        {
+            Type type = typeof(t);
+            AddComponentToObj(instance_pointer, type.Name);
         }
     }
 }

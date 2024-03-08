@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LowpEngine;
 using LowpEngine.AssetsHandeling;
+using LowpEngine.Components;
 
 public class TestClass : LowpBehaviour
 {
@@ -13,10 +14,12 @@ public class TestClass : LowpBehaviour
     public void Start()
     {
         Debug.Log($"Obj start");
+        obj = GameObject.Instatiate();
+        obj.AddComponent<Rigidbody3D>();
     }
 
     public void Update()
     {
-        Debug.Log($"Obj update");
+       
     }
 }

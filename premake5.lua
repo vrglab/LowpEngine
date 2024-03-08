@@ -219,6 +219,8 @@ project "CoreBindings"
 
 	links
 	{
+		"SceneEngine",
+		"PhysicsEngine",
 		"AssetsEngine",
 		"Core",
 		"SDL2",
