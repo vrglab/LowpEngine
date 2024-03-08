@@ -1,3 +1,5 @@
+projects_without_pch = {"STB", "ImGui"}
+
 function determine_os()
     if os.ishost("windows") then
         return "windows"
@@ -39,36 +41,80 @@ workspace "LowpEngine"
 	filter "configurations:Debug"
 		symbols "On"
 		defines {"DEBUG"}
+	if  os.target() == "linux" then
+		if projects_without_pch["%{prj.name}"] == false then
+			prebuildcommands {
+				"{MKDIR} %{cfg.targetdir}/pch",
+				"g++ ../%{prj.name}/pch.h -o %{cfg.objdir}/pch.h.gch -c -x c++-header -std=c++20"
+			}
+		end
+	end
 
 	filter "configurations:Release"
 		optimize "On"
 		defines {"RELEASE"}
+	if  os.target() == "linux" then
+		if projects_without_pch["%{prj.name}"] == false then
+			prebuildcommands {
+				"{MKDIR} %{cfg.targetdir}/pch",
+				"g++ ../%{prj.name}/pch.h -o %{cfg.objdir}/pch.h.gch -c -x c++-header -std=c++20"
+			}
+		end
+	end
 
 	filter "configurations:Debug_Game"
 		symbols "On"
 		defines {"DEBUG", "GAME"}
+	if  os.target() == "linux" then
+		if projects_without_pch["%{prj.name}"] == false then
+			prebuildcommands {
+				"{MKDIR} %{cfg.targetdir}/pch",
+				"g++ ../%{prj.name}/pch.h -o %{cfg.objdir}/pch.h.gch -c -x c++-header -std=c++20"
+			}
+		end
+	end
 
 	filter "configurations:Release_Game"
 		optimize "On"
 		defines {"RELEASE", "GAME"}
+	if  os.target() == "linux" then
+		if projects_without_pch["%{prj.name}"] == false then
+			prebuildcommands {
+				"{MKDIR} %{cfg.targetdir}/pch",
+				"g++ ../%{prj.name}/pch.h -o %{cfg.objdir}/pch.h.gch -c -x c++-header -std=c++20"
+			}
+		end
+	end
 
 	filter "configurations:Debug_Editor"
 		symbols "On"
 		defines {"DEBUG", "EDITOR"}
+	if  os.target() == "linux" then
+		if projects_without_pch["%{prj.name}"] == false then
+			prebuildcommands {
+				"{MKDIR} %{cfg.targetdir}/pch",
+				"g++ ../%{prj.name}/pch.h -o %{cfg.objdir}/pch.h.gch -c -x c++-header -std=c++20"
+			}
+		end
+	end
 
 	filter "configurations:Release_Editor"
 		optimize "On"
 		defines {"RELEASE", "EDITOR"}
+	if  os.target() == "linux" then
+		if projects_without_pch["%{prj.name}"] == false then
+			prebuildcommands {
+				"{MKDIR} %{cfg.targetdir}/pch",
+				"g++ ../%{prj.name}/pch.h -o %{cfg.objdir}/pch.h.gch -c -x c++-header -std=c++20"
+			}
+		end
+	end
 			
 group "C++/Engine"
 project "Core"
 	location "Core"
 	kind "SharedLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -87,6 +133,10 @@ project "Core"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -173,10 +223,6 @@ project "CoreBindings"
 	location "CoreBindings"
 	kind "SharedLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -189,6 +235,10 @@ project "CoreBindings"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+				buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -263,10 +313,6 @@ project "EngineCommons"
 	location "EngineCommons"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -276,6 +322,10 @@ project "EngineCommons"
 		toolset "v143"
 		pchheader "pch.h"
 		cppdialect "C++latest"
+		buildoptions
+		{
+			"/Zc:__cplusplus"
+		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
 	end
@@ -341,10 +391,6 @@ project "Launcher"
 	location "Launcher"
 	kind "ConsoleApp"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -358,6 +404,10 @@ project "Launcher"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -413,10 +463,6 @@ project "SoundEngine"
 	location "SoundEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -429,6 +475,10 @@ project "SoundEngine"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -499,10 +549,6 @@ project "PhysicsEngine"
 	location "PhysicsEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -512,6 +558,10 @@ project "PhysicsEngine"
 		pchheader "pch.h"
 		cppdialect "C++latest"
 		toolset "v143"
+		buildoptions
+		{
+			"/Zc:__cplusplus"
+		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
 	end
@@ -577,10 +627,6 @@ project "RenderingEngine"
 	location "RenderingEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -596,6 +642,10 @@ project "RenderingEngine"
 			"dxgi",
 			"D3DCompiler",
 			"OpenGL32"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -678,10 +728,6 @@ project "ShaderEngine"
 	location "ShaderEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -697,6 +743,10 @@ project "ShaderEngine"
 			"dxgi",
 			"D3DCompiler",
 			"OpenGL32"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -769,10 +819,6 @@ project "ScriptingEngine"
 	location "ScriptingEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -790,6 +836,10 @@ project "ScriptingEngine"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -857,10 +907,6 @@ project "SceneEngine"
 	location "SceneEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -873,6 +919,10 @@ project "SceneEngine"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -946,10 +996,6 @@ project "AssetsEngine"
 	location "AssetsEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -962,6 +1008,10 @@ project "AssetsEngine"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -1029,10 +1079,6 @@ project "EventEngine"
 	location "EventEngine"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -1045,6 +1091,10 @@ project "EventEngine"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -1107,7 +1157,11 @@ project "EventEngine"
 	filter "configurations:Release_Editor"
 		defines {"LP_API_EXPORTS"}
 
-group("C#")
+if os.target() == "windows" then
+	group("C#")
+elseif os.target() == "linux" then
+	group("C_Sharp")
+end
 project "LowpEngine"
 	location "LowpEngine"
 	kind "SharedLib"
@@ -1181,10 +1235,6 @@ project "Editor"
 	location "Editor"
 	kind "ConsoleApp"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -1197,6 +1247,10 @@ project "Editor"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
@@ -1261,10 +1315,6 @@ project "ImGui"
 	location "ImGui"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -1276,6 +1326,10 @@ project "ImGui"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 	end
@@ -1322,15 +1376,11 @@ project "ImGui"
 		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
-
+		
 project "STB"
 	location "STB"
 	kind "StaticLib"
 	language "C++"
-	buildoptions
-	{
-		"/Zc:__cplusplus"
-	}
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -1342,6 +1392,10 @@ project "STB"
 		libdirs
 		{
 			"Packages/c++/libs/windows"
+		}
+		buildoptions
+		{
+			"/Zc:__cplusplus"
 		}
 	elseif os.target() == "linux" then
 	end

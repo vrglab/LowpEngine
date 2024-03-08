@@ -87,7 +87,7 @@ LP_API std::string getExecutablePath()
 #include <unistd.h>
 #include <limits.h>
 
-LP_Export std::string getExecutablePath() {
+LP_API std::string getExecutablePath() {
     char path[PATH_MAX];
     ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);
     std::string pathStr = std::string(path, (count > 0) ? count : 0);

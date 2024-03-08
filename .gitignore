@@ -311,3 +311,6 @@ Runtime/
 x64/
 Universal Launcher/
 UWP Engine/
+
+Makefile
+*.bak
