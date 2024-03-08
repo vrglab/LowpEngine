@@ -8,6 +8,7 @@
 #include <ScriptingEngine/ScriptingEngine.h>
 #include <SceneEngine/SceneManager.h>
 #include <SoundEngine/SoundEngine.h>
+#include <PhysicsEngine/PhysicsEngine.h>
 
 int Application::Init(Ref<ApplicationInfo> info)
 {
@@ -25,6 +26,7 @@ void Application::InitSubEngines()
     AssetsEngine::StartAssetsEngine(app_info);
     ScriptingEngine::InitMono(app_info);
     SoundEngine::Init(app_info);
+    PhysicsEngine::Init(app_info);
     SceneManager::Init(app_info);
 }
 
@@ -36,6 +38,7 @@ void Application::Run()
         window_data->created_window->ProcessEvents();
         window_data->event_buss->ResolveQue();
 #ifdef GAME
+            PhysicsEngine::Simulate();
             current_scene->Update();
             ((Framework*)window_data->created_rendering_framework)->Tick();
 #endif
@@ -90,6 +93,7 @@ void Application::CleanUp()
     LP_CORE_INFO("Closing engine");
     ((Framework*)window_data->created_rendering_framework)->Cleanup();
     window_data->created_window->CleanUp();
+    PhysicsEngine::Cleanup();
     SoundEngine::Shutdown();
     ScriptingEngine::ShutdownMono();
 }

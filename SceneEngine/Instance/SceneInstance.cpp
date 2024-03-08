@@ -56,33 +56,6 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uint
 #endif
 }
 
-void* SceneInstance::GetConfig(std::string id)
-{
-	for (size_t i = 0; i < configs.size(); i++)
-	{
-		if (configs[i].id == id) {
-			return configs[i].value;
-		}
-	}
-	return nullptr;
-}
-
-void SceneInstance::SetConfig(std::string id, void* val)
-{
-	for (size_t i = 0; i < configs.size(); i++)
-	{
-		if (configs[i].id == id) {
-			configs[i].value = val;
-			return;
-		}
-	}
-
-	SceneInstanceConfigs sic = {};
-	sic.id = id;
-	sic.value = val;
-	configs.push_back(sic);
-}
-
 void SceneInstance::Update()
 {
 	if (!obj_instances.empty()) {

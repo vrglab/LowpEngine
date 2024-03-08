@@ -112,7 +112,7 @@ void Directx12Framework::Tick()
     D3D12_CPU_DESCRIPTOR_HANDLE currentRtvHandle(rtvHeap->GetCPUDescriptorHandleForHeapStart());
     SIZE_T rtvDescriptorIncrement = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
     currentRtvHandle.ptr += swapChain->GetCurrentBackBufferIndex() * rtvDescriptorIncrement;
-        float* clear_Color = static_cast<float*>(current_scene->GetConfig("bgd_color"));
+        float* clear_Color = static_cast<float*>(current_scene->configs.GetConfig("bgd_color"));
         float clearColors[] = { clear_Color[0], clear_Color[1], clear_Color[2], clear_Color[3] };
         commandList->ClearRenderTargetView(currentRtvHandle, clearColors, 0, nullptr);
 #endif

@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Scene Engine C/C++ header file.										        */
+/* LowpEngine - Physics Engine C/C++ header file.											*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
@@ -7,18 +7,18 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include <Core/Debugging/Debug.h>
+#include <Core/Application/ApplicationInfo.h>
 
-#include "ComponentInstance.h"
-#include "SceneEngine/Serialized/GameObject.h"
+#include <ode/ode.h>
 
-
-class GameObjectInstance
+class PhysicsEngine
 {
 public:
-	void CreateComponentInstance(Component);
-	MonoObject* obj_instance;
-	std::vector<ComponentInstance> component_instances;
-	GameObject base;
-	void Awake();
-	void Update();
+	static void Init(Ref<ApplicationInfo>);
+	static dWorldID CreatePhysicsWorld();
+	static dSpaceID CreatePhysicsSpace();
+	static void Simulate();
+	static void Cleanup();
 };
+

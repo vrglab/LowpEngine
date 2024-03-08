@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LowpEngine;
 using LowpEngine.AssetsHandeling;
+using LowpEngine.Components;
 
 public class TestClass : LowpBehaviour
 {
@@ -12,11 +13,13 @@ public class TestClass : LowpBehaviour
     GameObject obj;
     public void Start()
     {
-        Debug.Log($"Obj name was {gameObject.Name}");
-        gameObject.Name = "Test"; 
-        Debug.Log($"Obj name is {gameObject.Name}, it's id is {gameObject.ID} and it says: {AssetsLoader.GetRawAssetContent("Test.txt")}");
+        Debug.Log($"Obj start");
         obj = GameObject.Instatiate();
-        obj.Name = "Fallout boy is fun";
-        Debug.Log($"Obj named {gameObject.Name} made a new GameObject with the id of {obj.ID}");
+        obj.AddComponent<Rigidbody3D>();
+    }
+
+    public void Update()
+    {
+       
     }
 }

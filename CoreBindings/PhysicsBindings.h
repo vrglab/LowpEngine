@@ -1,5 +1,5 @@
 /* ======================================================================================== */
-/* LowpEngine - Scene Engine C/C++ header file.										        */
+/* LowpEngine - CoreBindings C/C++ header file.												*/
 /*                                                                                          */
 /*                 Copyright (c) 2023-Present Arad Bozorgmehr (Vrglab)                      */
 /*                                                                                          */
@@ -7,18 +7,10 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
+#include "CustomMacros.h"
+#include <PhysicsEngine/PhysicsEngine.h>
+#include "SceneBindings.h"
 
-#include "ComponentInstance.h"
-#include "SceneEngine/Serialized/GameObject.h"
-
-
-class GameObjectInstance
-{
-public:
-	void CreateComponentInstance(Component);
-	MonoObject* obj_instance;
-	std::vector<ComponentInstance> component_instances;
-	GameObject base;
-	void Awake();
-	void Update();
-};
+LP_Extern LP_BINDINGS_API inline dBodyID create_body_ode();
+LP_Extern LP_BINDINGS_API inline dMass create_mass_ode(dBodyID);
+LP_Extern LP_BINDINGS_API inline void destroy_body_ode(dBodyID);

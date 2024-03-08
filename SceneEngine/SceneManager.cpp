@@ -7,6 +7,8 @@
 #include <filesystem>
 #include <fstream>
 
+#include <PhysicsEngine/PhysicsEngine.h>
+
 std::vector<Scene> loaded_scenes;
 Ref<SceneInstance> current_scene;
 #ifdef EDITOR
@@ -24,7 +26,9 @@ Ref<SceneInstance> SceneManager::CreateSceneInstance(Scene base)
 	}
 
 	float* clearColor = new float[4] { 0.4f, 0.4f, 1.0f, 0.5f };
-	_instance->SetConfig("bgd_color", clearColor);
+	_instance->configs.SetConfig("bgd_color", clearColor);
+	_instance->configs.SetConfig("phys_world", PhysicsEngine::CreatePhysicsWorld());
+	_instance->configs.SetConfig("phys_space", PhysicsEngine::CreatePhysicsSpace());
 
 	return _instance;
 }
