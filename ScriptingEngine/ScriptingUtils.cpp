@@ -17,7 +17,7 @@ MonoMethod* ScriptingUtils::GetMethod(std::string mt_name, MonoClass* klass)
 
 void ScriptingUtils::InvokeMethod(MonoMethod* method, MonoObject* instance)
 {
-    if (method) {
+    if (method && instance) {
 
         MonoObject* exception = nullptr;
         mono_runtime_invoke(method, instance, {}, &exception);

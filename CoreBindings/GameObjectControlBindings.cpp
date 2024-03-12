@@ -18,6 +18,7 @@ LP_Extern LP_BINDINGS_API char* GetGameOBJId(GameObjectInstance* obj)
 
 LP_Extern LP_BINDINGS_API void AddComponentToObj(GameObjectInstance* obj, char* comp_id)
 {
+#ifdef GAME
 	Component comp = {};
 	comp.engine_id = comp_id;
 
@@ -31,4 +32,5 @@ LP_Extern LP_BINDINGS_API void AddComponentToObj(GameObjectInstance* obj, char* 
 	}
 	instance.class_type = klass;
 	obj->component_instances.push_back(instance);
+#endif
 }

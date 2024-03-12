@@ -13,5 +13,10 @@ namespace LowpEditor.Pages
        {
             Debug.Log("Tesy");
        }
+
+       void ImGuiRender()
+       {
+           ImGui.WriteText("This is a test text");
+       }
     }
 }

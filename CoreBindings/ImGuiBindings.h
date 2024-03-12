@@ -8,3 +8,6 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 #include <ImGui/ImGui_impl.h>
+
+
+LP_Extern LP_BINDINGS_API void imgui_text(char*);

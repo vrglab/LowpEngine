@@ -273,6 +273,7 @@ project "CoreBindings"
 		"SceneEngine",
 		"PhysicsEngine",
 		"AssetsEngine",
+		"ImGui",
 		"Core",
 		"SDL2",
 		"spdlog",

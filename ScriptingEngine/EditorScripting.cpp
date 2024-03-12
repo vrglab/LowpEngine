@@ -77,6 +77,7 @@ MonoObject* EditorScripting::CreatePageInstance(EditorPageType page)
     mono_runtime_object_init(obj);
 
     ScriptingUtils::InvokeMethod(ScriptingUtils::GetMethod("Start", page.loaded_class_type), obj);
+    return obj;
 }
 
 std::vector<std::string> EditorScripting::GetPages()
