@@ -22,7 +22,7 @@ Clone the project using `git clone git@github.com:vrglab/LowpEngine.git` and Run
 On windows running the `Generate.bat` file should by default create `Visual Studio Comunity 2022` project files and using Visual Studio you should be able to just build the project.
 
 ### Linux
-On linux running the `Generate.sh` file in the console using `sh`,should by default create `Gmake2` files and by running the `make config=Release_GAME` or and `make config=Release_EDITOR` command in the bash, you should be able to build the project
+On linux running the `Generate.sh` file in the console using `sh`,should by default create `Gmake2` files and by running the `make` command in the bash with a `config=` of your chosing (you can see the configs by opening the generated Makefile), you should be able to build the project
 
 # Currently Supported features
 This are all of the feature that are already fully or partially implemented into the Project
