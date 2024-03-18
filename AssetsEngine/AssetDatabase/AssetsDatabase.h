@@ -16,6 +16,7 @@ public:
 	HRIDTable hrid_table;
 	AssetsBatch assets_batch;
 	LP_API void ImportFileAsAsset(std::string);
+	LP_API void ImportBufferedFileAsAsset(std::string, std::string);
 	LP_API static void GenerateDatabaseFiles(HRIDTable, AssetsBatch, std::string);
 };
 

@@ -751,6 +751,10 @@ project "ShaderEngine"
 		{
 			"/Zc:__cplusplus"
 		}
+		libdirs
+		{
+			"Packages/c++/libs/windows"
+		}
 	elseif os.target() == "linux" then
 		pchheader "%{prj.name}/pch.h"
 		links 
@@ -778,6 +782,7 @@ project "ShaderEngine"
 	{
 		"Programs/vcpkg/installed/"..vcpkg_arg_dir.."/include",
 		"%{prj.name}",
+		"Packages/c++/includes",
 		"."
 	}
 	
@@ -1442,3 +1447,30 @@ project "STB"
 		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
+
+group("C++/Defaults")
+project "DefaultShader"
+	location "DefaultShader"
+	kind "StaticLib"
+	language "C++"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	if os.target() == "windows" then
+		cppdialect "C++latest"
+		toolset "v143"
+		buildoptions
+		{
+			"/Zc:__cplusplus"
+		}
+	elseif os.target() == "linux" then
+	end
+
+	files 
+	{
+		"%{prj.name}/**.hlsl",
+		"%{prj.name}/**/**.hlsl",
+		"%{prj.name}/**.cpp",
+		"%{prj.name}/**/**.cpp"
+	}

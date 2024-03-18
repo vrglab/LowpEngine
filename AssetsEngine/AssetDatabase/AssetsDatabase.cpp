@@ -44,6 +44,23 @@ void AssetsDatabase::ImportFileAsAsset(std::string file)
     }
 }
 
+void AssetsDatabase::ImportBufferedFileAsAsset(std::string file, std::string hrid_name)
+{
+    std::string generated_guid = GUIDGen();
+
+    FileAsset asset;
+    asset.id = generated_guid;
+
+    HRID hrid;
+    hrid.hrid = hrid_name;
+    hrid.guid = generated_guid;
+
+    asset.file_content = file;
+
+    assets_batch.assets.push_back(asset);
+    hrid_table.hrids.push_back(hrid);
+}
+
 std::string GetFileContentFromHRID(std::string hrid, AssetsDatabase database)
 {
     return GetByGUID(GetGUIDFromHRID(hrid, database.hrid_table), database.assets_batch);
