@@ -30,7 +30,7 @@ LP_Extern LP_API ScriptsDatabase database;
 LP_Extern LP_API MonoAssembly* editor_assembly;
 LP_Extern LP_API MonoImage* editor_image;
 
-class EditorScripting
+class LP_API EditorScripting
 {
 private:
 	static bool IsSubclassOf(MonoClass*, MonoClass*);

@@ -22,15 +22,6 @@ LP_Extern LP_BINDINGS_API void AddComponentToObj(GameObjectInstance* obj, char* 
 	Component comp = {};
 	comp.engine_id = comp_id;
 
-	ComponentInstance instance = {};
-	instance.parent = reinterpret_cast<uintptr_t>(obj);
-	instance.base = comp;
-	instance.created_instance = GameScripting::CreateComponentClass(comp, obj->obj_instance);
-	MonoClass* klass = GameScripting::GetGameLoadedClassType(comp.engine_id);
-	if (!klass) {
-		klass = GameScripting::GetApiLoadedClassType(comp.engine_id);
-	}
-	instance.class_type = klass;
-	obj->component_instances.push_back(instance);
+	obj->CreateComponentInstance(comp);
 #endif
 }

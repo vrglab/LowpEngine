@@ -24,3 +24,8 @@ void ScriptingEngine::ShutdownMono()
     EditorScripting::ShutdownMono();
 #endif
 }
+
+MonoDomain* ScriptingEngine::GetCurrentDomain()
+{
+    return monoDomain;
+}

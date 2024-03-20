@@ -25,14 +25,16 @@ LP_Extern LP_API Ref<SceneInstance> current_scene;
 LP_Extern LP_API std::vector<Ref<EditorPageInstance>> created_pages;
 #endif
 
-class SceneManager
+class LP_API SceneManager
 {
 
 private:
 	static Ref<SceneInstance> CreateSceneInstance(Scene);
+	static void InitializeSceneObjects(Ref<SceneInstance> scene);
 
 public:
 	static void Init(Ref<ApplicationInfo>);
+	static void SetCurrentScene(Scene);
 	static inline Ref<SceneInstance> GetCurrentScene() 
 	{
 		return current_scene;

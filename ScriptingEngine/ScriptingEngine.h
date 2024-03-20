@@ -16,10 +16,11 @@
 #include "EditorScripting.h"
 #endif
 
-class ScriptingEngine
+class LP_API ScriptingEngine
 {
 public:
 	static void InitMono(Ref<ApplicationInfo>);
 	static void ShutdownMono();
+	static MonoDomain* GetCurrentDomain();
 };
 

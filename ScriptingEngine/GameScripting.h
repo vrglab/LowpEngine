@@ -34,7 +34,7 @@ LP_Extern LP_API MonoAssembly* game_assembly;
 LP_Extern LP_API MonoImage* api_image;
 LP_Extern LP_API MonoAssembly* api_assembly;
 
-class GameScripting
+class LP_API GameScripting
 {
 private:
 	static bool IsSubclassOf(MonoClass*, MonoClass*);

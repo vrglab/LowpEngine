@@ -19,18 +19,22 @@ Ref<SceneInstance> SceneManager::CreateSceneInstance(Scene base)
 {
 	Ref<SceneInstance> _instance = CreateRef<SceneInstance>();
 	_instance->base = base;
-	
-	for (size_t i = 0; i < base.game_objects.size(); i++)
-	{
-		_instance->CreateInstance(base.game_objects[i]);
-	}
 
-	float* clearColor = new float[4] { 0.4f, 0.4f, 1.0f, 0.5f };
-	_instance->configs.SetConfig("bgd_color", clearColor);
 	_instance->configs.SetConfig("phys_world", PhysicsEngine::CreatePhysicsWorld());
 	_instance->configs.SetConfig("phys_space", PhysicsEngine::CreatePhysicsSpace());
 
+	float* clearColor = new float[4] { 0.4f, 0.4f, 1.0f, 0.5f };
+	_instance->configs.SetConfig("bgd_color", clearColor);
+
 	return _instance;
+}
+
+void SceneManager::InitializeSceneObjects(Ref<SceneInstance> scene)
+{
+	for (size_t i = 0; i < scene->base.game_objects.size(); i++)
+	{
+		scene->CreateInstance(scene->base.game_objects[i]);
+	}
 }
 
 void SceneManager::Init(Ref<ApplicationInfo> info)
@@ -50,12 +54,18 @@ void SceneManager::Init(Ref<ApplicationInfo> info)
 		archive(loaded_scenes);
 	}
 
-	current_scene = CreateSceneInstance(loaded_scenes[0]);
+	SetCurrentScene(loaded_scenes[0]);
 #endif
 #ifdef EDITOR
 	current_scene = CreateRef<SceneInstance>();
 	current_scene->Init();
 #endif
+}
+
+void SceneManager::SetCurrentScene(Scene scene)
+{
+	current_scene = CreateSceneInstance(scene);
+	InitializeSceneObjects(current_scene);
 }
 
 void GenerateSceneListFile(std::string filepath, std::vector<Scene> scene_list)
