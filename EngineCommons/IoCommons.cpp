@@ -2,7 +2,7 @@
 #include "IoCommons.h"
 #include <sstream>
 
-LP_API char* read_bytes(const std::string& filepath, uint32_t* outSize)
+LP_API std::string read_bytes(const std::string& filepath)
 {
 
     std::ifstream stream(filepath, std::ios::binary | std::ios::ate);
@@ -23,12 +23,9 @@ LP_API char* read_bytes(const std::string& filepath, uint32_t* outSize)
         return nullptr;
     }
 
-    char* buffer = new char[size];
-    stream.read((char*)buffer, size);
-    stream.close();
-
-    *outSize = size;
-    return buffer;
+    std::vector<char> buffer(size);
+    stream.read(buffer.data(), size);
+    return std::string(buffer.begin(), buffer.end());
 }
 
 #if defined(_WIN32)

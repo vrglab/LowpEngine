@@ -15,13 +15,18 @@ namespace fs = std::filesystem;
 
 #include "Utils.h"
 
-LP_API char vertex_filename[] = {'v', 'r', 't'};
-LP_API char fragment_filename[] = { 'f', 'r', 'a' };
-LP_API char geometry_filename[] = { 'g', 'e', 'o' };
-LP_API char hull_filename[] = { 'h', 'u', 'l' };
-LP_API char domain_filename[] = { 'd', 'o', 'm' };
-LP_API char compute_filename[] = { 'c', 'o', 'm' };
-LP_API char num_filename[] = { 'n', 'u', 'm' };
+static char vertex_filename[] = {'v', 'r', 't'};
+static char fragment_filename[] = { 'f', 'r', 'a' };
+static char geometry_filename[] = { 'g', 'e', 'o' };
+static char hull_filename[] = { 'h', 'u', 'l' };
+static char domain_filename[] = { 'd', 'o', 'm' };
+static char compute_filename[] = { 'c', 'o', 'm' };
+static char num_filename[] = { 'n', 'u', 'm' };
 
-LP_Extern LP_API void CompileShadersForReleaseCompilation(std::string, std::string);
-LP_Extern LP_API ShaderConductor::ShaderStage GetShaderStage(std::string);
+class ShaderEngine
+{
+public:
+	static void Dummy();
+	static void CompileShadersForReleaseCompilation(std::string, std::string);
+	static ShaderConductor::ShaderStage GetShaderStage(std::string);
+};

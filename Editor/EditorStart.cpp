@@ -1,8 +1,4 @@
 #include "pch.h"
-#include <iostream>
-#include <Core/LowpEngine.h>
-#include <ScriptingEngine/ScriptingEngine.h>
-#include <SoundEngine/SoundEngine.h>
 
 #undef main
 

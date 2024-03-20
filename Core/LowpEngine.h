@@ -36,4 +36,19 @@
 //Assets
 #include <AssetsEngine/AssetsEngine.h>
 
+//Shader Compilers
+#include <ShaderEngine/ShaderEngine.h>
+
+//Scripting
+#include <ScriptingEngine/ScriptingEngine.h>
+
+//Audio
+#include <SoundEngine/SoundEngine.h>
+
+//Physics
+#include <PhysicsEngine/PhysicsEngine.h>
+
+//Scene
+#include <SceneEngine/SceneManager.h>
+
 #endif

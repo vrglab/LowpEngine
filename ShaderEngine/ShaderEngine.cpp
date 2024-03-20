@@ -1,16 +1,24 @@
 #include "pch.h"
 #include "ShaderEngine.h"
+#include <ShaderConductor/ShaderConductor.hpp>
 
-LP_Extern LP_API void CompileShadersForReleaseCompilation(std::string shaders_dir, std::string includes_dir)
+void ShaderEngine::Dummy()
+{
+}
+
+void ShaderEngine::CompileShadersForReleaseCompilation(std::string shaders_dir, std::string includes_dir)
 {
     AssetsDatabase shaders_data_base = { {}, {} };
 
     for (const auto& entry : fs::directory_iterator(shaders_dir)) {
         if (entry.is_regular_file() && entry.path().extension() == ".hlsl") {
-            std::string shader = entry.path().string();
+            std::filesystem::path filename = entry.path().filename();
 
-            std::string compiled_shader = reinterpret_cast<const char*>(
-                CompileHLSLToSPIRV(shader, includes_dir, "lp_main", GetShaderStage(entry.path().filename().string())));
+            std::string shader = read_bytes(entry.path().string());
+
+            const void* spirv = ShaderEngineUtils::CompileHLSLToSPIRV(shader, includes_dir, "lp_main", GetShaderStage(filename.string()), filename.string());
+
+            std::string compiled_shader = reinterpret_cast<const char*>(spirv);
 
             shaders_data_base.ImportBufferedFileAsAsset(compiled_shader, entry.path().filename().string());
         }
@@ -18,7 +26,7 @@ LP_Extern LP_API void CompileShadersForReleaseCompilation(std::string shaders_di
     AssetsDatabase::GenerateDatabaseFiles(shaders_data_base.hrid_table, shaders_data_base.assets_batch, "");
 }
 
-LP_Extern LP_API ShaderConductor::ShaderStage GetShaderStage(std::string filename)
+ShaderConductor::ShaderStage ShaderEngine::GetShaderStage(std::string filename)
 {
     ShaderConductor::ShaderStage stage = ShaderConductor::ShaderStage::ComputeShader;
 

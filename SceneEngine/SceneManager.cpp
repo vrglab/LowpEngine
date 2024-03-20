@@ -76,5 +76,6 @@ Ref<EditorPageInstance> SceneManager::CreatePageInstance(EditorPageType page)
 	ref->id = GUIDGen();
 	ref->instance = EditorScripting::CreatePageInstance(page);
 	created_pages.push_back(ref);
+	return ref;
 }
 #endif

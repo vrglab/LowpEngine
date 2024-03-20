@@ -175,12 +175,14 @@ project "Core"
 		"ScriptingEngine",
 		"EventEngine",
 		"SceneEngine",
+		"ShaderEngine",
 		"SDL2",
 		"spdlog",
 		"fmt",
 		"volk",
 		"mono-2.0-sgen",
-		"ode_double"
+		"ode_double",
+		"ShaderConductor"
 	}
 
 	vpaths {
@@ -789,6 +791,7 @@ project "ShaderEngine"
 	links
 	{
 		"EngineCommons",
+		"ShaderConductor",
 		"glew32",
 		"GlU32",
 		"volk"
@@ -1290,15 +1293,7 @@ project "Editor"
 	links
 	{
 		"Core",
-		"AssetsEngine",
-		"SoundEngine",
-		"PhysicsEngine",
-		"RenderingEngine",
-		"EngineCommons",
-		"ScriptingEngine",
-		"EventEngine",
-		"SceneEngine",
-		"SDL2",
+		"SDL2", 
 		"spdlog",
 		"fmt",
 		"volk",
@@ -1315,8 +1310,6 @@ project "Editor"
 		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
-
-
 
 group("C++/Vendors")
 project "ImGui"

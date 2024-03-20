@@ -8,8 +8,12 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 #include <Core/Debugging/Debug.h>
-
 #include <ShaderConductor/ShaderConductor.hpp>
 
-LP_Extern LP_API std::string ResolveShaderIncludes(std::string, std::string);
-LP_Extern LP_API const void* CompileHLSLToSPIRV(std::string, std::string, std::string, ShaderConductor::ShaderStage);
+
+class LP_API ShaderEngineUtils
+{
+public:
+	static std::string ResolveShaderIncludes(std::string, std::string, std::vector<std::string>);
+	static const void* CompileHLSLToSPIRV(std::string, std::string, std::string, ShaderConductor::ShaderStage, std::string);
+};

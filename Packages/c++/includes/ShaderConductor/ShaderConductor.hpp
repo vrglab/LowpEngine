@@ -94,7 +94,7 @@ namespace ShaderConductor
 
     struct MacroDefine
     {
-        const char* name;
+        const char* name = "";
         const char* value;
     };
 
