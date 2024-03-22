@@ -8,7 +8,6 @@
 #include <ImGui/backends/imgui_impl_opengl3.h>
 #endif
 
-#include <Core/Debugging/Debug.h>
 #include <GL/glew.h>
 #include <SceneEngine/SceneManager.h>
  

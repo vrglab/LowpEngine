@@ -19,19 +19,37 @@ namespace LowpEngine
         [DllImport("CoreBindings.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void _WarnLog(string msg);
 
-        public static void Log(string msg)
+        /// <summary>
+        /// Log's anything given to it as information to the debug console
+        /// </summary>
+        /// <param name="msg">The Message to log</param>
+        /// <b>Authors</b>
+        /// <br>Arad Bozorgmehr (Vrglab)</br>
+        public static void Log(object msg)
         {
-            _Log(msg);
+            _Log(msg.ToString());
         }
 
-        public static void LogError(string msg)
+        /// <summary>
+        /// Log's anything given to it as error to the debug console
+        /// </summary>
+        /// <param name="msg">The Message to log</param>
+        /// <b>Authors</b>
+        /// <br>Arad Bozorgmehr (Vrglab)</br>
+        public static void LogError(object msg)
         {
-            _ErrLog(msg);
+            _ErrLog(msg.ToString());
         }
 
-        public static void LogWarning(string msg)
+        /// <summary>
+        /// Log's anything given to it as warning to the debug console
+        /// </summary>
+        /// <param name="msg">The Message to log</param>
+        /// <b>Authors</b>
+        /// <br>Arad Bozorgmehr (Vrglab)</br>
+        public static void LogWarning(object msg)
         {
-            _WarnLog(msg);
+            _WarnLog(msg.ToString());
         }
     }
 }

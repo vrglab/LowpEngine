@@ -8,7 +8,6 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 
-#include <Core/Debugging/Debug.h>
 
 #include <mono/metadata/debug-helpers.h>
 #include <mono/jit/jit.h>

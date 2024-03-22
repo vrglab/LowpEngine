@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "SceneInstance.h"
 #include <ScriptingEngine/ScriptingEngine.h>
-#include <Core/Debugging/Debug.h>
 
 void SceneInstance::CreateInstance(GameObject obj_data)
 {

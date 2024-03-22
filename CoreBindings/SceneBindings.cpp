@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "SceneBindings.h"
-#include <Core/Debugging/Debug.h>
 
 LP_Extern LP_BINDINGS_API inline SceneInstance* GetCurrentScene()
 {

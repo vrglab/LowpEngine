@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "SceneManager.h"
 
-#include <Core/Debugging/Debug.h>
-
 #include <iostream>
 #include <filesystem>
 #include <fstream>

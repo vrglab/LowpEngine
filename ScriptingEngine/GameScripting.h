@@ -8,7 +8,6 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 #include <SceneEngine/Serialized/Component/Component.h>
-#include <Core/Debugging/Debug.h>
 #include <Core/Application/ApplicationInfo.h>
 
 #include <mono/metadata/debug-helpers.h>

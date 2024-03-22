@@ -12,7 +12,6 @@
 #include <EventEngine/EventBus.h>
 #include <SDL2/SDL.h>
 #include <ImGui/ImGui_impl.h>
-#include "Debugging/Debug.h"
 #include "WindowCreateInfo.h"
 
 class Window

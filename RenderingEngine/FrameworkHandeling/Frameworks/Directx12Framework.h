@@ -7,7 +7,6 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <Core/Debugging/Debug.h>
 #include <Core/Application/ApplicationInfo.h>
 
 #include "RenderingEngine/FrameworkHandeling/Framework.h"
