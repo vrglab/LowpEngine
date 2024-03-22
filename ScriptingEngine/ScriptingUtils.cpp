@@ -3,6 +3,12 @@
 
 
 
+MonoClass* ScriptingUtils::GetClass(std::string class_name, MonoImage* image)
+{
+    std::vector<std::string> split_txt = splitString(class_name, '.');
+    return mono_class_from_name(image, joinExceptLast(class_name, '.').c_str(), split_txt[split_txt.size()-1].c_str());
+}
+
 MonoMethod* ScriptingUtils::GetMethod(std::string mt_name, MonoClass* klass)
 {
     std::string start_method_find_string;

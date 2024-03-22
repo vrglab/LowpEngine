@@ -18,4 +18,8 @@ LP_API enum RendererTypes
 	Metal = 3
 };
 
+/**
+ * @brief Get's the best possible Renderer type for the current computers OS
+ * @return The best render using it's RendererTypes enum number
+ */
 LP_API int getSystemSupportedRenderer();

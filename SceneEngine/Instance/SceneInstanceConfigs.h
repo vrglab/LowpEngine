@@ -14,4 +14,3 @@ public:
 	std::string id;
 	void* value;
 };
-

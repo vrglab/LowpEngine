@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "IoCommons.h"
 #include <sstream>
+#include <cereal/archives/binary.hpp>
 
 LP_API std::string read_bytes(const std::string& filepath)
 {
@@ -26,6 +27,55 @@ LP_API std::string read_bytes(const std::string& filepath)
     std::vector<char> buffer(size);
     stream.read(buffer.data(), size);
     return std::string(buffer.begin(), buffer.end());
+}
+
+std::ofstream GenerateFile(std::string filepath, std::string filename)
+{
+    std::string path = filepath;
+    path.append(filename);
+    path.append(".bin");
+
+    std::ofstream  file_stream(path.c_str(), std::ios::binary);
+    IFERRTHROW(!file_stream.is_open(), "Failed to open file for writing.");
+}
+
+LP_API std::vector<std::string> splitString(const std::string& text, char delim)
+{
+    std::vector<std::string> tokens;
+    std::istringstream iss(text);
+    std::string token;
+
+    while (std::getline(iss, token, delim)) 
+    {
+    	if (!token.empty()) 
+        {
+            tokens.push_back(token);
+        }
+    }
+
+    return tokens;
+}
+
+LP_API std::string joinExceptLast(const std::string& text, char delim) {
+    std::istringstream iss(text);
+    std::string token;
+    std::string result;
+    std::string last;
+
+    while (std::getline(iss, token, delim)) 
+    {
+        if (!token.empty()) 
+        {
+            if (!result.empty()) 
+            {
+                result += delim; 
+			}   
+            result += last;
+            last = token;
+		}
+    }
+
+    return result;
 }
 
 #if defined(_WIN32)

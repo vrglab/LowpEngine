@@ -10,7 +10,6 @@
 #include "SceneEngine/Serialized/Scene.h"
 #include "SceneEngine/Serialized/GameObject.h"
 #include "GameObjectInstance.h"
-#include "SceneInstanceConfigs.h"
 
 
 class LP_API SceneInstance

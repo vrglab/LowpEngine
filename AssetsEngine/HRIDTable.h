@@ -7,8 +7,6 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <cereal/types/string.hpp>
-#include <cereal/types/memory.hpp>
 #include <cereal/types/vector.hpp>
 
 /**

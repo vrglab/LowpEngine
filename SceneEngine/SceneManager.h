@@ -10,7 +10,6 @@
 #include <Core/Application/ApplicationInfo.h>
 
 #include <cereal/cereal.hpp>
-#include <cereal/archives/binary.hpp>
 
 #include "Instance/SceneInstance.h"
 #include "Serialized/Scene.h"

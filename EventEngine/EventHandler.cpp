@@ -6,7 +6,6 @@ EventHandler::EventHandler() {
     listeners = std::vector<std::function<void()>>();
 }
 
-
 void EventHandler::Dispatch() {
     for (const std::function<void()>& listener : listeners) {
         listener();

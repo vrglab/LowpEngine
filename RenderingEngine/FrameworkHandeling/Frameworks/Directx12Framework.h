@@ -12,13 +12,13 @@
 #include "RenderingEngine/FrameworkHandeling/Framework.h"
 
 #include <SDL2/SDL.h>
+#ifdef _WIN32
 #include <d3d12.h>
 #include <dxgi1_6.h>
-#include <wrl.h>
-#include <iostream>
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
+#endif
 
 class Directx12Framework : Framework
 {
@@ -33,7 +33,7 @@ public:
 	ID3D12CommandAllocator* commandAllocator;
 	ID3D12GraphicsCommandList* commandList;
 #endif
-	void Init(Ref<ApplicationInfo>, SDL_Window*) override;
+	void Init(Ref<ApplicationInfo> info, SDL_Window* window) override;
 	void Tick() override;
 #ifdef EDITOR
 	void CleanWindow() override;

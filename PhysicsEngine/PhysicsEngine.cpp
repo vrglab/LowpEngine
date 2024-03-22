@@ -6,7 +6,8 @@
 void PhysicsEngine::Init(Ref<ApplicationInfo> info)
 {
 	LP_CORE_INFO("Starting Physics Engine");
-	dInitODE();
+	dInitODE2(0);
+	dAllocateODEDataForThread(dAllocateODEDataFlags::dAllocateMaskAll);
 }
 
 dWorldID PhysicsEngine::CreatePhysicsWorld()

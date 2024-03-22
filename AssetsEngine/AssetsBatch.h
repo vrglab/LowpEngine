@@ -8,7 +8,6 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 #include "FileAsset.h"
-#include <cereal/types/memory.hpp>
 #include <cereal/types/vector.hpp>
 
 /**

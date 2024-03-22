@@ -10,9 +10,7 @@
 #include "GameObject.h"
 
 #include <cereal/types/vector.hpp>
-#include <cereal/types/string.hpp>
 #include <cereal/archives/binary.hpp>
-#include <fstream>
 
 class Scene
 {

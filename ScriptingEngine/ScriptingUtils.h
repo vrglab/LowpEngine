@@ -18,6 +18,7 @@
 class ScriptingUtils
 {
 public:
+	static MonoClass* GetClass(std::string class_id, MonoImage* image);
 	static MonoMethod* GetMethod(std::string, MonoClass*);
 	static void InvokeMethod(MonoMethod*, MonoObject*);
 };

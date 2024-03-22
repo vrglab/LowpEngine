@@ -6,12 +6,8 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-#include <EngineCommons/EngineCommons.h>
 #include "Component/Component.h"
 
-#include <cereal/types/vector.hpp>
-#include <cereal/types/string.hpp>
-#include <cereal/archives/binary.hpp>
 #include <fstream>
 
 class GameObject

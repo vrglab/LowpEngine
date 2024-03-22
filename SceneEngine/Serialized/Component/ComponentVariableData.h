@@ -6,13 +6,7 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-#include <EngineCommons/EngineCommons.h>
-#include <mono/metadata/object.h>
-
-#include <cereal/types/vector.hpp>
 #include <cereal/types/string.hpp>
-#include <cereal/archives/binary.hpp>
-#include <fstream>
 
 class ComponentVariableData
 {

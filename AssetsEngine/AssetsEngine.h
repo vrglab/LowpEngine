@@ -7,19 +7,11 @@
 /* ======================================================================================== */
 #pragma once
 
-#include <cereal/cereal.hpp>
-
 #include <EngineCommons/EngineCommons.h>
-
-#include "FileAsset.h"
 
 //Asset Database
 #include "AssetDatabase/AssetsDatabase.h"
 
-#include "AssetsBatch.h"
-#include "HRIDTable.h"
-
-#include <fstream>
 #include <Core/Application/ApplicationInfo.h>
 
 /*
