@@ -25,7 +25,7 @@ MonoClass* ScriptsDatabase::GetLoadedScript(std::string id)
 }
 
 #ifdef EDITOR
-EditorPageType ScriptsDatabase::GetLoadedScript_(std::string id)
+EditorPageType ScriptsDatabase::GetLoadedPageType(std::string id)
 {
 	for (size_t i = 0; i < scripts.size(); i++)
 	{

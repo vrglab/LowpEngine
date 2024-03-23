@@ -20,7 +20,7 @@ public:
 #ifdef EDITOR
 	std::vector<EditorPageType> scripts;
 	MonoClass* GetLoadedScript(std::string);
-	EditorPageType GetLoadedScript_(std::string);
+	EditorPageType GetLoadedPageType(std::string);
 #endif
 };
 

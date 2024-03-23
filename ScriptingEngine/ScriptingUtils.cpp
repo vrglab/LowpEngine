@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "ScriptingUtils.h"
+#include <filesystem>
 
+namespace fs = std::filesystem;
 
 
 MonoClass* ScriptingUtils::GetClass(std::string class_name, MonoImage* image)
@@ -42,4 +44,30 @@ void ScriptingUtils::InvokeMethod(MonoMethod* method, MonoObject* instance)
 
         }
     }
+}
+
+MonoAssembly* ScriptingUtils::LoadAssembly(std::string assemblyPath, MonoDomain* domain, std::vector<MonoAssembly*> loaded_assemblies)
+{
+    MonoAssembly* assembly = mono_domain_assembly_open(domain, assemblyPath.c_str());
+    IFERRRET(!assembly, "Failed to load assembly: ", assemblyPath, nullptr);
+    loaded_assemblies.push_back(assembly);
+    return assembly;
+}
+
+void ScriptingUtils::LoadAllAssembliesFromDirectory(std::string directoryPath, MonoDomain* domain, std::vector<MonoAssembly*> loaded_assemblies)
+{
+    for (const auto& entry : fs::directory_iterator(directoryPath)) {
+        if (entry.is_regular_file() && entry.path().extension() == ASSEMBLY_EXTENSION) {
+            LoadAssembly(entry.path().string(), domain, loaded_assemblies);
+        }
+    }
+}
+
+bool ScriptingUtils::IsSubclassOf(MonoClass* test_class, MonoClass* parent)
+{
+    while (test_class) {
+        if (test_class == parent) return true;
+        test_class = mono_class_get_parent(test_class);
+    }
+    return false;
 }

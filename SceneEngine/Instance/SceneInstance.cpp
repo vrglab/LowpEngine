@@ -2,6 +2,8 @@
 #include "SceneInstance.h"
 #include <ScriptingEngine/ScriptingEngine.h>
 
+#include "ScriptingEngine/ScriptingUtils.h"
+
 void SceneInstance::CreateInstance(GameObject obj_data)
 {
 #ifdef GAME
@@ -17,13 +19,8 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uint
 {
 #ifdef GAME
 	Ref<GameObjectInstance> created_instance = CreateRef<GameObjectInstance>();
-	GameObject obj = {};
-	obj.Name = "GameObject";
-	obj.guid = GUIDGen();
-
-	Component transform = {};
-	transform.engine_id = "Transform";
-	obj.components.push_back(transform);
+	GameObject obj = { GUIDGen(), "GameObject" };
+	obj.components.push_back({ "Transform" });
 
 	created_instance->base = obj;
 	if (instatiate_in_sharp) {
@@ -32,19 +29,12 @@ GameObjectInstance* SceneInstance::CreateInstance(bool instatiate_in_sharp, uint
 	{
 		created_instance->obj_instance = mono_gchandle_get_target(_obj);
 
-		MonoClass* klass = mono_class_from_name(api_image, "LowpEngine", "GameObject");
-
 		void* args[1];
 		intptr_t myIntPtrValue = reinterpret_cast<uintptr_t>(created_instance.get());
 		args[0] = &myIntPtrValue;
 
-		MonoClassField* field = mono_class_get_field_from_name(klass, "instance_pointer");
-		if (field) {
-			mono_field_set_value(created_instance->obj_instance, field, &myIntPtrValue);
-		}
-		else {
-			// Handle the error: Field not found
-		}
+		MonoClassField* field = mono_class_get_field_from_name(ScriptingUtils::GetClass("LowpEngine.GameObject", api_image), "instance_pointer");
+		IFNERR(field, mono_field_set_value(created_instance->obj_instance, field, &myIntPtrValue);, "instance_pointer", "Not found in");
 	}
 	created_instance->Awake();
 	obj_instances.push_back(created_instance);

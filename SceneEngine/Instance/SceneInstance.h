@@ -11,7 +11,9 @@
 #include "SceneEngine/Serialized/GameObject.h"
 #include "GameObjectInstance.h"
 
-
+/**
+ * @brief Instance of a live and open scene in the runtime
+ */
 class LP_API SceneInstance
 {
 private:
@@ -19,8 +21,27 @@ private:
 public:
 	Scene base;
 	Config configs;
-	void CreateInstance(GameObject);
-	GameObjectInstance* CreateInstance(bool instatiate_in_sharp, uintptr_t);
+
+	/**
+	 * @brief Creates a GameObject instance based on the given serialized game object
+	 * @param serialized_gameobj The serialized game object
+	 */
+	void CreateInstance(GameObject serialized_gameobj);
+
+	/**
+	 * @brief Creates a empty GameObject instance within the scene
+	 * @param instantiate_in_sharp Set true to generate a C# instance of the GameObject. Set False to use a created C# instance as our own
+	 * @param sharp_instance The given C# instance to use if needed
+	 */
+	GameObjectInstance* CreateInstance(bool instantiate_in_sharp, uintptr_t sharp_instance);
+
+	/**
+	 * @brief Calls all of the game object instances update functions
+	 */
 	void Update();
+
+	/**
+	 * @brief Helper function to initialize all of the scenes variables
+	 */
 	void Init();
 };

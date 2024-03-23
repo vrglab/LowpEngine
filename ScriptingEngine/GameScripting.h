@@ -35,17 +35,13 @@ LP_Extern LP_API MonoAssembly* api_assembly;
 
 class LP_API GameScripting
 {
-private:
-	static bool IsSubclassOf(MonoClass*, MonoClass*);
-
 public:
 	static void Init(Ref<ApplicationInfo>);
-	static MonoAssembly* LoadAssembly(std::string assemblyPath);
-	static void LoadAllAssembliesFromDirectory(std::string directoryPath);
 	static void ShutdownMono();
 	static MonoObject* CreateComponentClass(Component, MonoObject*);
 	static MonoObject* CreateGameObjectClass(GameObjectInstance*);
 	static MonoClass* GetGameLoadedClassType(std::string);
 	static MonoClass* GetApiLoadedClassType(std::string);
+	static MonoClass* GetClass(std::string);
 };
 

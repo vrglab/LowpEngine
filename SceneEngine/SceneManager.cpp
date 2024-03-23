@@ -68,10 +68,7 @@ void SceneManager::SetCurrentScene(Scene scene)
 
 void GenerateSceneListFile(std::string filepath, std::vector<Scene> scene_list)
 {
-	std::ofstream  level_file_stream(filepath.append("levels_table.bin").c_str(), std::ios::binary);
-	if (!level_file_stream.is_open()) {
-		throw std::runtime_error("Failed to open Levels file for writing.");
-	}
+	std::ofstream  level_file_stream = GenerateFile(filepath, "levels_table");
 	cereal::BinaryOutputArchive archive_levle(level_file_stream);
 	archive_levle(scene_list);
 }

@@ -14,6 +14,9 @@
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/mono-config.h>
 
+/**
+ * @brief Editor's base page type class 
+ */
 class EditorPageType {
 public:
 	std::string page_id;

@@ -10,12 +10,17 @@
 
 #include <fstream>
 
+
+/**
+ * @brief Class for saving and loading a serialized GameObject
+ */
 class GameObject
 {
 public:
 	std::string guid, Name;
 	std::vector<Component> components;
 
+	// Ignore this function as its used for serialization by cereal
 	template<class Archive>
 	void serialize(Archive& ar) {
 		ar(guid, Name, components);

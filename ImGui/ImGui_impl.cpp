@@ -100,7 +100,7 @@ void ImGUI::Tick(Ref<ApplicationInfo> app_info, void* rendering_framework)
 	for (size_t i = 0; i < created_pages.size(); i++)
 	{
 		Ref<EditorPageInstance> page = created_pages[i];
-		page->Render();
+		page->render();
 	}
 
 	((Framework*)rendering_framework)->Tick();
