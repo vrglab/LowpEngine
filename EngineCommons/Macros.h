@@ -52,10 +52,8 @@
 #define ASSEMBLY_EXTENSION ".dylib"
 #endif
 
-template<typename... Args>
-void AppendToEM(std::string& err_msg, Args... args);
 
-#define LOGAPPENEDEDTXT(y, ...)  std::string err_msg = y; AppendToEM(err_msg, ##__VA_ARGS__);  LP_CORE_ERROR(err_msg); 
+#define LOGAPPENEDEDTXT(y, ...)  std::string err_msg = y; err_msg.append(##__VA_ARGS__);  LP_CORE_ERROR(err_msg); 
 
 #define IFERR(x, y, ...) if(x){LOGAPPENEDEDTXT(y, __VA_ARGS__)}
 #define IFERRRET(x, y, z, ...) if(x){LOGAPPENEDEDTXT(y, z) return __VA_ARGS__;}

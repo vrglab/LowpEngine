@@ -9,6 +9,9 @@
 #include <EngineCommons/EngineCommons.h>
 #include <mono/metadata/class.h>
 
+/**
+ * @brief The Main class to represent a memory loaded C# class within the engine
+ */
 class LoadedScript
 {
 public:

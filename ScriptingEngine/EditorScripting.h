@@ -30,7 +30,7 @@ LP_Extern LP_API MonoAssembly* editor_assembly;
 LP_Extern LP_API MonoImage* editor_image;
 
 /**
- * @brief Main class for editor time's scripting engine (specifically used for basis of handling C# editor page creation"
+ * @brief Main class for editor time's scripting engine (specifically used for basis of handling C# editor page creation)
  */
 class LP_API EditorScripting
 {

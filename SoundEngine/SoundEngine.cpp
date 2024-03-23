@@ -13,14 +13,11 @@ void SoundEngine::Init(Ref<ApplicationInfo> info)
 	if (sound_system_backend_type == SoundSystemBackendType::OpenAL) {
 		LP_CORE_INFO("Starting OpenAL");
 		sound_device = (ALCdevice*)alcOpenDevice(nullptr);
-		if (!sound_device) {
-			LP_CORE_ERROR("OpenAL sound system failed device init");
-		}
-
+		IFERR(!sound_device, "OpenAL sound system failed device initialize", "")
+			std::string t;
 		sound_context = (ALCcontext*)alcCreateContext((ALCdevice*)sound_device, nullptr);
-		if (!sound_context) {
-			LP_CORE_ERROR("OpenAL sound system failed context init");
-		}
+		IFERR(!sound_context, "OpenAL sound system failed failed context init", "")
+		
 		alcMakeContextCurrent((ALCcontext*)sound_context);
 	}
 
@@ -28,7 +25,8 @@ void SoundEngine::Init(Ref<ApplicationInfo> info)
 		LP_CORE_INFO("Starting Fmod");
 		FMOD::System* system;
 		FMOD::System_Create(&system);
-		system->init(512, FMOD_INIT_NORMAL, nullptr);
+		FMOD_RESULT result = system->init(512, FMOD_INIT_NORMAL, nullptr);
+		IFERR(result != FMOD_RESULT::FMOD_OK, "Fmod sound system failed initialize", "")
 		sound_device = system;
 	}
 }

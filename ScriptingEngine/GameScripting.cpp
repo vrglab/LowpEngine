@@ -60,12 +60,12 @@ MonoObject* GameScripting::CreateComponentClass(Component component, MonoObject*
     return obj;
 }
 
-MonoObject* GameScripting::CreateGameObjectClass(GameObjectInstance* instance)
+MonoObject* GameScripting::CreateGameObjectClass(GameObjectInstance* gameobj)
 {
     MonoClass* klass = mono_class_from_name(api_image, "LowpEngine", "GameObject");
 
     void* args[1];
-    intptr_t myIntPtrValue = reinterpret_cast<uintptr_t>(instance);
+    intptr_t myIntPtrValue = reinterpret_cast<uintptr_t>(gameobj);
     args[0] = &myIntPtrValue;
 
     MonoObject* obj = mono_object_new(monoDomain, klass);

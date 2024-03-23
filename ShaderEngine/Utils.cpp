@@ -3,7 +3,7 @@
 #include <regex>
 #include <ShaderConductor/ShaderConductor.hpp>
 
-std::string ShaderEngineUtils::ResolveShaderIncludes(std::string source, std::string directoryPath, std::vector<std::string> resolved)
+std::string ShaderEngineUtils::ResolveShaderIncludes(std::string source, std::vector<std::string> include_paths, std::vector<std::string> resolved_includes)
 {
     static const std::regex includeRegex(R"(#include\s+["<](.+)[">])");
 
@@ -16,17 +16,16 @@ std::string ShaderEngineUtils::ResolveShaderIncludes(std::string source, std::st
 
     for (std::sregex_iterator i = begin; i != end; ++i) {
         match = *i;
-        std::string includePath = match[1].str();
-        std::string fullPath = directoryPath + "/" + includePath;
+        std::string includePath_str = match[1].str();
 
-        std::filesystem::path include_path = includePath;
+        std::filesystem::path include_path = includePath_str;
 
         std::string opening_Comment = "\n //----RESOLVED INCLUDE OF ";
-        opening_Comment.append(includePath).append("---- \n");
+        opening_Comment.append(includePath_str).append("---- \n");
 
         bool alreadyResolved = false;
 
-        if (std::find(resolved.begin(), resolved.end(), includePath) != resolved.end()) {
+        if (std::find(resolved_includes.begin(), resolved_includes.end(), includePath_str) != resolved_includes.end()) {
             alreadyResolved = true;
             size_t pos = processedSource.find(match[0].str());
             if (pos != std::string::npos) {
@@ -35,19 +34,28 @@ std::string ShaderEngineUtils::ResolveShaderIncludes(std::string source, std::st
         }
 
         if (processedSource.find(opening_Comment) == std::string::npos && !alreadyResolved) {
-            std::string includedContent = read_bytes(fullPath);
 
-            std::string final_include_path = directoryPath + "/" + include_path.remove_filename().string();
-            final_include_path.pop_back();
-
-            includedContent = ResolveShaderIncludes(includedContent, final_include_path, resolved);
+            std::string includedContent;
+            std::string final_include_path;
+            for (size_t i = 0; i < include_paths.size(); i++)
+            {
+                includedContent = read_bytes(include_paths[i] + "/" + includePath_str);
+                if (!includedContent.empty()) 
+                {
+                    final_include_path = include_paths[i] + "/" + include_path.remove_filename().string();
+                    final_include_path.pop_back();
+                    break;
+                }
+            }
+            include_paths.push_back(final_include_path);
+            includedContent = ResolveShaderIncludes(includedContent, include_paths, resolved_includes);
 
 
             size_t pos = processedSource.find(match[0].str());
             if (pos != std::string::npos) {
                 processedSource.replace(pos, match[0].str().length(), includedContent);
                 processedSource.append(opening_Comment);
-                resolved.push_back(includePath);
+                resolved_includes.push_back(includePath_str);
             }
         }
     }
@@ -55,7 +63,7 @@ std::string ShaderEngineUtils::ResolveShaderIncludes(std::string source, std::st
     return processedSource;
 }
 
-const void* ShaderEngineUtils::CompileHLSLToSPIRV(std::string source_unprocessed, std::string includes_dir, std::string entryPoint, ShaderConductor::ShaderStage stage, std::string filename)
+const void* ShaderEngineUtils::CompileHLSLToSPIRV(std::string source_unprocessed, std::vector<std::string> includes_dir, std::string entryPoint, ShaderConductor::ShaderStage stage, std::string filename)
 {
     std::string source_processed = ResolveShaderIncludes(source_unprocessed, includes_dir, {});
 
