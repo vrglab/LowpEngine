@@ -1,29 +1,29 @@
 #include "pch.h"
 #include "Config.h"
 
-void* Config::GetConfig(std::string id)
+void* Config::GetConfig(std::string conf)
 {
 	for (size_t i = 0; i < configs.size(); i++)
 	{
-		if (configs[i].id == id) {
+		if (configs[i].id == conf) {
 			return configs[i].value;
 		}
 	}
 	return nullptr;
 }
 
-void Config::SetConfig(std::string id, void* val)
+void Config::SetConfig(std::string conf, void* val)
 {
 	for (size_t i = 0; i < configs.size(); i++)
 	{
-		if (configs[i].id == id) {
+		if (configs[i].id == conf) {
 			configs[i].value = val;
 			return;
 		}
 	}
 
 	ConfigData sic = {};
-	sic.id = id;
+	sic.id = conf;
 	sic.value = val;
 	configs.push_back(sic);
 }
