@@ -71,11 +71,7 @@ int Application::CreateAppWindow(Ref<WindowCreateInfo> info)
     }
 
     ((Framework*)app_window->created_rendering_framework)->OnSdlSetup();
-    if (created_window->Init(info) != LowpResultCodes::Success)
-    {
-        LP_CORE_ERROR("Window initiation failed");
-        return LowpResultCodes::UnknowError;
-    }
+    IFERRRET(created_window->Init(info) != LowpResultCodes::Success, "Window initiation failed", "", LowpResultCodes::UnknowError)
 
     LP_CORE_INFO("Opening window");
     ((Framework*)app_window->created_rendering_framework)->Init(app_info, created_window->getSdlWindow());

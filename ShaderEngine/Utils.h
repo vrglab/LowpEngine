@@ -10,6 +10,9 @@
 #include <ShaderConductor/ShaderConductor.hpp>
 
 
+/**
+ * @brief Class holding helper functions for the ShaderEngine
+ */
 class LP_API ShaderEngineUtils
 {
 public:

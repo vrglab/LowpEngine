@@ -10,6 +10,9 @@
 #include <EngineCommons/EngineCommons.h>
 #include "Resolution.h"
 
+/**
+ * @brief Class holding the window's initial configuration data
+ */
 struct WindowCreateInfo
 {
 public:

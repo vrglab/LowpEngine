@@ -23,6 +23,9 @@ static char domain_filename[] = { 'd', 'o', 'm' };
 static char compute_filename[] = { 'c', 'o', 'm' };
 static char num_filename[] = { 'n', 'u', 'm' };
 
+/**
+ * @brief Primary class in charge of handling Shaders
+ */
 class ShaderEngine
 {
 public:

@@ -87,7 +87,8 @@ MonoClass* GameScripting::GetGameLoadedClassType(std::string id)
                 LoadedScript ls = {};
                 ls.engine_id = name;
                 ls.loaded_class_type = klasss;
-                database.scripts.push_back(ls); ,
+                database.scripts.push_back(ls); 
+                return klasss; ,
                     && name == id
                     )
 #endif
@@ -109,7 +110,8 @@ MonoClass* GameScripting::GetApiLoadedClassType(std::string id)
             LoadedScript ls = {};
             ls.engine_id = name;
             ls.loaded_class_type = klasss;
-            database.scripts.push_back(ls);,
+            database.scripts.push_back(ls);
+            return klasss; ,
             && name == id
             )
 #endif

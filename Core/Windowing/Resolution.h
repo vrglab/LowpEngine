@@ -8,6 +8,9 @@
 #pragma once
 #include <EngineCommons/EngineCommons.h>
 
+/**
+ * Basic class holding resolution data for configuration's
+ */
 class Resolution
 {
 public:

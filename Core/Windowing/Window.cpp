@@ -6,29 +6,14 @@ int Window::Init(Ref<WindowCreateInfo> createInfo)
 {
 	create_info = createInfo;
 
-	if (create_info->renderer_type == RendererTypes::OpenGL) {
-		create_info->tags |= SDL_WINDOW_OPENGL;
-	}
-	
-	if (create_info->renderer_type == RendererTypes::Vulkan) {
-		create_info->tags |= SDL_WINDOW_VULKAN;
-	}
+	set_win_type_sdl_tag(RendererTypes::OpenGL, SDL_WINDOW_OPENGL)
+	set_win_type_sdl_tag(RendererTypes::Vulkan, SDL_WINDOW_VULKAN)
+	set_win_type_sdl_tag(RendererTypes::Metal, SDL_WINDOW_METAL)
 
-	if (create_info->renderer_type == RendererTypes::Metal) {
-		create_info->tags |= SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_METAL;
-	}
-
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		LP_CORE_ERROR(SDL_GetError());
-		return LowpResultCodes::SystemFailure;
-	}
-
+	IFERRRET(SDL_Init(SDL_INIT_VIDEO) != 0, "Sdl init failed with error: ", SDL_GetError(), LowpResultCodes::SystemFailure)
 	sdl_window = SDL_CreateWindow(create_info->window_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, create_info->resolution->width, create_info->resolution->height, create_info->tags | SDL_WINDOW_HIDDEN);
-	if (sdl_window == nullptr) {
+	IFERRRET(!sdl_window, "Sdl window creation failed with error: ", SDL_GetError(), LowpResultCodes::SystemFailure)
 
-		LP_CORE_ERROR(SDL_GetError());
-		return LowpResultCodes::SystemFailure;
-	}
 	SDL_GLContext gl_context = {};
 	if (create_info->renderer_type == RendererTypes::OpenGL) {
 		LP_CORE_INFO("Creating OpenGL Context");
