@@ -10,9 +10,6 @@
 #ifndef _lpEngine_
 #define _lpEngine_
 
-//Debugging
-#include "Debugging/Debug.h"
-
 //Engine Commons
 #include <EngineCommons/EngineCommons.h>
 

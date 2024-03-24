@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "ScriptingEngine.h"
-#include <Core/Debugging/Debug.h>
 #include <mono/metadata/debug-helpers.h>
 
 

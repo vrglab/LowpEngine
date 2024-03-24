@@ -6,6 +6,8 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 
+#include "Debug.h"
+
 //LP_API
 #if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 #ifdef LP_API_EXPORTS
@@ -49,3 +51,11 @@
 #elif defined(__APPLE__)
 #define ASSEMBLY_EXTENSION ".dylib"
 #endif
+
+
+#define LOGAPPENEDEDTXT(y, ...)  std::string err_msg = y; err_msg.append(##__VA_ARGS__);  LP_CORE_ERROR(err_msg); 
+
+#define IFERR(x, y, ...) if(x){LOGAPPENEDEDTXT(y, __VA_ARGS__)}
+#define IFERRRET(x, y, z, ...) if(x){LOGAPPENEDEDTXT(y, z) return __VA_ARGS__;}
+#define IFERRTHROW(x, y) if(x){ throw std::runtime_error(y); }
+#define IFNERR(x, y, z, w) if(x){ y } else {LOGAPPENEDEDTXT(z, w)}

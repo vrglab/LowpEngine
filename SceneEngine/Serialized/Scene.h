@@ -10,15 +10,18 @@
 #include "GameObject.h"
 
 #include <cereal/types/vector.hpp>
-#include <cereal/types/string.hpp>
 #include <cereal/archives/binary.hpp>
-#include <fstream>
 
+
+/**
+ * @brief Class for saving and loading a serialized Scene
+ */
 class Scene
 {
 public:
 	std::vector<GameObject> game_objects;
 
+    // Ignore this function as its used for serialization by cereal
     template<class Archive>
     void serialize(Archive& ar) {
         ar(game_objects);

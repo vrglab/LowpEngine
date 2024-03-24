@@ -11,6 +11,9 @@
 
 #include "SceneEngine/Serialized/Component/Component.h"
 
+/**
+ * @brief Runtime instance of a component
+ */
 class ComponentInstance
 {
 public:
@@ -18,6 +21,9 @@ public:
 	uintptr_t parent;
 	MonoClass* class_type;
 	MonoObject* created_instance;
+
+	/**
+	 * @brief Update call of the Component
+	 */
 	void Update();
 };
-

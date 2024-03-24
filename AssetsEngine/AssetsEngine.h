@@ -7,27 +7,33 @@
 /* ======================================================================================== */
 #pragma once
 
-#include <cereal/cereal.hpp>
-
 #include <EngineCommons/EngineCommons.h>
-
-#include "FileAsset.h"
 
 //Asset Database
 #include "AssetDatabase/AssetsDatabase.h"
 
-#include "AssetsBatch.h"
-#include "HRIDTable.h"
-
-#include <fstream>
-#include <Core/Debugging/Debug.h>
 #include <Core/Application/ApplicationInfo.h>
+
+/*
+ *
+ * Engines Runtime Asset Databases
+ *
+ * The top variable is the database containing all of the games asset files (audio, video, drawings, game shader's,  misc files)
+ * The bottom variable is the engine's default shader's
+ */
 
 extern LP_API AssetsDatabase assets_database;
 extern LP_API AssetsDatabase default_shader_assets_database;
 
-class AssetsEngine {
+/**
+ * @brief Primary class in charge of initializing the runtime's Asset system
+ */
+class LP_API AssetsEngine {
 
 public:
+	/**
+	 * @brief Start's the runtime assets system's by loading all required asset database from .bin files
+	 * @param info The Application starting info config
+	 */
 	static void StartAssetsEngine(Ref<ApplicationInfo> info);
 };

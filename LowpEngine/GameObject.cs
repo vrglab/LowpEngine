@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace LowpEngine
 {
+    /// <summary>
+    /// Engine Objects which hold various components within the scene
+    /// </summary>
     public class GameObject
     {
         [DllImport("CoreBindings.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -24,7 +27,9 @@ namespace LowpEngine
         [DllImport("CoreBindings.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void AddComponentToObj(IntPtr instance, string id);
 
-
+        /// <summary>
+        /// The GameObject's active name
+        /// </summary>
         public string Name
         {
             get
@@ -84,7 +89,13 @@ namespace LowpEngine
             
         }
 
-        public static GameObject Instatiate()
+        /// <summary>
+        /// Creates a new GameObject within the current scene
+        /// </summary>
+        /// <returns>The created game object</returns>
+        /// <b>Authors</b>
+        /// <br>Arad Bozorgmehr (Vrglab)</br>
+        public static GameObject Instantiate()
         {
             GameObject obj = new GameObject();
             GCHandle handle = GCHandle.Alloc(obj, GCHandleType.Pinned);

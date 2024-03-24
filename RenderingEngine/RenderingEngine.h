@@ -16,3 +16,4 @@
 #include "FrameworkHandeling/Frameworks/OpenGLFramework.h"
 #include "FrameworkHandeling/Frameworks/Directx12Framework.h"
 #include "FrameworkHandeling/Frameworks/VulkanFramework.h"
+#include "FrameworkHandeling/Frameworks/MetalFramework.h"

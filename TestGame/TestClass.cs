@@ -14,12 +14,8 @@ public class TestClass : LowpBehaviour
     public void Start()
     {
         Debug.Log($"Obj start");
-        obj = GameObject.Instatiate();
+        AssetsLoader.GetRawAssetContent("bbs");
+        obj = GameObject.Instantiate();
         obj.AddComponent<Rigidbody3D>();
-    }
-
-    public void Update()
-    {
-       
     }
 }

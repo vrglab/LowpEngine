@@ -23,10 +23,23 @@ static char domain_filename[] = { 'd', 'o', 'm' };
 static char compute_filename[] = { 'c', 'o', 'm' };
 static char num_filename[] = { 'n', 'u', 'm' };
 
+/**
+ * @brief Primary class in charge of handling Shaders
+ */
 class ShaderEngine
 {
 public:
-	static void Dummy();
-	static void CompileShadersForReleaseCompilation(std::string, std::string);
-	static ShaderConductor::ShaderStage GetShaderStage(std::string);
+	/**
+	 * @brief Compiles all .hlsl shaders contained within a directory
+	 * @param shaders_dir The directory to search for .hlsl files
+	 * @param includes_dir the directory to include dependencies
+	 */
+	static void CompileShadersForReleaseCompilation(std::string shaders_dir, std::vector<std::string> includes_dir);
+
+	/**
+	 * @brief Get's The type of a shader based on it's name
+	 * @param filename the shader's file name
+	 * @return The found type
+	 */
+	static ShaderConductor::ShaderStage GetShaderStage(std::string filename);
 };

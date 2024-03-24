@@ -26,7 +26,22 @@ private:
 	static inline std::vector<void*> created_buffers;
 	static inline std::vector<void*> created_sources;
 public:
-	static void Init(Ref<ApplicationInfo>);
+
+	/**
+	 * @brief Starts the Audio engine
+	 * @param info The starting configs of the application
+	 */
+	static void Init(Ref<ApplicationInfo> info);
+
+	/**
+	 * @brief Creates a audio source from a audio asset in the asset database
+	 * @param hrid The hrid of the audio asset
+	 * @return The created audio source
+	 */
 	static void* CreateSound(std::string hrid);
+
+	/**
+	 * @brief shuts down the audio engine and cleans the memory
+	 */
 	static void Shutdown();
 };

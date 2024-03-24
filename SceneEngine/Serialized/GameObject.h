@@ -6,20 +6,21 @@
 /* Authors: Arad Bozorgmehr(Vrglab)                                                         */
 /* ======================================================================================== */
 #pragma once
-#include <EngineCommons/EngineCommons.h>
 #include "Component/Component.h"
 
-#include <cereal/types/vector.hpp>
-#include <cereal/types/string.hpp>
-#include <cereal/archives/binary.hpp>
 #include <fstream>
 
+
+/**
+ * @brief Class for saving and loading a serialized GameObject
+ */
 class GameObject
 {
 public:
 	std::string guid, Name;
 	std::vector<Component> components;
 
+	// Ignore this function as its used for serialization by cereal
 	template<class Archive>
 	void serialize(Archive& ar) {
 		ar(guid, Name, components);

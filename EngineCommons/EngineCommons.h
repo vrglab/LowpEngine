@@ -10,6 +10,7 @@
 
 #ifndef _LpEngine_Commons
 #define _LpEngine_Commons
+#include "Debug.h"
 #include "Macros.h"
 #include "Ref.h"
 #include "ResultCodes.h"

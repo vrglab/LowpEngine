@@ -7,7 +7,6 @@
 /* ======================================================================================== */
 #pragma once
 #include <EngineCommons/EngineCommons.h>
-#include <Core/Debugging/Debug.h>
 #include <Core/Application/ApplicationInfo.h>
 
 #include <mono/metadata/debug-helpers.h>
@@ -15,6 +14,9 @@
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/mono-config.h>
 
+/**
+ * @brief Editor's base page type class 
+ */
 class EditorPageType {
 public:
 	std::string page_id;

@@ -14,6 +14,7 @@ class FileAsset
 public:
     std::string id, file_content;
 
+    // Ignore this function as its used for serialization by cereal
     template<class Archive>
     void serialize(Archive& archive) {
         archive(file_content, id);

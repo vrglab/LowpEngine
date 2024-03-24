@@ -10,16 +10,17 @@
 #include "ComponentVariableData.h"
 
 #include <cereal/types/vector.hpp>
-#include <cereal/types/string.hpp>
-#include <cereal/archives/binary.hpp>
-#include <fstream>
 
+/**
+ * @brief Class for saving and loading a serialized Component
+ */
 class Component
 {
 public:
 	std::string engine_id;
 	std::vector<ComponentVariableData> data;
 
+	// Ignore this function as its used for serialization by cereal
 	template<class Archive>
 	void serialize(Archive& ar) {
 		ar(engine_id, data);

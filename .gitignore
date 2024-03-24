@@ -314,3 +314,6 @@ UWP Engine/
 
 Makefile
 *.bak
+/TestGame/.vs
+/LowpEngine/.vs
+/LowpEditor/.vs

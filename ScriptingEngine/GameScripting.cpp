@@ -40,49 +40,39 @@ void GameScripting::Init(Ref<ApplicationInfo> info)
     std::string path_to_game_assembly = info->ResourcesDir;
     path_to_game_assembly.append("\\CoreAssembly").append(ASSEMBLY_EXTENSION);
 
-    LoadAllAssembliesFromDirectory(path_to_dependencies.c_str());
-    api_assembly = LoadAssembly(path_to_api_assembly);
-    game_assembly = LoadAssembly(path_to_game_assembly);
+    ScriptingUtils::LoadAllAssembliesFromDirectory(path_to_dependencies.c_str(), monoDomain, loaded_assemblies);
+    api_assembly = ScriptingUtils::LoadAssembly(path_to_api_assembly, monoDomain, loaded_assemblies);
+    game_assembly = ScriptingUtils::LoadAssembly(path_to_game_assembly, monoDomain, loaded_assemblies);
     api_image = mono_assembly_get_image(api_assembly);
     game_image = mono_assembly_get_image(game_assembly);
 }
 
 MonoObject* GameScripting::CreateComponentClass(Component component, MonoObject* parent_game_obj)
 {
-    MonoClass* klass = GetGameLoadedClassType(component.engine_id);
-    if (!klass) {
-        klass = GetApiLoadedClassType(component.engine_id);
-    }
+    MonoClass* klass = GameScripting::GetClass(component.engine_id);
     MonoObject* obj = mono_object_new(monoDomain, klass);
     mono_runtime_object_init(obj);
 
-    MonoClass* parentClass = mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour");
-
-    MonoClassField* field = mono_class_get_field_from_name(parentClass, "_gameobj");
-    mono_field_set_value(obj, field, parent_game_obj);
+    MonoClassField* field = mono_class_get_field_from_name(mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour"), "_gameobj");
+    IFNERR(field, mono_field_set_value(obj, field, parent_game_obj); , "_gameobj", " Field not found");
 
     ScriptingUtils::InvokeMethod(ScriptingUtils::GetMethod("Start", klass), obj);
     return obj;
 }
 
-MonoObject* GameScripting::CreateGameObjectClass(GameObjectInstance* instance)
+MonoObject* GameScripting::CreateGameObjectClass(GameObjectInstance* gameobj)
 {
     MonoClass* klass = mono_class_from_name(api_image, "LowpEngine", "GameObject");
 
     void* args[1];
-    intptr_t myIntPtrValue = reinterpret_cast<uintptr_t>(instance);
+    intptr_t myIntPtrValue = reinterpret_cast<uintptr_t>(gameobj);
     args[0] = &myIntPtrValue;
 
     MonoObject* obj = mono_object_new(monoDomain, klass);
     mono_runtime_object_init(obj);
 
     MonoClassField* field = mono_class_get_field_from_name(klass, "instance_pointer");
-    if (field) {
-        mono_field_set_value(obj, field, &myIntPtrValue);
-    }
-    else {
-        // Handle the error: Field not found
-    }
+    IFNERR(field, mono_field_set_value(obj, field, &myIntPtrValue); , "_gameobj", " Field not found");
 
     return obj;
 }
@@ -92,26 +82,19 @@ MonoClass* GameScripting::GetGameLoadedClassType(std::string id)
     MonoClass* klass = database.GetLoadedScript(id);
     if (!klass) {
         MonoClass* baseClass = mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour");
-
-        const MonoTableInfo* typeTable = mono_image_get_table_info(game_image, MONO_TABLE_TYPEDEF);
-        int rows = mono_table_info_get_rows(typeTable);
-        for (int i = 1; i <= rows; i++) {
-            uint32_t cols[MONO_TYPEDEF_SIZE];
-            mono_metadata_decode_row(typeTable, i - 1, cols, MONO_TYPEDEF_SIZE);
-            const char* name = mono_metadata_string_heap(game_image, cols[MONO_TYPEDEF_NAME]);
-            const char* nameSpace = mono_metadata_string_heap(game_image, cols[MONO_TYPEDEF_NAMESPACE]);
-            MonoClass* klasss = mono_class_from_name(game_image, nameSpace, name);
-
-            if (IsSubclassOf(klasss, baseClass) && name == id) {
 #ifdef GAME
+        mono_find_on_rows(game_image, baseClass,         
                 LoadedScript ls = {};
                 ls.engine_id = name;
                 ls.loaded_class_type = klasss;
-                database.scripts.push_back(ls);
+                database.scripts.push_back(ls); 
+                return klasss; ,
+                    && name == id
+                    )
 #endif
-                return klasss;
-            }
-        }
+#ifdef EDITOR
+            return nullptr;
+#endif 
     }
     return klass;
 }
@@ -122,50 +105,30 @@ MonoClass* GameScripting::GetApiLoadedClassType(std::string id)
     if (!klass) {
         MonoClass* baseClass = mono_class_from_name(api_image, "LowpEngine", "LowpBehaviour");
 
-        const MonoTableInfo* typeTable = mono_image_get_table_info(api_image, MONO_TABLE_TYPEDEF);
-        int rows = mono_table_info_get_rows(typeTable);
-        for (int i = 1; i <= rows; i++) {
-            uint32_t cols[MONO_TYPEDEF_SIZE];
-            mono_metadata_decode_row(typeTable, i - 1, cols, MONO_TYPEDEF_SIZE);
-            const char* name = mono_metadata_string_heap(api_image, cols[MONO_TYPEDEF_NAME]);
-            const char* nameSpace = mono_metadata_string_heap(api_image, cols[MONO_TYPEDEF_NAMESPACE]);
-            MonoClass* klasss = mono_class_from_name(api_image, nameSpace, name);
-
-            if (IsSubclassOf(klasss, baseClass) && name == id) {
 #ifdef GAME
-                LoadedScript ls = {};
-                ls.engine_id = name;
-                ls.loaded_class_type = klasss;
-                database.scripts.push_back(ls);
+        mono_find_on_rows(api_image, baseClass,
+            LoadedScript ls = {};
+            ls.engine_id = name;
+            ls.loaded_class_type = klasss;
+            database.scripts.push_back(ls);
+            return klasss; ,
+            && name == id
+            )
 #endif
-                return klasss;
-            }
-        }
+#ifdef EDITOR
+            return nullptr;
+#endif
     }
     return klass;
 }
 
-MonoAssembly* GameScripting::LoadAssembly(std::string assemblyPath)
+MonoClass* GameScripting::GetClass(std::string id)
 {
-    MonoAssembly* assembly = mono_domain_assembly_open(monoDomain, assemblyPath.c_str());
-    if (!assembly) {
-        std::string error_txt;
-        error_txt.append("Failed to load assembly: ");
-        error_txt.append(assemblyPath);
-        LP_CORE_ERROR(error_txt.c_str());
-        return nullptr;
+    MonoClass* klass = GameScripting::GetGameLoadedClassType(id);
+    if (!klass) {
+        klass = GameScripting::GetApiLoadedClassType(id);
     }
-    loaded_assemblies.push_back(assembly);
-    return assembly;
-}
-
-void GameScripting::LoadAllAssembliesFromDirectory(std::string directoryPath)
-{
-    for (const auto& entry : fs::directory_iterator(directoryPath)) {
-        if (entry.is_regular_file() && entry.path().extension() == ASSEMBLY_EXTENSION) {
-            LoadAssembly(entry.path().string());
-        }
-    }
+    return klass;
 }
 
 void GameScripting::ShutdownMono()
@@ -174,12 +137,4 @@ void GameScripting::ShutdownMono()
         mono_jit_cleanup(monoDomain);
         monoDomain = nullptr;
     }
-}
-
-bool GameScripting::IsSubclassOf(MonoClass* child, MonoClass* parent) {
-    while (child) {
-        if (child == parent) return true;
-        child = mono_class_get_parent(child);
-    }
-    return false;
 }
