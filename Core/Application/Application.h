@@ -38,8 +38,8 @@ public:
 
 	/**
 	 * @brief Initializes the application
-	 * \param info The initialization configuration's
-	 * \return A LowpResultCodes of success upon a successful init
+	 * @param info The initialization configuration's
+	 * @return A LowpResultCodes of success upon a successful init
 	 */
 	int Init(Ref<ApplicationInfo> info);
 
