@@ -18,7 +18,7 @@ void ShaderEngine::CompileShadersForReleaseCompilation(std::string shaders_dir, 
                 )), entry.path().filename().string());
         }
     }
-    AssetsDatabase::GenerateDatabaseFiles(shaders_data_base.hrid_table, shaders_data_base.assets_batch, "");
+    AssetsDatabase::GenerateDatabaseFiles(shaders_data_base.hrid_table, shaders_data_base.assets_batch, "", "shad_");
 }
 
 ShaderConductor::ShaderStage ShaderEngine::GetShaderStage(std::string filename)

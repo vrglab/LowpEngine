@@ -9,7 +9,9 @@
 #include "RenderingEngine/FrameworkHandeling/Frameworks/VulkanFramework.h"
 #include <imgui_internal.h>
 
+#include <AssetsEngine/AssetsEngine.h>
 #include <ScriptingEngine/EditorScripting.h>
+#include <ShaderEngine/ShaderEngine.h>
 #include <SceneEngine/SceneManager.h>
 
 void ImGUI::Init(Ref<WindowCreateInfo> info, SDL_Window* _sdl_window, SDL_GLContext gl_context)
@@ -64,18 +66,24 @@ void ImGUI::Tick(Ref<ApplicationInfo> app_info, void* rendering_framework)
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			ImGui::MenuItem("Open", NULL, false, true);
-			ImGui::MenuItem("Save", NULL, false, true);
-			ImGui::MenuItem("Exit", NULL, false, true);
+			ImGui::MenuItem("Open");
+			ImGui::MenuItem("Save");
+			if (ImGui::MenuItem("Build project")) {
+				GenerateSceneListFile("", loaded_scenes);
+				AssetsDatabase::GenerateDatabaseFiles(assets_database.hrid_table, assets_database.assets_batch, "", "");
+				std::vector<std::string> paths = {};
+				ShaderEngine::CompileShadersForReleaseCompilation("", paths);
+			}
+			ImGui::MenuItem("Exit");
 			ImGui::EndMenu();
 		}
 
 		if (ImGui::BeginMenu("Edit"))
 		{
-			ImGui::MenuItem("Undo", NULL, false, true);
-			ImGui::MenuItem("Redo", NULL, false, true);
-			ImGui::MenuItem("Copy", NULL, false, true);
-			ImGui::MenuItem("Paste", NULL, false, true);
+			ImGui::MenuItem("Undo");
+			ImGui::MenuItem("Redo");
+			ImGui::MenuItem("Copy");
+			ImGui::MenuItem("Paste");
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("View"))
@@ -87,7 +95,7 @@ void ImGUI::Tick(Ref<ApplicationInfo> app_info, void* rendering_framework)
 				if (ImGui::MenuItem(page.c_str(), NULL, false, true)) {
 
 					EditorScripting::GetPage(page);
-					SceneManager::CreatePageInstance(EditorScripting::GetPage_(page));
+					SceneManager::CreatePageInstance(EditorScripting::GetPageType(page));
 				}
 			}
 			ImGui::EndMenu();

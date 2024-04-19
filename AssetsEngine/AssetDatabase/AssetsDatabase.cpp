@@ -47,13 +47,13 @@ std::string GetFileContentFromHRID(std::string hrid, AssetsDatabase database)
     return GetByGUID(GetGUIDFromHRID(hrid, database.hrid_table), database.assets_batch);
 }
 
-void AssetsDatabase::GenerateDatabaseFiles(HRIDTable hrid_table, AssetsBatch batch, std::string filepath)
+void AssetsDatabase::GenerateDatabaseFiles(HRIDTable hrid_table, AssetsBatch batch, std::string filepath, std::string  prefix)
 {
-    std::ofstream batch_stream = GenerateFile(filepath, "primaryassetsbatch");
+    std::ofstream batch_stream = GenerateFile(filepath, prefix.append("primaryassetsbatch"));
     cereal::BinaryOutputArchive archive_batch(batch_stream);
     archive_batch(batch);
 
-    std::ofstream hrid_stream = GenerateFile(filepath, "hrid_table");
+    std::ofstream hrid_stream = GenerateFile(filepath, prefix.append("hrid_table"));
     cereal::BinaryOutputArchive   archive_hrid(hrid_stream);
     archive_hrid(hrid_table);
 }

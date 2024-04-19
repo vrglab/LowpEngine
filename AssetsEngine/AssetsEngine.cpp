@@ -25,13 +25,13 @@ void AssetsEngine::StartAssetsEngine(Ref<ApplicationInfo> info)
 
 	AssetsBatch shader_batch;
 	std::string sh_assets_file = info->ResourcesDir;
-	sh_assets_file.append("\\primarydefshaderassetsbatch.bin");
+	sh_assets_file.append("\\shad_primaryassetsbatch.bin");
 	std::ifstream is_sh_asset_file(sh_assets_file, std::ios::binary);
 	IFNERR(is_sh_asset_file.good(), cereal::BinaryInputArchive archive(is_sh_asset_file); archive(shader_batch);, "Loading Failed: ", sh_assets_file);
 
 	HRIDTable shader_hrid_table;
 	std::string sh_hrid_file = info->ResourcesDir;
-	sh_hrid_file.append("\\defshader_hrid_table.bin");
+	sh_hrid_file.append("\\shad_hrid_table.bin");
 	std::ifstream is_sh_hrid_file(sh_hrid_file, std::ios::binary);
 	IFNERR(is_sh_hrid_file.good(), cereal::BinaryInputArchive archive(is_sh_hrid_file); archive(shader_hrid_table); , "Loading Failed: ", sh_hrid_file);
 

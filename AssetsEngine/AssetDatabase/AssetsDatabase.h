@@ -38,7 +38,7 @@ public:
 	 * @param batch The batch of file contents from the database that we are exporting
 	 * @param path Where to export the files to
 	 */
-	static void GenerateDatabaseFiles(HRIDTable hrid, AssetsBatch batch, std::string path);
+	static void GenerateDatabaseFiles(HRIDTable hrid, AssetsBatch batch, std::string path, std::string prefix);
 };
 
 /**
