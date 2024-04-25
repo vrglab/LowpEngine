@@ -1,3 +1,4 @@
+[![License](https://img.shields.io/github/license/vrglab/LowpEngine)](LICENSE) [![Releases](https://img.shields.io/github/v/release/vrglab/LowpEngine)](https://github.com/vrglab/LowpEngine/releases) [![Issues](https://img.shields.io/bitbucket/issues/vrglab/LowpEngine)](https://github.com/vrglab/LowpEngine/issues)
 # LowpEngine
 C++/C# based Game Engine, fully free and open source.
  
